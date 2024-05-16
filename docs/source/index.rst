@@ -9,6 +9,18 @@ Welcome to NoLCAT's documentation!
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+   Getting Started <getting_started>
+   On Developing and Running Tests <testing>
+   All About COUNTER, SUSHI, and Annual Reporting <COUNTER_SUSHI_and_annual_reports>
+   Development Roadmap <roadmap>
+   modules
+   nolcat
+   nolcat.annual_stats
+   nolcat.ingest_usage
+   nolcat.initialization
+   nolcat.login
+   nolcat.view_lists
+   nolcat.view_usage
 
 
 
