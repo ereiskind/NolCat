@@ -1,5 +1,5 @@
 """Tests the routes in the `initialization` blueprint."""
-########## Passing 2024-10-16 ##########
+########## Passing 2024-12-19 ##########
 
 import pytest
 import logging
@@ -618,15 +618,6 @@ def test_collect_AUCT_and_historical_COUNTER_data(engine, client, tmp_path, head
     assert HTML_file_title in POST_response.data
     assert HTML_file_page_title in POST_response.data
     assert_frame_equal(annualUsageCollectionTracking_relation_data, annualUsageCollectionTracking_relation)
-    #TEST: temp
-    try:
-        log.warning(f"Comparison:\n{COUNTERData_relation_data.compare(COUNTERData_relation[COUNTERData_relation_data.columns.tolist()], result_names=('first', 'second'))}")
-    except:
-        log.warning(f"COUNTERData_relation_data.index:\n{COUNTERData_relation_data.index}")
-        log.warning(f"COUNTERData_relation[COUNTERData_relation_data.columns.tolist()].index:\n{COUNTERData_relation[COUNTERData_relation_data.columns.tolist()].index}")
-        log.warning(f"COUNTERData_relation_data.columns:\n{COUNTERData_relation_data.columns}")
-        log.warning(f"COUNTERData_relation[COUNTERData_relation_data.columns.tolist()].columns:\n{COUNTERData_relation[COUNTERData_relation_data.columns.tolist()].columns}")
-    #TEST: end temp
     assert_frame_equal(COUNTERData_relation_data, COUNTERData_relation[COUNTERData_relation_data.columns.tolist()], check_index_type=False)  # `check_index_type` argument allows test to pass if indexes aren't the same dtype
 
 
@@ -683,7 +674,7 @@ def test_GET_request_for_upload_historical_non_COUNTER_usage(client, caplog):
 def files_for_test_upload_historical_non_COUNTER_usage(tmp_path, caplog):
     """A fixture which can be called multiple times capable of randomly selecting a file to use in testing `test_upload_historical_non_COUNTER_usage`, making a copy of that file with a name matching the naming convention, and returning the value appropriate for the file type for use in the `fields` dictionary of a MultipartEncoder instance.
 
-    To test for a greater number of possible scenarios, the number and type of files uploaded when calling `test_upload_historical_non_COUNTER_usage` should vary; the "factory as fixture" pattern (https://docs.pytest.org/en/8.2.x/how-to/fixtures.html#factories-as-fixtures) makes that possible. Not only does iteration allow the test to call the fixture a variable number of times, it makes teardown much easier, as the pattern has that functionality explicitly modeled in the pytest instructions. The `sample_COUNTER_R4_reports` folder is used for binary data because all of the files within are under 30KB; there is no similar way to limit the file size for text data, as the files in `COUNTER_JSONs_for_tests` can be over 6,000KB.
+    To test for a greater number of possible scenarios, the number and type of files uploaded when calling `test_upload_historical_non_COUNTER_usage` should vary; the "factory as fixture" pattern (https://docs.pytest.org/en/8.2.x/how-to/fixtures.html#factories-as-fixtures) makes that possible. Not only does iteration allow the test to call the fixture a variable number of times, it makes teardown much easier, as the pattern has that functionality explicitly modeled in the pytest instructions. The `sample_COUNTER_R4_reports` folder is used for binary data because all of the files within are under 30KB; there is no similar way to limit the file size for text data, as the files in `R5_COUNTER_JSONs_for_tests` can be over 6,000KB.
 
     Args:
         tmp_path (pathlib.Path): a temporary directory created just for running tests
@@ -707,7 +698,7 @@ def files_for_test_upload_historical_non_COUNTER_usage(tmp_path, caplog):
         Returns:
             tuple: the file name and a FileIO object for the file
         """
-        file_options = [file for file in Path(TOP_NOLCAT_DIRECTORY, 'tests', 'data', 'COUNTER_JSONs_for_tests').iterdir()] + [file for file in Path(TOP_NOLCAT_DIRECTORY, 'tests', 'bin', 'COUNTER_workbooks_for_tests').iterdir()]
+        file_options = [file for file in Path(TOP_NOLCAT_DIRECTORY, 'tests', 'data', 'R5_COUNTER_JSONs_for_tests').iterdir()] + [file for file in Path(TOP_NOLCAT_DIRECTORY, 'tests', 'bin', 'COUNTER_workbooks_for_tests').iterdir()]
         file = random.choice(file_options)
         new_file = tmp_path / f"{AUCT_option[0][0]}_{AUCT_option[1][-4:]}{file.suffix}"
         copy(file, new_file)

@@ -455,7 +455,7 @@ def download_destination():
 
 
 @pytest.fixture(params=[
-    TOP_NOLCAT_DIRECTORY / 'tests' / 'data' / 'COUNTER_JSONs_for_tests',
+    TOP_NOLCAT_DIRECTORY / 'tests' / 'data' / 'R5_COUNTER_JSONs_for_tests',
     TOP_NOLCAT_DIRECTORY / 'tests' / 'bin' / 'sample_COUNTER_R4_reports',
 ])
 def path_to_sample_file(request):

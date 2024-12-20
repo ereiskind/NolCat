@@ -850,3 +850,12 @@ def non_COUNTER_file_name_regex():
         re.Pattern: the regex object
     """
     return re.compile(r"(\d+)_(\d{4})\.\w{3,4}")
+
+
+def empty_string_regex():
+    """A regex for matching empty strings and whitespace-only strings.
+
+    Returns:
+        re.Pattern: the regex object
+    """
+    return re.compile(r"^\s*$")

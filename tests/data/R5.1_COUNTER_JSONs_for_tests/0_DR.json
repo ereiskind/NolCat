@@ -1,276 +1,452 @@
 {
     "Report_Header": {
-        "Release": "5.1",
-        "Report_ID": "DR",
-        "Report_Name": "Database Report",
-        "Created": "2019-07-01T00:00:00Z",
+        "Created": "2024-11-25T15:28:31Z",
         "Created_By": "ProQuest",
+        "Report_ID": "DR",
+        "Release": "5.1",
+        "Report_Name": "Database Report",
+        "Registry_Record": "https://registry.projectcounter.org/platform/618759fd-bd3e-4617-a0d1-ccbe06c22171",
+        "Institution_Name": "FLORIDA STATE UNIVERSITY",
         "Institution_ID": {
             "Proprietary": [
                 "ProQuest:0000"
             ]
         },
-        "Institution_Name": "FLORIDA STATE UNIVERSITY",
-        "Registry_Record": "https://registry.projectcounter.org/platform/99999999-9999-9999-9999-999999999999",
+        "Report_Filters": {
+            "Begin_Date": "2024-11-01",
+            "End_Date": "2024-11-30"
+        },
         "Report_Attributes": {
             "Attributes_To_Show": [
-                "Data_Type",
                 "Access_Method"
             ]
-        },
-        "Report_Filters": {
-            "Begin_Date": "2019-10-01",
-            "End_Date": "2020-06-30",
-            "Platform": "ProQuest"
         }
     },
-    "Report_Items": []
+    "Report_Items": [
+        {
+            "Database": "01 Periodicals Archive Online Foundation Collection 1",
+            "Item_ID": {
+                "Proprietary": "ProQuest:paofoundation"
+            },
+            "Platform": "ProQuest",
+            "Publisher": "ProQuest",
+            "Attribute_Performance": [
+                {
+                    "Data_Type": "Database_Aggregated",
+                    "Access_Method": "Regular",
+                    "Performance": {
+                        "Searches_Automated": {
+                            "2024-11": 1877
+                        }
+                    }
+                },
+                {
+                    "Data_Type": "Journal",
+                    "Access_Method": "Regular",
+                    "Performance": {
+                        "Total_Item_Investigations": {
+                            "2024-11": 199
+                        },
+                        "Total_Item_Requests": {
+                            "2024-11": 184
+                        },
+                        "Unique_Item_Investigations": {
+                            "2024-11": 112
+                        },
+                        "Unique_Item_Requests": {
+                            "2024-11": 103
+                        }
+                    }
+                },
+                {
+                    "Data_Type": "Newspaper_or_Newsletter",
+                    "Access_Method": "Regular",
+                    "Performance": {
+                        "Total_Item_Investigations": {
+                            "2024-11": 26
+                        },
+                        "Total_Item_Requests": {
+                            "2024-11": 13
+                        },
+                        "Unique_Item_Investigations": {
+                            "2024-11": 23
+                        },
+                        "Unique_Item_Requests": {
+                            "2024-11": 10
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "Database": "APA PsycInfo®",
+            "Item_ID": {
+                "Proprietary": "ProQuest:psycinfo"
+            },
+            "Platform": "ProQuest",
+            "Publisher": "ProQuest",
+            "Attribute_Performance": [
+                {
+                    "Data_Type": "Book",
+                    "Access_Method": "Regular",
+                    "Performance": {
+                        "Total_Item_Investigations": {
+                            "2024-11": 119
+                        },
+                        "Unique_Item_Investigations": {
+                            "2024-11": 49
+                        },
+                        "Unique_Title_Investigations": {
+                            "2024-11": 20
+                        }
+                    }
+                },
+                {
+                    "Data_Type": "Database_AI",
+                    "Access_Method": "Regular",
+                    "Performance": {
+                        "Searches_Regular": {
+                            "2024-11": 2494
+                        }
+                    }
+                },
+                {
+                    "Data_Type": "Journal",
+                    "Access_Method": "Regular",
+                    "Performance": {
+                        "Total_Item_Investigations": {
+                            "2024-11": 3596
+                        },
+                        "Unique_Item_Investigations": {
+                            "2024-11": 1183
+                        }
+                    }
+                },
+                {
+                    "Data_Type": "Thesis_or_Dissertation",
+                    "Access_Method": "Regular",
+                    "Performance": {
+                        "Total_Item_Investigations": {
+                            "2024-11": 261
+                        },
+                        "Unique_Item_Investigations": {
+                            "2024-11": 90
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "Database": "ERIC",
+            "Item_ID": {
+                "Proprietary": "ProQuest:eric"
+            },
+            "Platform": "ProQuest",
+            "Publisher": "ProQuest",
+            "Attribute_Performance": [
+                {
+                    "Data_Type": "Book",
+                    "Access_Method": "Regular",
+                    "Performance": {
+                        "Total_Item_Investigations": {
+                            "2024-11": 67
+                        },
+                        "Unique_Item_Investigations": {
+                            "2024-11": 56
+                        },
+                        "Unique_Title_Investigations": {
+                            "2024-11": 3
+                        }
+                    }
+                },
+                {
+                    "Data_Type": "Conference",
+                    "Access_Method": "Regular",
+                    "Performance": {
+                        "Total_Item_Investigations": {
+                            "2024-11": 13
+                        },
+                        "Unique_Item_Investigations": {
+                            "2024-11": 11
+                        }
+                    }
+                },
+                {
+                    "Data_Type": "Database_AI",
+                    "Access_Method": "Regular",
+                    "Performance": {
+                        "Searches_Regular": {
+                            "2024-11": 2290
+                        }
+                    }
+                },
+                {
+                    "Data_Type": "Journal",
+                    "Access_Method": "Regular",
+                    "Performance": {
+                        "Total_Item_Investigations": {
+                            "2024-11": 874
+                        },
+                        "Unique_Item_Investigations": {
+                            "2024-11": 670
+                        }
+                    }
+                },
+                {
+                    "Data_Type": "Other",
+                    "Access_Method": "Regular",
+                    "Performance": {
+                        "Total_Item_Investigations": {
+                            "2024-11": 48
+                        },
+                        "Unique_Item_Investigations": {
+                            "2024-11": 43
+                        }
+                    }
+                },
+                {
+                    "Data_Type": "Reference_Work",
+                    "Access_Method": "Regular",
+                    "Performance": {
+                        "Total_Item_Investigations": {
+                            "2024-11": 87
+                        },
+                        "Unique_Item_Investigations": {
+                            "2024-11": 73
+                        },
+                        "Unique_Title_Investigations": {
+                            "2024-11": 3
+                        }
+                    }
+                },
+                {
+                    "Data_Type": "Report",
+                    "Access_Method": "Regular",
+                    "Performance": {
+                        "Total_Item_Investigations": {
+                            "2024-11": 198
+                        },
+                        "Unique_Item_Investigations": {
+                            "2024-11": 170
+                        }
+                    }
+                },
+                {
+                    "Data_Type": "Thesis_or_Dissertation",
+                    "Access_Method": "Regular",
+                    "Performance": {
+                        "Total_Item_Investigations": {
+                            "2024-11": 46
+                        },
+                        "Unique_Item_Investigations": {
+                            "2024-11": 37
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "Database": "Early European Books Collection 1",
+            "Item_ID": {
+                "Proprietary": "ProQuest:eeb1"
+            },
+            "Platform": "ProQuest",
+            "Publisher": "ProQuest",
+            "Attribute_Performance": [
+                {
+                    "Data_Type": "Database_Aggregated",
+                    "Access_Method": "Regular",
+                    "Performance": {
+                        "Searches_Automated": {
+                            "2024-11": 1870
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "Database": "Early European Books Collection 10",
+            "Item_ID": {
+                "Proprietary": "ProQuest:eeb10"
+            },
+            "Platform": "ProQuest",
+            "Publisher": "ProQuest",
+            "Attribute_Performance": [
+                {
+                    "Data_Type": "Database_Aggregated",
+                    "Access_Method": "Regular",
+                    "Performance": {
+                        "Searches_Automated": {
+                            "2024-11": 1870
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "Database": "Performing Arts Periodicals Database",
+            "Item_ID": {
+                "Proprietary": "ProQuest:iipaft"
+            },
+            "Platform": "ProQuest",
+            "Publisher": "ProQuest",
+            "Attribute_Performance": [
+                {
+                    "Data_Type": "Database_Aggregated",
+                    "Access_Method": "Regular",
+                    "Performance": {
+                        "Searches_Regular": {
+                            "2024-11": 1877
+                        }
+                    }
+                },
+                {
+                    "Data_Type": "Journal",
+                    "Access_Method": "Regular",
+                    "Performance": {
+                        "Total_Item_Investigations": {
+                            "2024-11": 82
+                        },
+                        "Total_Item_Requests": {
+                            "2024-11": 75
+                        },
+                        "Unique_Item_Investigations": {
+                            "2024-11": 51
+                        },
+                        "Unique_Item_Requests": {
+                            "2024-11": 47
+                        }
+                    }
+                },
+                {
+                    "Data_Type": "Newspaper_or_Newsletter",
+                    "Access_Method": "Regular",
+                    "Performance": {
+                        "Total_Item_Investigations": {
+                            "2024-11": 38
+                        },
+                        "Total_Item_Requests": {
+                            "2024-11": 20
+                        },
+                        "Unique_Item_Investigations": {
+                            "2024-11": 32
+                        },
+                        "Unique_Item_Requests": {
+                            "2024-11": 16
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "Database": "Periodicals Archive Online Foundation Collection 2",
+            "Item_ID": {
+                "Proprietary": "ProQuest:paofoundation2"
+            },
+            "Platform": "ProQuest",
+            "Publisher": "ProQuest",
+            "Attribute_Performance": [
+                {
+                    "Data_Type": "Database_Aggregated",
+                    "Access_Method": "Regular",
+                    "Performance": {
+                        "Searches_Automated": {
+                            "2024-11": 1877
+                        }
+                    }
+                },
+                {
+                    "Data_Type": "Journal",
+                    "Access_Method": "Regular",
+                    "Performance": {
+                        "Total_Item_Investigations": {
+                            "2024-11": 136
+                        },
+                        "Total_Item_Requests": {
+                            "2024-11": 101
+                        },
+                        "Unique_Item_Investigations": {
+                            "2024-11": 82
+                        },
+                        "Unique_Item_Requests": {
+                            "2024-11": 61
+                        }
+                    }
+                },
+                {
+                    "Data_Type": "Newspaper_or_Newsletter",
+                    "Access_Method": "Regular",
+                    "Performance": {
+                        "Total_Item_Investigations": {
+                            "2024-11": 31
+                        },
+                        "Total_Item_Requests": {
+                            "2024-11": 29
+                        },
+                        "Unique_Item_Investigations": {
+                            "2024-11": 25
+                        },
+                        "Unique_Item_Requests": {
+                            "2024-11": 23
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "Database": "Periodicals Archive Online Foundation Collection 3",
+            "Item_ID": {
+                "Proprietary": "ProQuest:paofoundation3"
+            },
+            "Platform": "ProQuest",
+            "Publisher": "ProQuest",
+            "Attribute_Performance": [
+                {
+                    "Data_Type": "Database_Aggregated",
+                    "Access_Method": "Regular",
+                    "Performance": {
+                        "Searches_Automated": {
+                            "2024-11": 1877
+                        }
+                    }
+                },
+                {
+                    "Data_Type": "Journal",
+                    "Access_Method": "Regular",
+                    "Performance": {
+                        "Total_Item_Investigations": {
+                            "2024-11": 419
+                        },
+                        "Total_Item_Requests": {
+                            "2024-11": 412
+                        },
+                        "Unique_Item_Investigations": {
+                            "2024-11": 195
+                        },
+                        "Unique_Item_Requests": {
+                            "2024-11": 192
+                        }
+                    }
+                },
+                {
+                    "Data_Type": "Newspaper_or_Newsletter",
+                    "Access_Method": "Regular",
+                    "Performance": {
+                        "Total_Item_Investigations": {
+                            "2024-11": 12
+                        },
+                        "Total_Item_Requests": {
+                            "2024-11": 7
+                        },
+                        "Unique_Item_Investigations": {
+                            "2024-11": 9
+                        },
+                        "Unique_Item_Requests": {
+                            "2024-11": 4
+                        }
+                    }
+                }
+            ]
+        }
+    ]
 }
-
-
-
-"Report_Items": [
-    {
-        "Database": "Database 1",
-        "Publisher": "Sample Publisher",
-        "Publisher_ID": {
-            "ISNI": [
-                "4321432143214321"
-            ]
-        },
-        "Platform": "Platform 1",
-        "Item_ID": {
-            "Proprietary": "P1:DB1"
-        },
-        "Attribute_Performance": [
-            {
-                "Data_Type": "Book",
-                "Access_Method": "Regular",
-                "Performance": {
-                    "Total_Item_Investigations": {
-                        "2022-01": 1104,
-                        "2022-02": 1246,
-                        "2022-03": 1329
-                    },
-                    "Total_Item_Requests": {
-                        "2022-01": 662,
-                        "2022-02": 748,
-                        "2022-03": 797
-                    },
-                    "Unique_Item_Investigations": {
-                        "2022-01": 828,
-                        "2022-02": 935,
-                        "2022-03": 997
-                    },
-                    "Unique_Item_Requests": {
-                        "2022-01": 497,
-                        "2022-02": 561,
-                        "2022-03": 598
-                    },
-                    "Unique_Title_Investigations": {
-                        "2022-01": 552,
-                        "2022-02": 623,
-                        "2022-03": 665
-                    },
-                    "Unique_Title_Requests": {
-                        "2022-01": 414,
-                        "2022-02": 467,
-                        "2022-03": 499
-                    }
-                }
-            },
-            {
-                "Data_Type": "Database_Aggregated",
-                "Access_Method": "Regular",
-                "Performance": {
-                    "Limit_Exceeded": {
-                        "2022-01": 47,
-                        "2022-02": 59,
-                        "2022-03": 38
-                    },
-                    "No_License": {
-                        "2022-01": 41,
-                        "2022-02": 77,
-                        "2022-03": 42
-                    },
-                    "Searches_Automated": {
-                        "2022-01": 15888,
-                        "2022-02": 14802,
-                        "2022-03": 15488
-                    },
-                    "Searches_Regular": {
-                        "2022-01": 13878,
-                        "2022-02": 13332,
-                        "2022-03": 19412
-                    }
-                }
-            },
-            {
-                "Data_Type": "Journal",
-                "Access_Method": "Regular",
-                "Performance": {
-                    "Total_Item_Investigations": {
-                        "2022-01": 1002,
-                        "2022-02": 1650,
-                        "2022-03": 1623
-                    },
-                    "Total_Item_Requests": {
-                        "2022-01": 601,
-                        "2022-02": 990,
-                        "2022-03": 974
-                    },
-                    "Unique_Item_Investigations": {
-                        "2022-01": 752,
-                        "2022-02": 1238,
-                        "2022-03": 1217
-                    },
-                    "Unique_Item_Requests": {
-                        "2022-01": 451,
-                        "2022-02": 743,
-                        "2022-03": 731
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "Database": "Database 2",
-        "Publisher": "Sample Publisher",
-        "Publisher_ID": {
-            "ISNI": [
-                "4321432143214321"
-            ]
-        },
-        "Platform": "Platform 1",
-        "Item_ID": {
-            "Proprietary": "P1:DB2"
-        },
-        "Attribute_Performance": [
-            {
-                "Data_Type": "Audiovisual",
-                "Access_Method": "Regular",
-                "Performance": {
-                    "Total_Item_Investigations": {
-                        "2022-01": 1279,
-                        "2022-02": 1323,
-                        "2022-03": 1826
-                    },
-                    "Unique_Item_Investigations": {
-                        "2022-01": 959,
-                        "2022-02": 992,
-                        "2022-03": 1370
-                    }
-                }
-            },
-            {
-                "Data_Type": "Database_AI",
-                "Access_Method": "Regular",
-                "Performance": {
-                    "Limit_Exceeded": {
-                        "2022-01": 32,
-                        "2022-02": 70,
-                        "2022-03": 24
-                    },
-                    "No_License": {
-                        "2022-01": 40,
-                        "2022-02": 54,
-                        "2022-03": 44
-                    },
-                    "Searches_Automated": {
-                        "2022-01": 18260,
-                        "2022-02": 15802,
-                        "2022-03": 13441
-                    },
-                    "Searches_Regular": {
-                        "2022-01": 16221,
-                        "2022-02": 14212,
-                        "2022-03": 18909
-                    }
-                }
-            },
-            {
-                "Data_Type": "Image",
-                "Access_Method": "Regular",
-                "Performance": {
-                    "Total_Item_Investigations": {
-                        "2022-01": 1732,
-                        "2022-02": 1194,
-                        "2022-03": 1867
-                    },
-                    "Unique_Item_Investigations": {
-                        "2022-01": 1299,
-                        "2022-02": 896,
-                        "2022-03": 1400
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "Database": "Database 3",
-        "Publisher": "Sample Publisher",
-        "Publisher_ID": {
-            "ISNI": [
-                "4321432143214321"
-            ]
-        },
-        "Platform": "Platform 1",
-        "Item_ID": {
-            "Proprietary": "P1:DB3"
-        },
-        "Attribute_Performance": [
-            {
-                "Data_Type": "Database_Full",
-                "Access_Method": "Regular",
-                "Performance": {
-                    "Limit_Exceeded": {
-                        "2022-01": 69,
-                        "2022-02": 73,
-                        "2022-03": 67
-                    },
-                    "No_License": {
-                        "2022-01": 43,
-                        "2022-02": 12,
-                        "2022-03": 18
-                    },
-                    "Searches_Automated": {
-                        "2022-01": 14663,
-                        "2022-02": 19209,
-                        "2022-03": 16943
-                    },
-                    "Searches_Regular": {
-                        "2022-01": 14784,
-                        "2022-02": 13761,
-                        "2022-03": 15650
-                    }
-                }
-            },
-            {
-                "Data_Type": "Database_Full_Item",
-                "Access_Method": "Regular",
-                "Performance": {
-                    "Total_Item_Investigations": {
-                        "2022-01": 1094,
-                        "2022-02": 1325,
-                        "2022-03": 1730
-                    },
-                    "Total_Item_Requests": {
-                        "2022-01": 656,
-                        "2022-02": 795,
-                        "2022-03": 1038
-                    },
-                    "Unique_Item_Investigations": {
-                        "2022-01": 821,
-                        "2022-02": 994,
-                        "2022-03": 1298
-                    },
-                    "Unique_Item_Requests": {
-                        "2022-01": 492,
-                        "2022-02": 596,
-                        "2022-03": 779
-                    }
-                }
-            }
-        ]
-    }
-]

@@ -1,5 +1,5 @@
 """Test using `ConvertJSONDictToDataframe`."""
-########## Passing 2024-10-16 ##########
+########## Passing with temp dataframes 2024-12-19 ##########
 
 import pytest
 import logging
@@ -16,60 +16,25 @@ from nolcat.models import *
 log = logging.getLogger(__name__)
 
 #Section: Fixtures
-@pytest.fixture
+#Subsection: R5 Fixtures
+@pytest.fixture(scope='session')
 def sample_SUSHI_PR_response_R5_JSON_dict():
     """Creates a dictionary like the ones derived from the JSONs received in response to R5 SUSHI PR API calls.
     
     Yields:
-        dict: test COUNTER data
+        dict: the data in `tests\data\R5_COUNTER_JSONs_for_tests\\3_PR.json`
     """
     with open(TOP_NOLCAT_DIRECTORY / 'tests' / 'data' / 'R5_COUNTER_JSONs_for_tests' / '3_PR.json') as JSON_file:
         dict_from_JSON = json.load(JSON_file)
         yield dict_from_JSON
 
 
-@pytest.fixture
-def sample_SUSHI_DR_response_R5_JSON_dict():
-    """Creates a dictionary like the ones derived from the JSONs received in response to R5 SUSHI DR API calls.
+@pytest.fixture(scope='session')
+def sample_SUSHI_PR_response_R5_dataframe():
+    """Creates a dataframe with the result of changing the data in the `sample_SUSHI_PR_response_R5_JSON_dict` fixture into a dataframe.
     
     Yields:
-        dict: test COUNTER data
-    """
-    with open(TOP_NOLCAT_DIRECTORY / 'tests' / 'data' / 'R5_COUNTER_JSONs_for_tests' / '0_DR.json') as JSON_file:
-        dict_from_JSON = json.load(JSON_file)
-        yield dict_from_JSON
-
-
-@pytest.fixture
-def sample_SUSHI_TR_response_R5_JSON_dict():
-    """Creates a dictionary like the ones derived from the JSONs received in response to R5 SUSHI TR API calls.
-    
-    Yields:
-        dict: test COUNTER data
-    """
-    with open(TOP_NOLCAT_DIRECTORY / 'tests' / 'data' / 'R5_COUNTER_JSONs_for_tests' / '3_TR.json') as JSON_file:
-        dict_from_JSON = json.load(JSON_file)
-        yield dict_from_JSON
-
-
-@pytest.fixture
-def sample_SUSHI_IR_response_R5_JSON_dict():
-    """Creates a dictionary like the ones derived from the JSONs received in response to R5 SUSHI IR API calls.
-    
-    Yields:
-        dict: test COUNTER data
-    """
-    with open(TOP_NOLCAT_DIRECTORY / 'tests' / 'data' / 'R5_COUNTER_JSONs_for_tests' / '3_IR.json') as JSON_file:
-        dict_from_JSON = json.load(JSON_file)
-        yield dict_from_JSON
-
-
-@pytest.fixture
-def sample_SUSHI_PR_response_dataframe():
-    """Creates a dataframe with the result of changing the data in the PR JSON fixtures into a dataframe.
-    
-    Yields:
-        dataframe: test COUNTER data
+        dataframe: the data in `tests\data\R5_COUNTER_JSONs_for_tests\\3_PR.json` as a dataframe
     """
     df = pd.DataFrame(
         [
@@ -178,12 +143,24 @@ def sample_SUSHI_PR_response_dataframe():
     yield df
 
 
-@pytest.fixture
-def sample_SUSHI_DR_response_dataframe():
-    """Creates a dataframe with the result of changing the data in the DR JSON fixtures into a dataframe.
+@pytest.fixture(scope='session')
+def sample_SUSHI_DR_response_R5_JSON_dict():
+    """Creates a dictionary like the ones derived from the JSONs received in response to R5 SUSHI DR API calls.
     
     Yields:
-        dataframe: test COUNTER data
+        dict: the data in `tests\data\R5_COUNTER_JSONs_for_tests\\0_DR.json`
+    """
+    with open(TOP_NOLCAT_DIRECTORY / 'tests' / 'data' / 'R5_COUNTER_JSONs_for_tests' / '0_DR.json') as JSON_file:
+        dict_from_JSON = json.load(JSON_file)
+        yield dict_from_JSON
+
+
+@pytest.fixture(scope='session')
+def sample_SUSHI_DR_response_R5_dataframe():
+    """Creates a dataframe with the result of changing the data in the `sample_SUSHI_DR_response_R5_JSON_dict` fixture into a dataframe.
+    
+    Yields:
+        dataframe: the data in `tests\data\R5_COUNTER_JSONs_for_tests\\0_DR.json` as a dataframe
     """
     df = pd.DataFrame(
         [
@@ -606,12 +583,24 @@ def sample_SUSHI_DR_response_dataframe():
     yield df
 
 
-@pytest.fixture
-def sample_SUSHI_TR_response_dataframe():
-    """Creates a dataframe with the result of changing the data in the TR JSON fixtures into a dataframe.
+@pytest.fixture(scope='session')
+def sample_SUSHI_TR_response_R5_JSON_dict():
+    """Creates a dictionary like the ones derived from the JSONs received in response to R5 SUSHI TR API calls.
     
     Yields:
-        dataframe: test COUNTER data
+        dict: the data in `tests\data\R5_COUNTER_JSONs_for_tests\\3_TR.json`
+    """
+    with open(TOP_NOLCAT_DIRECTORY / 'tests' / 'data' / 'R5_COUNTER_JSONs_for_tests' / '3_TR.json') as JSON_file:
+        dict_from_JSON = json.load(JSON_file)
+        yield dict_from_JSON
+
+
+@pytest.fixture(scope='session')
+def sample_SUSHI_TR_response_R5_dataframe():
+    """Creates a dataframe with the result of changing the data in the `sample_SUSHI_TR_response_R5_JSON_dict` fixture into a dataframe.
+    
+    Yields:
+        dataframe: the data in `tests\data\R5_COUNTER_JSONs_for_tests\\3_TR.json` as a dataframe
     """
     df = pd.DataFrame(
         [
@@ -654,12 +643,24 @@ def sample_SUSHI_TR_response_dataframe():
     yield df
 
 
-@pytest.fixture
-def sample_SUSHI_IR_response_dataframe():
-    """Creates a dataframe with the result of changing the data in the IR JSON fixtures into a dataframe.
+@pytest.fixture(scope='session')
+def sample_SUSHI_IR_response_R5_JSON_dict():
+    """Creates a dictionary like the ones derived from the JSONs received in response to R5 SUSHI IR API calls.
     
     Yields:
-        dataframe: test COUNTER data
+        dict: the data in `tests\data\R5_COUNTER_JSONs_for_tests\\3_IR.json`
+    """
+    with open(TOP_NOLCAT_DIRECTORY / 'tests' / 'data' / 'R5_COUNTER_JSONs_for_tests' / '3_IR.json') as JSON_file:
+        dict_from_JSON = json.load(JSON_file)
+        yield dict_from_JSON
+
+
+@pytest.fixture(scope='session')
+def sample_SUSHI_IR_response_R5_dataframe():
+    """Creates a dataframe with the result of changing the data in the `sample_SUSHI_IR_response_R5_JSON_dict` fixture into a dataframe.
+    
+    Yields:
+        dataframe: the data in `tests\data\R5_COUNTER_JSONs_for_tests\\3_IR.json` as a dataframe
     """
     df = pd.DataFrame(
         [
@@ -4498,26 +4499,724 @@ def sample_SUSHI_IR_response_dataframe():
     yield df
 
 
+#Subsection: R5.1 Fixtures
+@pytest.fixture(scope='session')
+def sample_SUSHI_PR_response_R5b1_JSON_dict():
+    """Creates a dictionary like the ones derived from the JSONs received in response to R5.1 SUSHI PR API calls.
+    
+    Yields:
+        dict: the data in `tests\data\R5.1_COUNTER_JSONs_for_tests\\3_PR.json`
+    """
+    with open(Path(__file__).parent / 'data' / 'R5.1_COUNTER_JSONs_for_tests' / '3_PR.json') as JSON_file:
+        dict_from_JSON = json.load(JSON_file)
+        yield dict_from_JSON
+
+
+@pytest.fixture(scope='session')
+def sample_SUSHI_PR_response_R5b1_dataframe():
+    """Creates a dataframe with the result of changing the data in the `sample_SUSHI_PR_response_R5b1_JSON_dict` fixture into a dataframe.
+    
+    Yields:
+        dataframe: the data in `tests\data\R5.1_COUNTER_JSONs_for_tests\\3_PR.json` as a dataframe
+    """
+    df = pd.DataFrame(
+        [
+            ["Duke University Press", "Book", "Regular", "Unique_Title_Investigations", "2024-09-01", 43, "2024-11-20"],
+            ["Duke University Press", "Book", "Regular", "Unique_Title_Investigations", "2024-10-01", 44, "2024-11-20"],
+            ["Duke University Press", "Book", "Regular", "Unique_Item_Requests", "2024-09-01", 50, "2024-11-20"],
+            ["Duke University Press", "Book", "Regular", "Unique_Item_Requests", "2024-10-01", 25, "2024-11-20"],
+            ["Duke University Press", "Book", "Regular", "Total_Item_Requests", "2024-09-01", 53, "2024-11-20"],
+            ["Duke University Press", "Book", "Regular", "Total_Item_Requests", "2024-10-01", 32, "2024-11-20"],
+            ["Duke University Press", "Book", "Regular", "Unique_Item_Investigations", "2024-09-01", 56, "2024-11-20"],
+            ["Duke University Press", "Book", "Regular", "Unique_Item_Investigations", "2024-10-01", 65, "2024-11-20"],
+            ["Duke University Press", "Book", "Regular", "Total_Item_Investigations", "2024-09-01", 89, "2024-11-20"],
+            ["Duke University Press", "Book", "Regular", "Total_Item_Investigations", "2024-10-01", 72, "2024-11-20"],
+            ["Duke University Press", "Book", "Regular", "Unique_Title_Requests", "2024-09-01", 22, "2024-11-20"],
+            ["Duke University Press", "Book", "Regular", "Unique_Title_Requests", "2024-10-01", 17, "2024-11-20"],
+            ["Duke University Press", "Journal", "Regular", "Total_Item_Requests", "2024-09-01", 485, "2024-11-20"],
+            ["Duke University Press", "Journal", "Regular", "Total_Item_Requests", "2024-10-01", 477, "2024-11-20"],
+            ["Duke University Press", "Journal", "Regular", "Unique_Item_Investigations", "2024-09-01", 395, "2024-11-20"],
+            ["Duke University Press", "Journal", "Regular", "Unique_Item_Investigations", "2024-10-01", 421, "2024-11-20"],
+            ["Duke University Press", "Journal", "Regular", "Total_Item_Investigations", "2024-09-01", 678, "2024-11-20"],
+            ["Duke University Press", "Journal", "Regular", "Total_Item_Investigations", "2024-10-01", 769, "2024-11-20"],
+            ["Duke University Press", "Journal", "Regular", "Unique_Item_Requests", "2024-09-01", 353, "2024-11-20"],
+            ["Duke University Press", "Journal", "Regular", "Unique_Item_Requests", "2024-10-01", 342, "2024-11-20"],
+            ["Duke University Press", "Platform", "Regular", "Searches_Platform", "2024-09-01", 87, "2024-11-20"],
+            ["Duke University Press", "Platform", "Regular", "Searches_Platform", "2024-10-01", 93, "2024-11-20"],
+        ],
+        columns=['platform', 'data_type', 'access_method', 'metric_type', 'usage_date', 'usage_count', 'report_creation_date'],
+    )
+    df = df.astype({
+        'platform': COUNTERData.state_data_types()['platform'],
+        'data_type': COUNTERData.state_data_types()['data_type'],
+        'access_method': COUNTERData.state_data_types()['access_method'],
+        'metric_type': COUNTERData.state_data_types()['metric_type'],
+        'usage_count': COUNTERData.state_data_types()['usage_count'],
+    })
+    df['usage_date'] = pd.to_datetime(df['usage_date'])
+    df['report_creation_date'] = pd.to_datetime(df['report_creation_date'])
+    yield df
+
+
+@pytest.fixture(scope='session')
+def sample_SUSHI_DR_response_R5b1_JSON_dict():
+    """Creates a dictionary like the ones derived from the JSONs received in response to R5.1 SUSHI DR API calls.
+    
+    Yields:
+        dict: the data in `tests\data\R5.1_COUNTER_JSONs_for_tests\\0_DR.json`
+    """
+    with open(Path(__file__).parent / 'data' / 'R5.1_COUNTER_JSONs_for_tests' / '0_DR.json') as JSON_file:
+        dict_from_JSON = json.load(JSON_file)
+        yield dict_from_JSON
+
+
+@pytest.fixture(scope='session')
+def sample_SUSHI_DR_response_R5b1_dataframe():
+    """Creates a dataframe with the result of changing the data in the `sample_SUSHI_DR_response_R5b1_JSON_dict` fixture into a dataframe.
+    
+    Yields:
+        dataframe: the data in `tests\data\R5.1_COUNTER_JSONs_for_tests\\0_DR.json` as a dataframe
+    """
+    pass
+
+
+@pytest.fixture(scope='session')
+def sample_SUSHI_TR_response_R5b1_JSON_dict():
+    """Creates a dictionary like the ones derived from the JSONs received in response to R5.1 SUSHI TR API calls.
+    
+    Yields:
+        dict: the data in `tests\data\R5.1_COUNTER_JSONs_for_tests\\3_TR.json`
+    """
+    #TEST: with open(Path(__file__).parent / 'data' / 'R5.1_COUNTER_JSONs_for_tests' / '3_TR.json') as JSON_file:
+    with open(Path(__file__).parent / 'data' / 'R5.1_COUNTER_JSONs_for_tests' / '0_TR.json') as JSON_file:  #TEST: temp
+        dict_from_JSON = json.load(JSON_file)
+        yield dict_from_JSON
+
+
+@pytest.fixture(scope='session')
+def sample_SUSHI_TR_response_R5b1_dataframe():
+    """Creates a dataframe with the result of changing the data in the `sample_SUSHI_TR_response_R5b1_JSON_dict` fixture into a dataframe.
+    
+    Yields:
+        dataframe: the data in `tests\data\R5.1_COUNTER_JSONs_for_tests\\3_TR.json` as a dataframe
+    """
+    pass
+
+
+@pytest.fixture(scope='session')
+def sample_SUSHI_IR_response_R5b1_JSON_dict():
+    """Creates a dictionary like the ones derived from the JSONs received in response to R5.1 SUSHI IR API calls.
+    
+    Yields:
+        dict: the data in `tests\data\R5.1_COUNTER_JSONs_for_tests\\3_IR.json`
+    """
+    #TEST: with open(Path(__file__).parent / 'data' / 'R5.1_COUNTER_JSONs_for_tests' / '3_IR.json') as JSON_file:
+    with open(Path(__file__).parent / 'data' / 'R5.1_COUNTER_JSONs_for_tests' / '0_IR.json') as JSON_file:  #TEST: temp
+        dict_from_JSON = json.load(JSON_file)
+        yield dict_from_JSON
+
+
+@pytest.fixture(scope='session')
+def sample_SUSHI_IR_response_R5b1_dataframe():
+    """Creates a dataframe with the result of changing the data in the `sample_SUSHI_IR_response_R5b1_JSON_dict` fixture into a dataframe.
+    
+    Yields:
+        dataframe: the data in `tests\data\R5.1_COUNTER_JSONs_for_tests\\3_IR.json` as a dataframe
+    """
+    pass
+
+
 #Section: Tests
-def test_create_dataframe_from_R5_PR(sample_SUSHI_PR_response_R5_JSON_dict, sample_SUSHI_PR_response_dataframe):
+def test_create_dataframe_from_R5_PR(sample_SUSHI_PR_response_R5_JSON_dict, sample_SUSHI_PR_response_R5_dataframe):
     """Tests transforming dictionaries derived from R5 SUSHI PR JSONs into dataframes."""
     df = ConvertJSONDictToDataframe(sample_SUSHI_PR_response_R5_JSON_dict).create_dataframe()
-    assert_frame_equal(df, sample_SUSHI_PR_response_dataframe[df.columns.tolist()])
+    assert_frame_equal(df, sample_SUSHI_PR_response_R5_dataframe[df.columns.tolist()])
 
 
-def test_create_dataframe_from_R5_DR(sample_SUSHI_DR_response_R5_JSON_dict, sample_SUSHI_DR_response_dataframe):
-    """Tests transforming dictionaries derived from R5 SUSHI PR JSONs into dataframes."""
+def test_create_dataframe_from_R5_DR(sample_SUSHI_DR_response_R5_JSON_dict, sample_SUSHI_DR_response_R5_dataframe):
+    """Tests transforming dictionaries derived from R5 SUSHI DR JSONs into dataframes."""
     df = ConvertJSONDictToDataframe(sample_SUSHI_DR_response_R5_JSON_dict).create_dataframe()
-    assert_frame_equal(df, sample_SUSHI_DR_response_dataframe[df.columns.tolist()])
+    assert_frame_equal(df, sample_SUSHI_DR_response_R5_dataframe[df.columns.tolist()])
 
 
-def test_create_dataframe_from_R5_TR(sample_SUSHI_TR_response_R5_JSON_dict, sample_SUSHI_TR_response_dataframe):
-    """Tests transforming dictionaries derived from R5 SUSHI PR JSONs into dataframes."""
+def test_create_dataframe_from_R5_TR(sample_SUSHI_TR_response_R5_JSON_dict, sample_SUSHI_TR_response_R5_dataframe):
+    """Tests transforming dictionaries derived from R5 SUSHI TR JSONs into dataframes."""
     df = ConvertJSONDictToDataframe(sample_SUSHI_TR_response_R5_JSON_dict).create_dataframe()
-    assert_frame_equal(df, sample_SUSHI_TR_response_dataframe[df.columns.tolist()])
+    assert_frame_equal(df, sample_SUSHI_TR_response_R5_dataframe[df.columns.tolist()])
 
 
-def test_create_dataframe_from_R5_IR(sample_SUSHI_IR_response_R5_JSON_dict, sample_SUSHI_IR_response_dataframe):
-    """Tests transforming dictionaries derived from R5 SUSHI PR JSONs into dataframes."""
+@pytest.mark.slow
+def test_create_dataframe_from_R5_IR(sample_SUSHI_IR_response_R5_JSON_dict, sample_SUSHI_IR_response_R5_dataframe):
+    """Tests transforming dictionaries derived from R5 SUSHI IR JSONs into dataframes."""
     df = ConvertJSONDictToDataframe(sample_SUSHI_IR_response_R5_JSON_dict).create_dataframe()
-    assert_frame_equal(df, sample_SUSHI_IR_response_dataframe[df.columns.tolist()])
+    assert_frame_equal(df, sample_SUSHI_IR_response_R5_dataframe[df.columns.tolist()])
+
+
+def test_create_dataframe_from_R5b1_PR(sample_SUSHI_PR_response_R5b1_JSON_dict, sample_SUSHI_PR_response_R5b1_dataframe):
+    """Tests transforming dictionaries derived from R5.1 SUSHI PR JSONs into dataframes."""
+    df = ConvertJSONDictToDataframe(sample_SUSHI_PR_response_R5b1_JSON_dict).create_dataframe()
+    assert_frame_equal(df, sample_SUSHI_PR_response_R5b1_dataframe[df.columns.tolist()])
+
+
+def test_create_dataframe_from_R5b1_DR(sample_SUSHI_DR_response_R5b1_JSON_dict, sample_SUSHI_DR_response_R5b1_dataframe):
+    """Tests transforming dictionaries derived from R5.1 SUSHI DR JSONs into dataframes."""
+    df = ConvertJSONDictToDataframe(sample_SUSHI_DR_response_R5b1_JSON_dict).create_dataframe()
+    #TEST: temp
+    sample_SUSHI_DR_response_R5b1_dataframe = pd.DataFrame(  #TEST: Fixture returning `None` replaced by temporary dataframe matching temporary JSON in `sample_SUSHI_DR_response_R5b1_JSON_dict`
+        [
+            ["01 Periodicals Archive Online Foundation Collection 1", "ProQuest", "ProQuest", "ProQuest:paofoundation", "Database_Aggregated", "Regular", "Searches_Automated", "2024-11-01", 1877, "2024-11-25"],
+            ["01 Periodicals Archive Online Foundation Collection 1", "ProQuest", "ProQuest", "ProQuest:paofoundation", "Journal", "Regular", "Total_Item_Investigations", "2024-11-01", 199, "2024-11-25"],
+            ["01 Periodicals Archive Online Foundation Collection 1", "ProQuest", "ProQuest", "ProQuest:paofoundation", "Journal", "Regular", "Total_Item_Requests", "2024-11-01", 184, "2024-11-25"],
+            ["01 Periodicals Archive Online Foundation Collection 1", "ProQuest", "ProQuest", "ProQuest:paofoundation", "Journal", "Regular", "Unique_Item_Investigations", "2024-11-01", 112, "2024-11-25"],
+            ["01 Periodicals Archive Online Foundation Collection 1", "ProQuest", "ProQuest", "ProQuest:paofoundation", "Journal", "Regular", "Unique_Item_Requests", "2024-11-01", 103, "2024-11-25"],
+            ["01 Periodicals Archive Online Foundation Collection 1", "ProQuest", "ProQuest", "ProQuest:paofoundation", "Newspaper_or_Newsletter", "Regular", "Total_Item_Investigations", "2024-11-01", 26, "2024-11-25"],
+            ["01 Periodicals Archive Online Foundation Collection 1", "ProQuest", "ProQuest", "ProQuest:paofoundation", "Newspaper_or_Newsletter", "Regular", "Total_Item_Requests", "2024-11-01", 13, "2024-11-25"],
+            ["01 Periodicals Archive Online Foundation Collection 1", "ProQuest", "ProQuest", "ProQuest:paofoundation", "Newspaper_or_Newsletter", "Regular", "Unique_Item_Investigations", "2024-11-01", 23, "2024-11-25"],
+            ["01 Periodicals Archive Online Foundation Collection 1", "ProQuest", "ProQuest", "ProQuest:paofoundation", "Newspaper_or_Newsletter", "Regular", "Unique_Item_Requests", "2024-11-01", 10, "2024-11-25"],
+            ["APA PsycInfo®", "ProQuest", "ProQuest", "ProQuest:psycinfo", "Book", "Regular", "Total_Item_Investigations", "2024-11-01", 119, "2024-11-25"],
+            ["APA PsycInfo®", "ProQuest", "ProQuest", "ProQuest:psycinfo", "Book", "Regular", "Unique_Item_Investigations", "2024-11-01", 49, "2024-11-25"],
+            ["APA PsycInfo®", "ProQuest", "ProQuest", "ProQuest:psycinfo", "Book", "Regular", "Unique_Title_Investigations", "2024-11-01", 20, "2024-11-25"],
+            ["APA PsycInfo®", "ProQuest", "ProQuest", "ProQuest:psycinfo", "Database_AI", "Regular", "Searches_Regular", "2024-11-01", 2494, "2024-11-25"],
+            ["APA PsycInfo®", "ProQuest", "ProQuest", "ProQuest:psycinfo", "Journal", "Regular", "Total_Item_Investigations", "2024-11-01", 3596, "2024-11-25"],
+            ["APA PsycInfo®", "ProQuest", "ProQuest", "ProQuest:psycinfo", "Journal", "Regular", "Unique_Item_Investigations", "2024-11-01", 1183, "2024-11-25"],
+            ["APA PsycInfo®", "ProQuest", "ProQuest", "ProQuest:psycinfo", "Thesis_or_Dissertation", "Regular", "Total_Item_Investigations", "2024-11-01", 261, "2024-11-25"],
+            ["APA PsycInfo®", "ProQuest", "ProQuest", "ProQuest:psycinfo", "Thesis_or_Dissertation", "Regular", "Unique_Item_Investigations", "2024-11-01", 90, "2024-11-25"],
+            ["ERIC", "ProQuest", "ProQuest", "ProQuest:eric", "Book", "Regular", "Total_Item_Investigations", "2024-11-01", 67, "2024-11-25"],
+            ["ERIC", "ProQuest", "ProQuest", "ProQuest:eric", "Book", "Regular", "Unique_Item_Investigations", "2024-11-01", 56, "2024-11-25"],
+            ["ERIC", "ProQuest", "ProQuest", "ProQuest:eric", "Book", "Regular", "Unique_Title_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["ERIC", "ProQuest", "ProQuest", "ProQuest:eric", "Conference", "Regular", "Total_Item_Investigations", "2024-11-01", 13, "2024-11-25"],
+            ["ERIC", "ProQuest", "ProQuest", "ProQuest:eric", "Conference", "Regular", "Unique_Item_Investigations", "2024-11-01", 11, "2024-11-25"],
+            ["ERIC", "ProQuest", "ProQuest", "ProQuest:eric", "Database_AI", "Regular", "Searches_Regular", "2024-11-01", 2290, "2024-11-25"],
+            ["ERIC", "ProQuest", "ProQuest", "ProQuest:eric", "Journal", "Regular", "Total_Item_Investigations", "2024-11-01", 874, "2024-11-25"],
+            ["ERIC", "ProQuest", "ProQuest", "ProQuest:eric", "Journal", "Regular", "Unique_Item_Investigations", "2024-11-01", 670, "2024-11-25"],
+            ["ERIC", "ProQuest", "ProQuest", "ProQuest:eric", "Other", "Regular", "Total_Item_Investigations", "2024-11-01", 48, "2024-11-25"],
+            ["ERIC", "ProQuest", "ProQuest", "ProQuest:eric", "Other", "Regular", "Unique_Item_Investigations", "2024-11-01", 43, "2024-11-25"],
+            ["ERIC", "ProQuest", "ProQuest", "ProQuest:eric", "Reference_Work", "Regular", "Total_Item_Investigations", "2024-11-01", 87, "2024-11-25"],
+            ["ERIC", "ProQuest", "ProQuest", "ProQuest:eric", "Reference_Work", "Regular", "Unique_Item_Investigations", "2024-11-01", 73, "2024-11-25"],
+            ["ERIC", "ProQuest", "ProQuest", "ProQuest:eric", "Reference_Work", "Regular", "Unique_Title_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["ERIC", "ProQuest", "ProQuest", "ProQuest:eric", "Report", "Regular", "Total_Item_Investigations", "2024-11-01", 198, "2024-11-25"],
+            ["ERIC", "ProQuest", "ProQuest", "ProQuest:eric", "Report", "Regular", "Unique_Item_Investigations", "2024-11-01", 170, "2024-11-25"],
+            ["ERIC", "ProQuest", "ProQuest", "ProQuest:eric", "Thesis_or_Dissertation", "Regular", "Total_Item_Investigations", "2024-11-01", 46, "2024-11-25"],
+            ["ERIC", "ProQuest", "ProQuest", "ProQuest:eric", "Thesis_or_Dissertation", "Regular", "Unique_Item_Investigations", "2024-11-01", 37, "2024-11-25"],
+            ["Early European Books Collection 1", "ProQuest", "ProQuest", "ProQuest:eeb1", "Database_Aggregated", "Regular", "Searches_Automated", "2024-11-01", 1870, "2024-11-25"],
+            ["Early European Books Collection 10", "ProQuest", "ProQuest", "ProQuest:eeb10", "Database_Aggregated", "Regular", "Searches_Automated", "2024-11-01", 1870, "2024-11-25"],
+            ["Performing Arts Periodicals Database", "ProQuest", "ProQuest", "ProQuest:iipaft", "Database_Aggregated", "Regular", "Searches_Regular", "2024-11-01", 1877, "2024-11-25"],
+            ["Performing Arts Periodicals Database", "ProQuest", "ProQuest", "ProQuest:iipaft", "Journal", "Regular", "Total_Item_Investigations", "2024-11-01", 82, "2024-11-25"],
+            ["Performing Arts Periodicals Database", "ProQuest", "ProQuest", "ProQuest:iipaft", "Journal", "Regular", "Total_Item_Requests", "2024-11-01", 75, "2024-11-25"],
+            ["Performing Arts Periodicals Database", "ProQuest", "ProQuest", "ProQuest:iipaft", "Journal", "Regular", "Unique_Item_Investigations", "2024-11-01", 51, "2024-11-25"],
+            ["Performing Arts Periodicals Database", "ProQuest", "ProQuest", "ProQuest:iipaft", "Journal", "Regular", "Unique_Item_Requests", "2024-11-01", 47, "2024-11-25"],
+            ["Performing Arts Periodicals Database", "ProQuest", "ProQuest", "ProQuest:iipaft", "Newspaper_or_Newsletter", "Regular", "Total_Item_Investigations", "2024-11-01", 38, "2024-11-25"],
+            ["Performing Arts Periodicals Database", "ProQuest", "ProQuest", "ProQuest:iipaft", "Newspaper_or_Newsletter", "Regular", "Total_Item_Requests", "2024-11-01", 20, "2024-11-25"],
+            ["Performing Arts Periodicals Database", "ProQuest", "ProQuest", "ProQuest:iipaft", "Newspaper_or_Newsletter", "Regular", "Unique_Item_Investigations", "2024-11-01", 32, "2024-11-25"],
+            ["Performing Arts Periodicals Database", "ProQuest", "ProQuest", "ProQuest:iipaft", "Newspaper_or_Newsletter", "Regular", "Unique_Item_Requests", "2024-11-01", 16, "2024-11-25"],
+            ["Periodicals Archive Online Foundation Collection 2", "ProQuest", "ProQuest", "ProQuest:paofoundation2", "Database_Aggregated", "Regular", "Searches_Automated", "2024-11-01", 1877, "2024-11-25"],
+            ["Periodicals Archive Online Foundation Collection 2", "ProQuest", "ProQuest", "ProQuest:paofoundation2", "Journal", "Regular", "Total_Item_Investigations", "2024-11-01", 136, "2024-11-25"],
+            ["Periodicals Archive Online Foundation Collection 2", "ProQuest", "ProQuest", "ProQuest:paofoundation2", "Journal", "Regular", "Total_Item_Requests", "2024-11-01", 101, "2024-11-25"],
+            ["Periodicals Archive Online Foundation Collection 2", "ProQuest", "ProQuest", "ProQuest:paofoundation2", "Journal", "Regular", "Unique_Item_Investigations", "2024-11-01", 82, "2024-11-25"],
+            ["Periodicals Archive Online Foundation Collection 2", "ProQuest", "ProQuest", "ProQuest:paofoundation2", "Journal", "Regular", "Unique_Item_Requests", "2024-11-01", 61, "2024-11-25"],
+            ["Periodicals Archive Online Foundation Collection 2", "ProQuest", "ProQuest", "ProQuest:paofoundation2", "Newspaper_or_Newsletter", "Regular", "Total_Item_Investigations", "2024-11-01", 31, "2024-11-25"],
+            ["Periodicals Archive Online Foundation Collection 2", "ProQuest", "ProQuest", "ProQuest:paofoundation2", "Newspaper_or_Newsletter", "Regular", "Total_Item_Requests", "2024-11-01", 29, "2024-11-25"],
+            ["Periodicals Archive Online Foundation Collection 2", "ProQuest", "ProQuest", "ProQuest:paofoundation2", "Newspaper_or_Newsletter", "Regular", "Unique_Item_Investigations", "2024-11-01", 25, "2024-11-25"],
+            ["Periodicals Archive Online Foundation Collection 2", "ProQuest", "ProQuest", "ProQuest:paofoundation2", "Newspaper_or_Newsletter", "Regular", "Unique_Item_Requests", "2024-11-01", 23, "2024-11-25"],
+            ["Periodicals Archive Online Foundation Collection 3", "ProQuest", "ProQuest", "ProQuest:paofoundation3", "Database_Aggregated", "Regular", "Searches_Automated", "2024-11-01", 1877, "2024-11-25"],
+            ["Periodicals Archive Online Foundation Collection 3", "ProQuest", "ProQuest", "ProQuest:paofoundation3", "Journal", "Regular", "Total_Item_Investigations", "2024-11-01", 419, "2024-11-25"],
+            ["Periodicals Archive Online Foundation Collection 3", "ProQuest", "ProQuest", "ProQuest:paofoundation3", "Journal", "Regular", "Total_Item_Requests", "2024-11-01", 412, "2024-11-25"],
+            ["Periodicals Archive Online Foundation Collection 3", "ProQuest", "ProQuest", "ProQuest:paofoundation3", "Journal", "Regular", "Unique_Item_Investigations", "2024-11-01", 195, "2024-11-25"],
+            ["Periodicals Archive Online Foundation Collection 3", "ProQuest", "ProQuest", "ProQuest:paofoundation3", "Journal", "Regular", "Unique_Item_Requests", "2024-11-01", 192, "2024-11-25"],
+            ["Periodicals Archive Online Foundation Collection 3", "ProQuest", "ProQuest", "ProQuest:paofoundation3", "Newspaper_or_Newsletter", "Regular", "Total_Item_Investigations", "2024-11-01", 12, "2024-11-25"],
+            ["Periodicals Archive Online Foundation Collection 3", "ProQuest", "ProQuest", "ProQuest:paofoundation3", "Newspaper_or_Newsletter", "Regular", "Total_Item_Requests", "2024-11-01", 7, "2024-11-25"],
+            ["Periodicals Archive Online Foundation Collection 3", "ProQuest", "ProQuest", "ProQuest:paofoundation3", "Newspaper_or_Newsletter", "Regular", "Unique_Item_Investigations", "2024-11-01", 9, "2024-11-25"],
+            ["Periodicals Archive Online Foundation Collection 3", "ProQuest", "ProQuest", "ProQuest:paofoundation3", "Newspaper_or_Newsletter", "Regular", "Unique_Item_Requests", "2024-11-01", 4, "2024-11-25"],
+        ],
+        columns=['resource_name', 'publisher', 'platform', 'proprietary_ID', 'data_type', 'access_method', 'metric_type', 'usage_date', 'usage_count', 'report_creation_date'],  # All of the values in the `publisher_ID` field were null values, so the field isn't created
+    )
+    sample_SUSHI_DR_response_R5b1_dataframe = sample_SUSHI_DR_response_R5b1_dataframe.astype({
+        'resource_name': COUNTERData.state_data_types()['resource_name'],
+        'publisher': COUNTERData.state_data_types()['publisher'],
+        'platform': COUNTERData.state_data_types()['platform'],
+        'proprietary_ID': COUNTERData.state_data_types()['proprietary_ID'],
+        'data_type': COUNTERData.state_data_types()['data_type'],
+        'access_method': COUNTERData.state_data_types()['access_method'],
+        'metric_type': COUNTERData.state_data_types()['metric_type'],
+        'usage_count': COUNTERData.state_data_types()['usage_count'],
+    })
+    sample_SUSHI_DR_response_R5b1_dataframe['usage_date'] = pd.to_datetime(sample_SUSHI_DR_response_R5b1_dataframe['usage_date'])
+    sample_SUSHI_DR_response_R5b1_dataframe['report_creation_date'] = pd.to_datetime(sample_SUSHI_DR_response_R5b1_dataframe['report_creation_date'])
+    #TEST: end temp
+    assert_frame_equal(df[sample_SUSHI_DR_response_R5b1_dataframe.columns.tolist()], sample_SUSHI_DR_response_R5b1_dataframe)  #TEST: temp
+    #TEST: `assert_frame_equal(df, sample_SUSHI_DR_response_R5b1_dataframe[df.columns.tolist()])` passes when field are missing from `df` because they're not yet being captured in the class being tested, which isn't the desired behavior
+
+
+def test_create_dataframe_from_R5b1_TR(sample_SUSHI_TR_response_R5b1_JSON_dict, sample_SUSHI_TR_response_R5b1_dataframe):
+    """Tests transforming dictionaries derived from R5.1 SUSHI TR JSONs into dataframes."""
+    df = ConvertJSONDictToDataframe(sample_SUSHI_TR_response_R5b1_JSON_dict).create_dataframe()
+    #TEST: temp
+    sample_SUSHI_TR_response_R5b1_dataframe = pd.DataFrame(  #TEST: Fixture returning `None` replaced by temporary dataframe matching temporary JSON in `sample_SUSHI_TR_response_R5b1_JSON_dict`
+        [
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 1996, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 1996, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 1996, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 1996, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 1997, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 1997, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 1997, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 1997, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 1999, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 1999, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 3, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 1999, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 1999, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 2006, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 2006, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 2006, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 2006, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 2011, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 2011, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 2011, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 2011, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 2014, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 2014, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 3, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 2014, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 2014, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 3, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 2017, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 2017, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 2017, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Library Journal", "MSI Information Services", "ProQuest", "ProQuest:40955", "0363-0277", "Journal", 2017, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["School Library Journal", "MSI Information Services", "ProQuest", "ProQuest:2046260", "0362-8930", "Journal", 2007, "Controlled", "Regular", "No_License", "2024-11-01", 1, "2024-11-25"],
+            ["School Library Journal", "MSI Information Services", "ProQuest", "ProQuest:37051", "0362-8930", "Journal", 1999, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["School Library Journal", "MSI Information Services", "ProQuest", "ProQuest:37051", "0362-8930", "Journal", 1999, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["School Library Journal", "MSI Information Services", "ProQuest", "ProQuest:37051", "0362-8930", "Journal", 1999, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["School Library Journal", "MSI Information Services", "ProQuest", "ProQuest:37051", "0362-8930", "Journal", 1999, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["School Library Journal", "MSI Information Services", "ProQuest", "ProQuest:37051", "0362-8930", "Journal", 2000, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["School Library Journal", "MSI Information Services", "ProQuest", "ProQuest:37051", "0362-8930", "Journal", 2000, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["School Library Journal", "MSI Information Services", "ProQuest", "ProQuest:37051", "0362-8930", "Journal", 2000, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["School Library Journal", "MSI Information Services", "ProQuest", "ProQuest:37051", "0362-8930", "Journal", 2000, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["School Library Journal", "MSI Information Services", "ProQuest", "ProQuest:37051", "0362-8930", "Journal", 2003, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["School Library Journal", "MSI Information Services", "ProQuest", "ProQuest:37051", "0362-8930", "Journal", 2003, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["School Library Journal", "MSI Information Services", "ProQuest", "ProQuest:37051", "0362-8930", "Journal", 2003, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["School Library Journal", "MSI Information Services", "ProQuest", "ProQuest:37051", "0362-8930", "Journal", 2003, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["School Library Journal", "MSI Information Services", "ProQuest", "ProQuest:37051", "0362-8930", "Journal", 2019, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["School Library Journal", "MSI Information Services", "ProQuest", "ProQuest:37051", "0362-8930", "Journal", 2019, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["School Library Journal", "MSI Information Services", "ProQuest", "ProQuest:37051", "0362-8930", "Journal", 2019, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["School Library Journal", "MSI Information Services", "ProQuest", "ProQuest:37051", "0362-8930", "Journal", 2019, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 1998, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 1998, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2000, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2000, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2002, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2002, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 3, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2002, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2002, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 3, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2006, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2006, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2011, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2011, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2014, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2014, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2017, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2017, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2020, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2020, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2021, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2021, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2022, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2022, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2023, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 6, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2023, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 5, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2023, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2023, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2024, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 13, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2024, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 13, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2024, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 13, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Newspaper_or_Newsletter", 2024, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 13, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Other", 2013, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Other", 2013, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Other", 2013, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Other", 2013, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Other", 2014, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["The Washington Post", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:10327", "0190-8286", "Other", 2014, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 1977, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 4, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 1977, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 3, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 1977, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 1977, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 1982, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 1982, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 1982, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 1982, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 1986, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 1986, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 1989, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 1989, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 1990, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 1990, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 1991, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 1991, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 1991, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 1991, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 1992, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 11, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 1992, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 11, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 1994, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 1994, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 1998, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 1998, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 2000, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 2000, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 2002, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 2002, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 2002, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 2002, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 2004, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 2004, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 2004, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 2004, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 2006, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 5, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 2006, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 2006, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 4, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 2006, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 2008, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 9, "2024-11-25"],
+            ["The Washington Post  (1974-)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47130", "0190-8286", "Newspaper_or_Newsletter", 2008, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 9, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Newspaper_or_Newsletter", 2013, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Newspaper_or_Newsletter", 2013, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2012, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2012, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2012, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2012, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2013, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2013, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2017, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2017, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2019, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2019, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2019, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2019, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2020, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 8, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2020, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 8, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2021, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 7, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2021, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2021, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 7, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2021, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2022, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 5, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2022, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2022, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 5, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2022, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2023, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 4, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2023, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 4, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2023, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2023, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 3, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2024, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 15, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2024, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 14, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2024, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 15, "2024-11-25"],
+            ["The Washington Post (Online)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:2042186", "2641-9599", "Other", 2024, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 14, "2024-11-25"],
+            ["The Washington Post (pre-1997 Fulltext)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47014", "0190-8286", "Newspaper_or_Newsletter", 1989, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post (pre-1997 Fulltext)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47014", "0190-8286", "Newspaper_or_Newsletter", 1989, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post (pre-1997 Fulltext)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47014", "0190-8286", "Newspaper_or_Newsletter", 1989, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post (pre-1997 Fulltext)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47014", "0190-8286", "Newspaper_or_Newsletter", 1989, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post (pre-1997 Fulltext)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47014", "0190-8286", "Newspaper_or_Newsletter", 1991, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post (pre-1997 Fulltext)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47014", "0190-8286", "Newspaper_or_Newsletter", 1991, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post (pre-1997 Fulltext)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47014", "0190-8286", "Newspaper_or_Newsletter", 1994, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post (pre-1997 Fulltext)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47014", "0190-8286", "Newspaper_or_Newsletter", 1994, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Washington Post (pre-1997 Fulltext)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47014", "0190-8286", "Newspaper_or_Newsletter", 1994, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["The Washington Post (pre-1997 Fulltext)", "WP Company LLC dba The Washington Post", "ProQuest", "ProQuest:47014", "0190-8286", "Newspaper_or_Newsletter", 1994, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Women and Language", "Organization for the Study of Communication Language and Gender", "ProQuest", "ProQuest:31040", "8755-4550", "Journal", 1999, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Women and Language", "Organization for the Study of Communication Language and Gender", "ProQuest", "ProQuest:31040", "8755-4550", "Journal", 1999, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Women and Language", "Organization for the Study of Communication Language and Gender", "ProQuest", "ProQuest:31040", "8755-4550", "Journal", 1999, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Women and Language", "Organization for the Study of Communication Language and Gender", "ProQuest", "ProQuest:31040", "8755-4550", "Journal", 1999, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Women and Language", "Organization for the Study of Communication Language and Gender", "ProQuest", "ProQuest:31040", "8755-4550", "Journal", 2000, "Controlled", "Regular", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Women and Language", "Organization for the Study of Communication Language and Gender", "ProQuest", "ProQuest:31040", "8755-4550", "Journal", 2000, "Controlled", "Regular", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Women and Language", "Organization for the Study of Communication Language and Gender", "ProQuest", "ProQuest:31040", "8755-4550", "Journal", 2000, "Controlled", "Regular", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Women and Language", "Organization for the Study of Communication Language and Gender", "ProQuest", "ProQuest:31040", "8755-4550", "Journal", 2000, "Controlled", "Regular", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+        ],
+        columns=['resource_name', 'publisher', 'platform', 'proprietary_ID', 'print_ISSN', 'data_type', 'YOP', 'access_type', 'access_method', 'metric_type', 'usage_date', 'usage_count', 'report_creation_date'],  # Fields where all values are null removed from dataframe
+    )
+    sample_SUSHI_TR_response_R5b1_dataframe = sample_SUSHI_TR_response_R5b1_dataframe.astype({
+        'resource_name': COUNTERData.state_data_types()['resource_name'],
+        'publisher': COUNTERData.state_data_types()['publisher'],
+        'platform': COUNTERData.state_data_types()['platform'],
+        'proprietary_ID': COUNTERData.state_data_types()['proprietary_ID'],
+        'print_ISSN': COUNTERData.state_data_types()['print_ISSN'],
+        'data_type': COUNTERData.state_data_types()['data_type'],
+        'YOP': COUNTERData.state_data_types()['YOP'],
+        'access_type': COUNTERData.state_data_types()['access_type'],
+        'access_method': COUNTERData.state_data_types()['access_method'],
+        'metric_type': COUNTERData.state_data_types()['metric_type'],
+        'usage_count': COUNTERData.state_data_types()['usage_count'],
+    })
+    sample_SUSHI_TR_response_R5b1_dataframe['usage_date'] = pd.to_datetime(sample_SUSHI_TR_response_R5b1_dataframe['usage_date'])
+    sample_SUSHI_TR_response_R5b1_dataframe['report_creation_date'] = pd.to_datetime(sample_SUSHI_TR_response_R5b1_dataframe['report_creation_date'])
+    #TEST: end temp
+    assert_frame_equal(df[sample_SUSHI_TR_response_R5b1_dataframe.columns.tolist()], sample_SUSHI_TR_response_R5b1_dataframe)  #TEST: temp
+    #TEST: `assert_frame_equal(df, sample_SUSHI_TR_response_R5b1_dataframe[df.columns.tolist()])` passes when field are missing from `df` because they're not yet being captured in the class being tested, which isn't the desired behavior
+
+
+@pytest.mark.slow
+def test_create_dataframe_from_R5b1_IR(sample_SUSHI_IR_response_R5b1_JSON_dict, sample_SUSHI_IR_response_R5b1_dataframe):
+    """Tests transforming dictionaries derived from R5.1 SUSHI IR JSONs into dataframes."""
+    df = ConvertJSONDictToDataframe(sample_SUSHI_IR_response_R5b1_JSON_dict).create_dataframe()
+    #TEST: temp
+    sample_SUSHI_IR_response_R5b1_dataframe = pd.DataFrame(  #TEST: Fixture returning `None` replaced by temporary dataframe matching temporary JSON in `sample_SUSHI_IR_response_R5b1_JSON_dict`
+        [
+            ["Thinspo The Effects of Social Media on Disordered Eating and Body Image among Adolescent Middle", "ProQuest", "ProQuest", "Byrne Erin", "2022-01-01", "ProQuest:2688031495", None, "Thesis_or_Dissertation", 2022, "Controlled", "Regular", None, None, None, None, "Total_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["Thinspo The Effects of Social Media on Disordered Eating and Body Image among Adolescent Middle", "ProQuest", "ProQuest", "Byrne Erin", "2022-01-01", "ProQuest:2688031495", None, "Thesis_or_Dissertation", 2022, "Controlled", "Regular", None, None, None, None, "Total_Item_Requests", "2024-11-01", 3, "2024-11-25"],
+            ["Thinspo The Effects of Social Media on Disordered Eating and Body Image among Adolescent Middle", "ProQuest", "ProQuest", "Byrne Erin", "2022-01-01", "ProQuest:2688031495", None, "Thesis_or_Dissertation", 2022, "Controlled", "Regular", None, None, None, None, "Unique_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Thinspo The Effects of Social Media on Disordered Eating and Body Image among Adolescent Middle", "ProQuest", "ProQuest", "Byrne Erin", "2022-01-01", "ProQuest:2688031495", None, "Thesis_or_Dissertation", 2022, "Controlled", "Regular", None, None, None, None, "Unique_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["Creepy and cute Phantom Exhibition explores quirkier aspects of Japanese culture", "Tribune Content Agency LLC", "ProQuest", "Kelly Agee", "2024-07-25", "ProQuest:3084590345", None, "Other", 2024, "Controlled", "Regular", None, None, None, None, "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Creepy and cute Phantom Exhibition explores quirkier aspects of Japanese culture", "Tribune Content Agency LLC", "ProQuest", "Kelly Agee", "2024-07-25", "ProQuest:3084590345", None, "Other", 2024, "Controlled", "Regular", None, None, None, None, "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Creepy and cute Phantom Exhibition explores quirkier aspects of Japanese culture", "Tribune Content Agency LLC", "ProQuest", "Kelly Agee", "2024-07-25", "ProQuest:3084590345", None, "Other", 2024, "Controlled", "Regular", None, None, None, None, "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Creepy and cute Phantom Exhibition explores quirkier aspects of Japanese culture", "Tribune Content Agency LLC", "ProQuest", "Kelly Agee", "2024-07-25", "ProQuest:3084590345", None, "Other", 2024, "Controlled", "Regular", None, None, None, None, "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Detoure on Tour A fresh take on thrifting - The Daily Aztec", "Uloop  Inc", "ProQuest", None, "2024-02-05", "ProQuest:2922602443", None, "Other", 2024, "Controlled", "Regular", None, None, None, None, "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Detoure on Tour A fresh take on thrifting - The Daily Aztec", "Uloop  Inc", "ProQuest", None, "2024-02-05", "ProQuest:2922602443", None, "Other", 2024, "Controlled", "Regular", None, None, None, None, "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Detoure on Tour A fresh take on thrifting - The Daily Aztec", "Uloop  Inc", "ProQuest", None, "2024-02-05", "ProQuest:2922602443", None, "Other", 2024, "Controlled", "Regular", None, None, None, None, "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Detoure on Tour A fresh take on thrifting - The Daily Aztec", "Uloop  Inc", "ProQuest", None, "2024-02-05", "ProQuest:2922602443", None, "Other", 2024, "Controlled", "Regular", None, None, None, None, "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["at large womens lives and offending in victorian liverpool and london", "ProQuest", "ProQuest", "Williams Lucy", "2014-01-01", "ProQuest:1827867627", None, "Thesis_or_Dissertation", 2014, "Controlled", "Regular", None, None, None, None, "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["at large womens lives and offending in victorian liverpool and london", "ProQuest", "ProQuest", "Williams Lucy", "2014-01-01", "ProQuest:1827867627", None, "Thesis_or_Dissertation", 2014, "Controlled", "Regular", None, None, None, None, "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["- FSU Sociology Professor Named Director of Claude Pepper Center", "Targeted News Service", "ProQuest", None, "2022-05-10", "ProQuest:2661419826", None, "Other", 2022, "Controlled", "Regular", None, None, None, None, "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["- FSU Sociology Professor Named Director of Claude Pepper Center", "Targeted News Service", "ProQuest", None, "2022-05-10", "ProQuest:2661419826", None, "Other", 2022, "Controlled", "Regular", None, None, None, None, "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["- FSU Sociology Professor Named Director of Claude Pepper Center", "Targeted News Service", "ProQuest", None, "2022-05-10", "ProQuest:2661419826", None, "Other", 2022, "Controlled", "Regular", None, None, None, None, "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["- FSU Sociology Professor Named Director of Claude Pepper Center", "Targeted News Service", "ProQuest", None, "2022-05-10", "ProQuest:2661419826", None, "Other", 2022, "Controlled", "Regular", None, None, None, None, "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["A Modders Guidelines for Moddable Game Development", "ProQuest", "ProQuest", "Crmer Loc", "2024-01-01", "ProQuest:3064718144", None, "Thesis_or_Dissertation", 2024, "Controlled", "Regular", None, None, None, None, "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["A Modders Guidelines for Moddable Game Development", "ProQuest", "ProQuest", "Crmer Loc", "2024-01-01", "ProQuest:3064718144", None, "Thesis_or_Dissertation", 2024, "Controlled", "Regular", None, None, None, None, "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["A Modders Guidelines for Moddable Game Development", "ProQuest", "ProQuest", "Crmer Loc", "2024-01-01", "ProQuest:3064718144", None, "Thesis_or_Dissertation", 2024, "Controlled", "Regular", None, None, None, None, "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["A Modders Guidelines for Moddable Game Development", "ProQuest", "ProQuest", "Crmer Loc", "2024-01-01", "ProQuest:3064718144", None, "Thesis_or_Dissertation", 2024, "Controlled", "Regular", None, None, None, None, "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            [None, "ProQuest", "ProQuest", "MaldonadoResto Joan Katherine", "2021-01-01", "ProQuest:2525630476", None, "Thesis_or_Dissertation", 2021, "Controlled", "Regular", None, None, None, None, "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            [None, "ProQuest", "ProQuest", "MaldonadoResto Joan Katherine", "2021-01-01", "ProQuest:2525630476", None, "Thesis_or_Dissertation", 2021, "Controlled", "Regular", None, None, None, None, "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            [None, "ProQuest", "ProQuest", "MaldonadoResto Joan Katherine", "2021-01-01", "ProQuest:2525630476", None, "Thesis_or_Dissertation", 2021, "Controlled", "Regular", None, None, None, None, "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            [None, "ProQuest", "ProQuest", "MaldonadoResto Joan Katherine", "2021-01-01", "ProQuest:2525630476", None, "Thesis_or_Dissertation", 2021, "Controlled", "Regular", None, None, None, None, "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Fiction", "MSI Information Services", "ProQuest", "Anonymous", "2011-08-01", "ProQuest:881483559", "0363-0277", "Article", 2011, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Fiction", "MSI Information Services", "ProQuest", "Anonymous", "2011-08-01", "ProQuest:881483559", "0363-0277", "Article", 2011, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Total_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["Fiction", "MSI Information Services", "ProQuest", "Anonymous", "2011-08-01", "ProQuest:881483559", "0363-0277", "Article", 2011, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Unique_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Fiction", "MSI Information Services", "ProQuest", "Anonymous", "2011-08-01", "ProQuest:881483559", "0363-0277", "Article", 2011, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Unique_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["Hiddin in Plain View A Secret Story of Quilts and the Underground Railroad", "MSI Information Services", "ProQuest", "Jenny Presnell", "1999-02-15", "ProQuest:196801991", "0363-0277", "Article", 1999, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Total_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["Hiddin in Plain View A Secret Story of Quilts and the Underground Railroad", "MSI Information Services", "ProQuest", "Jenny Presnell", "1999-02-15", "ProQuest:196801991", "0363-0277", "Article", 1999, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Total_Item_Requests", "2024-11-01", 3, "2024-11-25"],
+            ["Hiddin in Plain View A Secret Story of Quilts and the Underground Railroad", "MSI Information Services", "ProQuest", "Jenny Presnell", "1999-02-15", "ProQuest:196801991", "0363-0277", "Article", 1999, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Hiddin in Plain View A Secret Story of Quilts and the Underground Railroad", "MSI Information Services", "ProQuest", "Jenny Presnell", "1999-02-15", "ProQuest:196801991", "0363-0277", "Article", 1999, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Ladies in Love", "MSI Information Services", "ProQuest", None, "2017-09-15", "ProQuest:1937840984", "0363-0277", "Article", 2017, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Ladies in Love", "MSI Information Services", "ProQuest", None, "2017-09-15", "ProQuest:1937840984", "0363-0277", "Article", 2017, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Total_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["Ladies in Love", "MSI Information Services", "ProQuest", None, "2017-09-15", "ProQuest:1937840984", "0363-0277", "Article", 2017, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Ladies in Love", "MSI Information Services", "ProQuest", None, "2017-09-15", "ProQuest:1937840984", "0363-0277", "Article", 2017, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Publishing Kindle Unlimited Sparks Discussion", "MSI Information Services", "ProQuest", "Matt Enis", "2014-09-01", "ProQuest:1554514780", "0363-0277", "Article", 2014, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Publishing Kindle Unlimited Sparks Discussion", "MSI Information Services", "ProQuest", "Matt Enis", "2014-09-01", "ProQuest:1554514780", "0363-0277", "Article", 2014, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Total_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["Publishing Kindle Unlimited Sparks Discussion", "MSI Information Services", "ProQuest", "Matt Enis", "2014-09-01", "ProQuest:1554514780", "0363-0277", "Article", 2014, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Unique_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Publishing Kindle Unlimited Sparks Discussion", "MSI Information Services", "ProQuest", "Matt Enis", "2014-09-01", "ProQuest:1554514780", "0363-0277", "Article", 2014, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Unique_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["Shooting from the Hip Changing Tunes in Jazz / Setting the Tempo Fifty Years of Great Jazz Liner", "MSI Information Services", "ProQuest", "Baker Paul Alan", "1996-10-01", "ProQuest:196757790", "0363-0277", "Article", 1996, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Shooting from the Hip Changing Tunes in Jazz / Setting the Tempo Fifty Years of Great Jazz Liner", "MSI Information Services", "ProQuest", "Baker Paul Alan", "1996-10-01", "ProQuest:196757790", "0363-0277", "Article", 1996, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Shooting from the Hip Changing Tunes in Jazz / Setting the Tempo Fifty Years of Great Jazz Liner", "MSI Information Services", "ProQuest", "Baker Paul Alan", "1996-10-01", "ProQuest:196757790", "0363-0277", "Article", 1996, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Shooting from the Hip Changing Tunes in Jazz / Setting the Tempo Fifty Years of Great Jazz Liner", "MSI Information Services", "ProQuest", "Baker Paul Alan", "1996-10-01", "ProQuest:196757790", "0363-0277", "Article", 1996, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Birth of Venus", "MSI Information Services", "ProQuest", "Carol Stern", "2006-05-15", "ProQuest:196862191", "0363-0277", "Article", 2006, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["The Birth of Venus", "MSI Information Services", "ProQuest", "Carol Stern", "2006-05-15", "ProQuest:196862191", "0363-0277", "Article", 2006, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Total_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["The Birth of Venus", "MSI Information Services", "ProQuest", "Carol Stern", "2006-05-15", "ProQuest:196862191", "0363-0277", "Article", 2006, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Birth of Venus", "MSI Information Services", "ProQuest", "Carol Stern", "2006-05-15", "ProQuest:196862191", "0363-0277", "Article", 2006, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Diving Bell and the Butterfly", "MSI Information Services", "ProQuest", "Wilda Williams", "1997-05-15", "ProQuest:196825373", "0363-0277", "Article", 1997, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["The Diving Bell and the Butterfly", "MSI Information Services", "ProQuest", "Wilda Williams", "1997-05-15", "ProQuest:196825373", "0363-0277", "Article", 1997, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Total_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["The Diving Bell and the Butterfly", "MSI Information Services", "ProQuest", "Wilda Williams", "1997-05-15", "ProQuest:196825373", "0363-0277", "Article", 1997, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Diving Bell and the Butterfly", "MSI Information Services", "ProQuest", "Wilda Williams", "1997-05-15", "ProQuest:196825373", "0363-0277", "Article", 1997, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["eReviews", "MSI Information Services", "ProQuest", "Cheryl LaGuardia", "2014-09-15", "ProQuest:1559542248", "0363-0277", "Article", 2014, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["eReviews", "MSI Information Services", "ProQuest", "Cheryl LaGuardia", "2014-09-15", "ProQuest:1559542248", "0363-0277", "Article", 2014, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["eReviews", "MSI Information Services", "ProQuest", "Cheryl LaGuardia", "2014-09-15", "ProQuest:1559542248", "0363-0277", "Article", 2014, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["eReviews", "MSI Information Services", "ProQuest", "Cheryl LaGuardia", "2014-09-15", "ProQuest:1559542248", "0363-0277", "Article", 2014, "Controlled", "Regular", "Library Journal", "Journal", "ProQuest:40955", "0363-0277", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Reaching for the Sun Kids in Cuba", "MSI Information Services", "ProQuest", "Margaret R Tassia", "2003-07-01", "ProQuest:211747419", "0362-8930", "Article", 2003, "Controlled", "Regular", "School Library Journal", "Journal", "ProQuest:37051", "0362-8930", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Reaching for the Sun Kids in Cuba", "MSI Information Services", "ProQuest", "Margaret R Tassia", "2003-07-01", "ProQuest:211747419", "0362-8930", "Article", 2003, "Controlled", "Regular", "School Library Journal", "Journal", "ProQuest:37051", "0362-8930", "Total_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["Reaching for the Sun Kids in Cuba", "MSI Information Services", "ProQuest", "Margaret R Tassia", "2003-07-01", "ProQuest:211747419", "0362-8930", "Article", 2003, "Controlled", "Regular", "School Library Journal", "Journal", "ProQuest:37051", "0362-8930", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Reaching for the Sun Kids in Cuba", "MSI Information Services", "ProQuest", "Margaret R Tassia", "2003-07-01", "ProQuest:211747419", "0362-8930", "Article", 2003, "Controlled", "Regular", "School Library Journal", "Journal", "ProQuest:37051", "0362-8930", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Freshman Fix", "MSI Information Services", "ProQuest", "Wayne Dorio", "2019-09-01", "ProQuest:2278150262", "0362-8930", "Article", 2019, "Controlled", "Regular", "School Library Journal", "Journal", "ProQuest:37051", "0362-8930", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Freshman Fix", "MSI Information Services", "ProQuest", "Wayne Dorio", "2019-09-01", "ProQuest:2278150262", "0362-8930", "Article", 2019, "Controlled", "Regular", "School Library Journal", "Journal", "ProQuest:37051", "0362-8930", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Freshman Fix", "MSI Information Services", "ProQuest", "Wayne Dorio", "2019-09-01", "ProQuest:2278150262", "0362-8930", "Article", 2019, "Controlled", "Regular", "School Library Journal", "Journal", "ProQuest:37051", "0362-8930", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Freshman Fix", "MSI Information Services", "ProQuest", "Wayne Dorio", "2019-09-01", "ProQuest:2278150262", "0362-8930", "Article", 2019, "Controlled", "Regular", "School Library Journal", "Journal", "ProQuest:37051", "0362-8930", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Gallup Poll Public Opinion", "MSI Information Services", "ProQuest", "Kirsten Martindale", "2000-11-01", "ProQuest:211726026", "0362-8930", "Article", 2000, "Controlled", "Regular", "School Library Journal", "Journal", "ProQuest:37051", "0362-8930", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Gallup Poll Public Opinion", "MSI Information Services", "ProQuest", "Kirsten Martindale", "2000-11-01", "ProQuest:211726026", "0362-8930", "Article", 2000, "Controlled", "Regular", "School Library Journal", "Journal", "ProQuest:37051", "0362-8930", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Gallup Poll Public Opinion", "MSI Information Services", "ProQuest", "Kirsten Martindale", "2000-11-01", "ProQuest:211726026", "0362-8930", "Article", 2000, "Controlled", "Regular", "School Library Journal", "Journal", "ProQuest:37051", "0362-8930", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Gallup Poll Public Opinion", "MSI Information Services", "ProQuest", "Kirsten Martindale", "2000-11-01", "ProQuest:211726026", "0362-8930", "Article", 2000, "Controlled", "Regular", "School Library Journal", "Journal", "ProQuest:37051", "0362-8930", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Mystery of Hieroglyphs The Story of the Rosetta Stone and the Race to Decipher Egyptian", "MSI Information Services", "ProQuest", "Cathryn A Camper", "1999-10-01", "ProQuest:211691481", "0362-8930", "Article", 1999, "Controlled", "Regular", "School Library Journal", "Journal", "ProQuest:37051", "0362-8930", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Mystery of Hieroglyphs The Story of the Rosetta Stone and the Race to Decipher Egyptian", "MSI Information Services", "ProQuest", "Cathryn A Camper", "1999-10-01", "ProQuest:211691481", "0362-8930", "Article", 1999, "Controlled", "Regular", "School Library Journal", "Journal", "ProQuest:37051", "0362-8930", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Mystery of Hieroglyphs The Story of the Rosetta Stone and the Race to Decipher Egyptian", "MSI Information Services", "ProQuest", "Cathryn A Camper", "1999-10-01", "ProQuest:211691481", "0362-8930", "Article", 1999, "Controlled", "Regular", "School Library Journal", "Journal", "ProQuest:37051", "0362-8930", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Mystery of Hieroglyphs The Story of the Rosetta Stone and the Race to Decipher Egyptian", "MSI Information Services", "ProQuest", "Cathryn A Camper", "1999-10-01", "ProQuest:211691481", "0362-8930", "Article", 1999, "Controlled", "Regular", "School Library Journal", "Journal", "ProQuest:37051", "0362-8930", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Zeus", "MSI Information Services", "ProQuest", "Russell Roberts", "2007-11-01", "ProQuest:2001764392", "0362-8930", "Article", 2007, "Controlled", "Regular", "School Library Journal", "Journal", "ProQuest:37051", "0362-8930", "No_License", "2024-11-01", 1, "2024-11-25"],
+            ["41 months for Jan 6 rioter who hit officer", "WP Company LLC dba The Washington Post", "ProQuest", "Tom Jackman", "2021-11-11", "ProQuest:2595797239", "0190-8286", "News_Item", 2021, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["41 months for Jan 6 rioter who hit officer", "WP Company LLC dba The Washington Post", "ProQuest", "Tom Jackman", "2021-11-11", "ProQuest:2595797239", "0190-8286", "News_Item", 2021, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["A monstrous act of lawlessness", "WP Company LLC dba The Washington Post", "ProQuest", None, "2020-09-15", "ProQuest:2442461086", "0190-8286", "News_Item", 2020, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["A monstrous act of lawlessness", "WP Company LLC dba The Washington Post", "ProQuest", None, "2020-09-15", "ProQuest:2442461086", "0190-8286", "News_Item", 2020, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Alexandria and Arlington crime report", "WP Company LLC dba The Washington Post", "ProQuest", None, "2011-11-03", "ProQuest:901558209", "0190-8286", "News_Item", 2011, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Alexandria and Arlington crime report", "WP Company LLC dba The Washington Post", "ProQuest", None, "2011-11-03", "ProQuest:901558209", "0190-8286", "News_Item", 2011, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Arrests show growing far-right boogaloo threat", "WP Company LLC dba The Washington Post", "ProQuest", "Craig Timberg", "2020-06-18", "ProQuest:2414163972", "0190-8286", "News_Item", 2020, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Arrests show growing far-right boogaloo threat", "WP Company LLC dba The Washington Post", "ProQuest", "Craig Timberg", "2020-06-18", "ProQuest:2414163972", "0190-8286", "News_Item", 2020, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["At the heart of Stonehenge  an astounding discovery raises more questions", "WP Company LLC dba The Washington Post", "ProQuest", "William Booth", "2024-08-15", "ProQuest:3092969038", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["At the heart of Stonehenge  an astounding discovery raises more questions", "WP Company LLC dba The Washington Post", "ProQuest", "William Booth", "2024-08-15", "ProQuest:3092969038", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["At the heart of Stonehenge  an astounding discovery raises more questions", "WP Company LLC dba The Washington Post", "ProQuest", "William Booth", "2024-08-15", "ProQuest:3092969038", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["At the heart of Stonehenge  an astounding discovery raises more questions", "WP Company LLC dba The Washington Post", "ProQuest", "William Booth", "2024-08-15", "ProQuest:3092969038", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["Attack on gay model is investigated as hate crime", "WP Company LLC dba The Washington Post", "ProQuest", "Peter Hermann", "2024-11-04", "ProQuest:3123596729", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Attack on gay model is investigated as hate crime", "WP Company LLC dba The Washington Post", "ProQuest", "Peter Hermann", "2024-11-04", "ProQuest:3123596729", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Attack on gay model is investigated as hate crime", "WP Company LLC dba The Washington Post", "ProQuest", "Peter Hermann", "2024-11-04", "ProQuest:3123596729", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Attack on gay model is investigated as hate crime", "WP Company LLC dba The Washington Post", "ProQuest", "Peter Hermann", "2024-11-04", "ProQuest:3123596729", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Battleground wins in NC  Georgia put him on brink", "WP Company LLC dba The Washington Post", "ProQuest", "Tyler Pager", "2024-11-06", "ProQuest:3124249327", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Battleground wins in NC  Georgia put him on brink", "WP Company LLC dba The Washington Post", "ProQuest", "Tyler Pager", "2024-11-06", "ProQuest:3124249327", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Battleground wins in NC  Georgia put him on brink", "WP Company LLC dba The Washington Post", "ProQuest", "Tyler Pager", "2024-11-06", "ProQuest:3124249327", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Battleground wins in NC  Georgia put him on brink", "WP Company LLC dba The Washington Post", "ProQuest", "Tyler Pager", "2024-11-06", "ProQuest:3124249327", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Clint Eastwood turns in another intentionally muddy moral tale", "WP Company LLC dba The Washington Post", "ProQuest", "Ty Burr", "2024-11-01", "ProQuest:3122821212", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Clint Eastwood turns in another intentionally muddy moral tale", "WP Company LLC dba The Washington Post", "ProQuest", "Ty Burr", "2024-11-01", "ProQuest:3122821212", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Clint Eastwood turns in another intentionally muddy moral tale", "WP Company LLC dba The Washington Post", "ProQuest", "Ty Burr", "2024-11-01", "ProQuest:3122821212", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Clint Eastwood turns in another intentionally muddy moral tale", "WP Company LLC dba The Washington Post", "ProQuest", "Ty Burr", "2024-11-01", "ProQuest:3122821212", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["DC Homicide Unit Senses Turnaround New Head of Much-Criticized Operation Cites Improving Morale", "WP Company LLC dba The Washington Post", "ProQuest", "Maria Elena Fernandez", "1998-05-20", "ProQuest:408362961", "0190-8286", "News_Item", 1998, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["DC Homicide Unit Senses Turnaround New Head of Much-Criticized Operation Cites Improving Morale", "WP Company LLC dba The Washington Post", "ProQuest", "Maria Elena Fernandez", "1998-05-20", "ProQuest:408362961", "0190-8286", "News_Item", 1998, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["District Police Lead Nation in Shootings Lack of Training  Supervision Implicated as Key Factors", "WP Company LLC dba The Washington Post", "ProQuest", "Jeff Leen", "1998-11-15", "ProQuest:408408781", "0190-8286", "News_Item", 1998, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["District Police Lead Nation in Shootings Lack of Training  Supervision Implicated as Key Factors", "WP Company LLC dba The Washington Post", "ProQuest", "Jeff Leen", "1998-11-15", "ProQuest:408408781", "0190-8286", "News_Item", 1998, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Four people left dead  several injured over violent 24-hour period in city", "WP Company LLC dba The Washington Post", "ProQuest", "Fredrick Kunkle", "2021-10-10", "ProQuest:2580382646", "0190-8286", "News_Item", 2021, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Four people left dead  several injured over violent 24-hour period in city", "WP Company LLC dba The Washington Post", "ProQuest", "Fredrick Kunkle", "2021-10-10", "ProQuest:2580382646", "0190-8286", "News_Item", 2021, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Hank Willis Thomas The artist as public intellectual  agitator  optimist", "WP Company LLC dba The Washington Post", "ProQuest", "Robin Givhan", "2024-08-18", "ProQuest:3093956879", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Hank Willis Thomas The artist as public intellectual  agitator  optimist", "WP Company LLC dba The Washington Post", "ProQuest", "Robin Givhan", "2024-08-18", "ProQuest:3093956879", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Hank Willis Thomas The artist as public intellectual  agitator  optimist", "WP Company LLC dba The Washington Post", "ProQuest", "Robin Givhan", "2024-08-18", "ProQuest:3093956879", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Hank Willis Thomas The artist as public intellectual  agitator  optimist", "WP Company LLC dba The Washington Post", "ProQuest", "Robin Givhan", "2024-08-18", "ProQuest:3093956879", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Harris returns to alma mater Howard  where excitement mixes with worry", "WP Company LLC dba The Washington Post", "ProQuest", "Maeve Reston", "2024-11-06", "ProQuest:3124281572", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Harris returns to alma mater Howard  where excitement mixes with worry", "WP Company LLC dba The Washington Post", "ProQuest", "Maeve Reston", "2024-11-06", "ProQuest:3124281572", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Harris returns to alma mater Howard  where excitement mixes with worry", "WP Company LLC dba The Washington Post", "ProQuest", "Maeve Reston", "2024-11-06", "ProQuest:3124281572", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Harris returns to alma mater Howard  where excitement mixes with worry", "WP Company LLC dba The Washington Post", "ProQuest", "Maeve Reston", "2024-11-06", "ProQuest:3124281572", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Johnson  who shares secret with Trump  fights to keep House majority", "WP Company LLC dba The Washington Post", "ProQuest", "Marianna Sotomayor", "2024-11-04", "ProQuest:3123596726", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Johnson  who shares secret with Trump  fights to keep House majority", "WP Company LLC dba The Washington Post", "ProQuest", "Marianna Sotomayor", "2024-11-04", "ProQuest:3123596726", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Johnson  who shares secret with Trump  fights to keep House majority", "WP Company LLC dba The Washington Post", "ProQuest", "Marianna Sotomayor", "2024-11-04", "ProQuest:3123596726", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Johnson  who shares secret with Trump  fights to keep House majority", "WP Company LLC dba The Washington Post", "ProQuest", "Marianna Sotomayor", "2024-11-04", "ProQuest:3123596726", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Jury Convicts Man of Murder In Shooting of Veteran Officer", "WP Company LLC dba The Washington Post", "ProQuest", "Ruben Castaneda", "2006-04-05", "ProQuest:409996011", "0190-8286", "News_Item", 2006, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Jury Convicts Man of Murder In Shooting of Veteran Officer", "WP Company LLC dba The Washington Post", "ProQuest", "Ruben Castaneda", "2006-04-05", "ProQuest:409996011", "0190-8286", "News_Item", 2006, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Md Man Convicted In Murder Of Officer", "WP Company LLC dba The Washington Post", "ProQuest", "Ruben Castaneda", "2006-04-05", "ProQuest:409995951", "0190-8286", "News_Item", 2006, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Md Man Convicted In Murder Of Officer", "WP Company LLC dba The Washington Post", "ProQuest", "Ruben Castaneda", "2006-04-05", "ProQuest:409995951", "0190-8286", "News_Item", 2006, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Musk  Ramaswamy to attempt drastic change", "WP Company LLC dba The Washington Post", "ProQuest", "Jeff Stein", "2024-11-13", "ProQuest:3127172417", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Musk  Ramaswamy to attempt drastic change", "WP Company LLC dba The Washington Post", "ProQuest", "Jeff Stein", "2024-11-13", "ProQuest:3127172417", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Musk  Ramaswamy to attempt drastic change", "WP Company LLC dba The Washington Post", "ProQuest", "Jeff Stein", "2024-11-13", "ProQuest:3127172417", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Musk  Ramaswamy to attempt drastic change", "WP Company LLC dba The Washington Post", "ProQuest", "Jeff Stein", "2024-11-13", "ProQuest:3127172417", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Neo-Nazi rally in Sweden leads to injuries  arrests", "WP Company LLC dba The Washington Post", "ProQuest", "Heba Habib", "2017-10-01", "ProQuest:1944756797", "0190-8286", "News_Item", 2017, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Neo-Nazi rally in Sweden leads to injuries  arrests", "WP Company LLC dba The Washington Post", "ProQuest", "Heba Habib", "2017-10-01", "ProQuest:1944756797", "0190-8286", "News_Item", 2017, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["President Trump The real hate is the hate from the other side", "WP Company LLC dba The Washington Post", "ProQuest", "Marc A Thiessen", "2020-07-10", "ProQuest:2421655392", "0190-8286", "News_Item", 2020, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["President Trump The real hate is the hate from the other side", "WP Company LLC dba The Washington Post", "ProQuest", "Marc A Thiessen", "2020-07-10", "ProQuest:2421655392", "0190-8286", "News_Item", 2020, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["RFK Jrs views on fluoride arent crazy Really", "WP Company LLC dba The Washington Post", "ProQuest", "Leana S Wen", "2024-11-13", "ProQuest:3127172470", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["RFK Jrs views on fluoride arent crazy Really", "WP Company LLC dba The Washington Post", "ProQuest", "Leana S Wen", "2024-11-13", "ProQuest:3127172470", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["RFK Jrs views on fluoride arent crazy Really", "WP Company LLC dba The Washington Post", "ProQuest", "Leana S Wen", "2024-11-13", "ProQuest:3127172470", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["RFK Jrs views on fluoride arent crazy Really", "WP Company LLC dba The Washington Post", "ProQuest", "Leana S Wen", "2024-11-13", "ProQuest:3127172470", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Six decades later  fighting a racist legacy of pollution", "WP Company LLC dba The Washington Post", "ProQuest", "Darryl Fears", "2023-05-12", "ProQuest:2812263455", "0190-8286", "News_Item", 2023, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 6, "2024-11-25"],
+            ["Six decades later  fighting a racist legacy of pollution", "WP Company LLC dba The Washington Post", "ProQuest", "Darryl Fears", "2023-05-12", "ProQuest:2812263455", "0190-8286", "News_Item", 2023, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Requests", "2024-11-01", 5, "2024-11-25"],
+            ["Six decades later  fighting a racist legacy of pollution", "WP Company LLC dba The Washington Post", "ProQuest", "Darryl Fears", "2023-05-12", "ProQuest:2812263455", "0190-8286", "News_Item", 2023, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Six decades later  fighting a racist legacy of pollution", "WP Company LLC dba The Washington Post", "ProQuest", "Darryl Fears", "2023-05-12", "ProQuest:2812263455", "0190-8286", "News_Item", 2023, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["TGI Fridays decades-long party may soon be over", "WP Company LLC dba The Washington Post", "ProQuest", "Emily Heil", "2024-11-04", "ProQuest:3123596667", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["TGI Fridays decades-long party may soon be over", "WP Company LLC dba The Washington Post", "ProQuest", "Emily Heil", "2024-11-04", "ProQuest:3123596667", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["TGI Fridays decades-long party may soon be over", "WP Company LLC dba The Washington Post", "ProQuest", "Emily Heil", "2024-11-04", "ProQuest:3123596667", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["TGI Fridays decades-long party may soon be over", "WP Company LLC dba The Washington Post", "ProQuest", "Emily Heil", "2024-11-04", "ProQuest:3123596667", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Cures new album is bands best in decades", "WP Company LLC dba The Washington Post", "ProQuest", "Chris Kelly", "2024-11-02", "ProQuest:3123165879", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Cures new album is bands best in decades", "WP Company LLC dba The Washington Post", "ProQuest", "Chris Kelly", "2024-11-02", "ProQuest:3123165879", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Cures new album is bands best in decades", "WP Company LLC dba The Washington Post", "ProQuest", "Chris Kelly", "2024-11-02", "ProQuest:3123165879", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Cures new album is bands best in decades", "WP Company LLC dba The Washington Post", "ProQuest", "Chris Kelly", "2024-11-02", "ProQuest:3123165879", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Director  On a Mission We Were Soldiers Is Personal Randall Wallace Fought to Keep It So", "WP Company LLC dba The Washington Post", "ProQuest", "Stephen Hunter", "2002-03-03", "ProQuest:409260100", "0190-8286", "News_Item", 2002, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["The Director  On a Mission We Were Soldiers Is Personal Randall Wallace Fought to Keep It So", "WP Company LLC dba The Washington Post", "ProQuest", "Stephen Hunter", "2002-03-03", "ProQuest:409260100", "0190-8286", "News_Item", 2002, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Requests", "2024-11-01", 3, "2024-11-25"],
+            ["The Director  On a Mission We Were Soldiers Is Personal Randall Wallace Fought to Keep It So", "WP Company LLC dba The Washington Post", "ProQuest", "Stephen Hunter", "2002-03-03", "ProQuest:409260100", "0190-8286", "News_Item", 2002, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["The Director  On a Mission We Were Soldiers Is Personal Randall Wallace Fought to Keep It So", "WP Company LLC dba The Washington Post", "ProQuest", "Stephen Hunter", "2002-03-03", "ProQuest:409260100", "0190-8286", "News_Item", 2002, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Requests", "2024-11-01", 3, "2024-11-25"],
+            ["The road to no rules ends here", "WP Company LLC dba The Washington Post", "ProQuest", "Ben Terris", "2014-07-03", "ProQuest:1542266427", "0190-8286", "News_Item", 2014, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The road to no rules ends here", "WP Company LLC dba The Washington Post", "ProQuest", "Ben Terris", "2014-07-03", "ProQuest:1542266427", "0190-8286", "News_Item", 2014, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Theres a prowler on my security cam Whats the best way to protect myself", "WP Company LLC dba The Washington Post", "ProQuest", "Courtland Milloy", "2022-07-20", "ProQuest:2691606636", "0190-8286", "News_Item", 2022, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Theres a prowler on my security cam Whats the best way to protect myself", "WP Company LLC dba The Washington Post", "ProQuest", "Courtland Milloy", "2022-07-20", "ProQuest:2691606636", "0190-8286", "News_Item", 2022, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Uncle denies making racist comments about my partner", "WP Company LLC dba The Washington Post", "ProQuest", "Judith Martin", "2024-11-06", "ProQuest:3124275905", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Uncle denies making racist comments about my partner", "WP Company LLC dba The Washington Post", "ProQuest", "Judith Martin", "2024-11-06", "ProQuest:3124275905", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Uncle denies making racist comments about my partner", "WP Company LLC dba The Washington Post", "ProQuest", "Judith Martin", "2024-11-06", "ProQuest:3124275905", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Uncle denies making racist comments about my partner", "WP Company LLC dba The Washington Post", "ProQuest", "Judith Martin", "2024-11-06", "ProQuest:3124275905", "0190-8286", "News_Item", 2024, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["WEEK IN REVIEW April 2-8", "WP Company LLC dba The Washington Post", "ProQuest", None, "2006-04-09", "ProQuest:410015456", "0190-8286", "News_Item", 2006, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["WEEK IN REVIEW April 2-8", "WP Company LLC dba The Washington Post", "ProQuest", None, "2006-04-09", "ProQuest:410015456", "0190-8286", "News_Item", 2006, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Whats Worth A Protest In Pr Georges", "WP Company LLC dba The Washington Post", "ProQuest", "Marc Fisher", "2000-04-06", "ProQuest:408602045", "0190-8286", "News_Item", 2000, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Whats Worth A Protest In Pr Georges", "WP Company LLC dba The Washington Post", "ProQuest", "Marc Fisher", "2000-04-06", "ProQuest:408602045", "0190-8286", "News_Item", 2000, "Controlled", "Regular", "The Washington Post", "Newspaper_or_Newsletter", "ProQuest:10327", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Americas Watch Attributes Half of Jamaican Killings to Police", "WP Company LLC dba The Washington Post", "ProQuest", None, "1986-09-23", "ProQuest:138827849", "0190-8286", "News_Item", 1986, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Americas Watch Attributes Half of Jamaican Killings to Police", "WP Company LLC dba The Washington Post", "ProQuest", None, "1986-09-23", "ProQuest:138827849", "0190-8286", "News_Item", 1986, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["CRIME REPORT", "WP Company LLC dba The Washington Post", "ProQuest", "RIA MANGLAPUS", "2008-07-03", "ProQuest:3064281469", "0190-8286", "News_Item", 2008, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["CRIME REPORT", "WP Company LLC dba The Washington Post", "ProQuest", "RIA MANGLAPUS", "2008-07-03", "ProQuest:3064281469", "0190-8286", "News_Item", 2008, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["CRIME REPORT", "WP Company LLC dba The Washington Post", "ProQuest", "RIA MANGLAPUS", "2008-09-04", "ProQuest:3058929487", "0190-8286", "News_Item", 2008, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["CRIME REPORT", "WP Company LLC dba The Washington Post", "ProQuest", "RIA MANGLAPUS", "2008-09-04", "ProQuest:3058929487", "0190-8286", "News_Item", 2008, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["CRIME REPORT", "WP Company LLC dba The Washington Post", "ProQuest", "RIA MANGLAPUS", "2008-12-11", "ProQuest:3051660964", "0190-8286", "News_Item", 2008, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["CRIME REPORT", "WP Company LLC dba The Washington Post", "ProQuest", "RIA MANGLAPUS", "2008-12-11", "ProQuest:3051660964", "0190-8286", "News_Item", 2008, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["Concentrated Violence Strains Police in DC", "WP Company LLC dba The Washington Post", "ProQuest", "Gabriel Escobar Washington Post Staff Writer", "1990-08-23", "ProQuest:140148661", "0190-8286", "News_Item", 1990, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["Concentrated Violence Strains Police in DC", "WP Company LLC dba The Washington Post", "ProQuest", "Gabriel Escobar Washington Post Staff Writer", "1990-08-23", "ProQuest:140148661", "0190-8286", "News_Item", 1990, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["Credit Law Seen Aiding US Women", "WP Company LLC dba The Washington Post", "ProQuest", "By Bradley GrahamWashington Post Staff Writer", "1977-07-06", "ProQuest:146684286", "0190-8286", "News_Item", 1977, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Investigations", "2024-11-01", 4, "2024-11-25"],
+            ["Credit Law Seen Aiding US Women", "WP Company LLC dba The Washington Post", "ProQuest", "By Bradley GrahamWashington Post Staff Writer", "1977-07-06", "ProQuest:146684286", "0190-8286", "News_Item", 1977, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Requests", "2024-11-01", 3, "2024-11-25"],
+            ["Credit Law Seen Aiding US Women", "WP Company LLC dba The Washington Post", "ProQuest", "By Bradley GrahamWashington Post Staff Writer", "1977-07-06", "ProQuest:146684286", "0190-8286", "News_Item", 1977, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Credit Law Seen Aiding US Women", "WP Company LLC dba The Washington Post", "ProQuest", "By Bradley GrahamWashington Post Staff Writer", "1977-07-06", "ProQuest:146684286", "0190-8286", "News_Item", 1977, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["District Police Lead Nation in Shootings", "WP Company LLC dba The Washington Post", "ProQuest", "JEFF LEEN", "1998-11-15", "ProQuest:1620446998", "0190-8286", "News_Item", 1998, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["District Police Lead Nation in Shootings", "WP Company LLC dba The Washington Post", "ProQuest", "JEFF LEEN", "1998-11-15", "ProQuest:1620446998", "0190-8286", "News_Item", 1998, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Goodfellas", "WP Company LLC dba The Washington Post", "ProQuest", "ROBERT SHERRILL", "2004-01-18", "ProQuest:2463436204", "0190-8286", "News_Item", 2004, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Goodfellas", "WP Company LLC dba The Washington Post", "ProQuest", "ROBERT SHERRILL", "2004-01-18", "ProQuest:2463436204", "0190-8286", "News_Item", 2004, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["Goodfellas", "WP Company LLC dba The Washington Post", "ProQuest", "ROBERT SHERRILL", "2004-01-18", "ProQuest:2463436204", "0190-8286", "News_Item", 2004, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Goodfellas", "WP Company LLC dba The Washington Post", "ProQuest", "ROBERT SHERRILL", "2004-01-18", "ProQuest:2463436204", "0190-8286", "News_Item", 2004, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["JFK Secretly Taped White House Talks", "WP Company LLC dba The Washington Post", "ProQuest", "By Bob Woodward and Patrick E Tyler Washington Post Staff Writers", "1982-02-04", "ProQuest:147536479", "0190-8286", "News_Item", 1982, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["JFK Secretly Taped White House Talks", "WP Company LLC dba The Washington Post", "ProQuest", "By Bob Woodward and Patrick E Tyler Washington Post Staff Writers", "1982-02-04", "ProQuest:147536479", "0190-8286", "News_Item", 1982, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["JFK Secretly Taped White House Talks", "WP Company LLC dba The Washington Post", "ProQuest", "By Bob Woodward and Patrick E Tyler Washington Post Staff Writers", "1982-02-04", "ProQuest:147536479", "0190-8286", "News_Item", 1982, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["JFK Secretly Taped White House Talks", "WP Company LLC dba The Washington Post", "ProQuest", "By Bob Woodward and Patrick E Tyler Washington Post Staff Writers", "1982-02-04", "ProQuest:147536479", "0190-8286", "News_Item", 1982, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Jury Convicts Man of Murder In Shooting of Veteran Officer", "WP Company LLC dba The Washington Post", "ProQuest", "RUBEN CASTANEDA Washington Post Staff Writer", "2006-04-05", "ProQuest:2688831272", "0190-8286", "News_Item", 2006, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Jury Convicts Man of Murder In Shooting of Veteran Officer", "WP Company LLC dba The Washington Post", "ProQuest", "RUBEN CASTANEDA Washington Post Staff Writer", "2006-04-05", "ProQuest:2688831272", "0190-8286", "News_Item", 2006, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Larry Clark You Should See These Kids", "WP Company LLC dba The Washington Post", "ProQuest", "ELLEN McCARTHY Washington Post Staff Writer", "2006-07-07", "ProQuest:2688672790", "0190-8286", "News_Item", 2006, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Larry Clark You Should See These Kids", "WP Company LLC dba The Washington Post", "ProQuest", "ELLEN McCARTHY Washington Post Staff Writer", "2006-07-07", "ProQuest:2688672790", "0190-8286", "News_Item", 2006, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["Larry Clark You Should See These Kids", "WP Company LLC dba The Washington Post", "ProQuest", "ELLEN McCARTHY Washington Post Staff Writer", "2006-07-07", "ProQuest:2688672790", "0190-8286", "News_Item", 2006, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Larry Clark You Should See These Kids", "WP Company LLC dba The Washington Post", "ProQuest", "ELLEN McCARTHY Washington Post Staff Writer", "2006-07-07", "ProQuest:2688672790", "0190-8286", "News_Item", 2006, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Md Man Convicted In Murder Of Officer", "WP Company LLC dba The Washington Post", "ProQuest", "RUBEN CASTANEDA Washington Post Staff Writer", "2006-04-05", "ProQuest:2688830359", "0190-8286", "News_Item", 2006, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Md Man Convicted In Murder Of Officer", "WP Company LLC dba The Washington Post", "ProQuest", "RUBEN CASTANEDA Washington Post Staff Writer", "2006-04-05", "ProQuest:2688830359", "0190-8286", "News_Item", 2006, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Mother Killed by Stray Bullet Was Swept Up in DC Feud", "WP Company LLC dba The Washington Post", "ProQuest", "Linda Wheeler", "1992-06-09", "ProQuest:140717839", "0190-8286", "News_Item", 1992, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Mother Killed by Stray Bullet Was Swept Up in DC Feud", "WP Company LLC dba The Washington Post", "ProQuest", "Linda Wheeler", "1992-06-09", "ProQuest:140717839", "0190-8286", "News_Item", 1992, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["New Orleans Paper Plays Central Role in Contest", "WP Company LLC dba The Washington Post", "ProQuest", "Howard Kurtz Washington Post Staff Writer", "1991-11-16", "ProQuest:140595259", "0190-8286", "News_Item", 1991, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["New Orleans Paper Plays Central Role in Contest", "WP Company LLC dba The Washington Post", "ProQuest", "Howard Kurtz Washington Post Staff Writer", "1991-11-16", "ProQuest:140595259", "0190-8286", "News_Item", 1991, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["New Orleans Paper Plays Central Role in Contest", "WP Company LLC dba The Washington Post", "ProQuest", "Howard Kurtz Washington Post Staff Writer", "1991-11-16", "ProQuest:140595259", "0190-8286", "News_Item", 1991, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["New Orleans Paper Plays Central Role in Contest", "WP Company LLC dba The Washington Post", "ProQuest", "Howard Kurtz Washington Post Staff Writer", "1991-11-16", "ProQuest:140595259", "0190-8286", "News_Item", 1991, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Requests", "2024-11-01", 2, "2024-11-25"],
+            ["No Run of DeMille Thriller", "WP Company LLC dba The Washington Post", "ProQuest", "David Morrell", "1994-12-13", "ProQuest:757194450", "0190-8286", "News_Item", 1994, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["No Run of DeMille Thriller", "WP Company LLC dba The Washington Post", "ProQuest", "David Morrell", "1994-12-13", "ProQuest:757194450", "0190-8286", "News_Item", 1994, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Other 40 -- No Title", "WP Company LLC dba The Washington Post", "ProQuest", None, "1992-03-05", "ProQuest:140604664", "0190-8286", "News_Item", 1992, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["Other 40 -- No Title", "WP Company LLC dba The Washington Post", "ProQuest", None, "1992-03-05", "ProQuest:140604664", "0190-8286", "News_Item", 1992, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["Other 41 -- No Title", "WP Company LLC dba The Washington Post", "ProQuest", None, "1992-06-11", "ProQuest:140676261", "0190-8286", "News_Item", 1992, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["Other 41 -- No Title", "WP Company LLC dba The Washington Post", "ProQuest", None, "1992-06-11", "ProQuest:140676261", "0190-8286", "News_Item", 1992, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["Other 51 -- No Title", "WP Company LLC dba The Washington Post", "ProQuest", None, "1992-05-21", "ProQuest:140598570", "0190-8286", "News_Item", 1992, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["Other 51 -- No Title", "WP Company LLC dba The Washington Post", "ProQuest", None, "1992-05-21", "ProQuest:140598570", "0190-8286", "News_Item", 1992, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["Other 72 -- No Title", "WP Company LLC dba The Washington Post", "ProQuest", None, "1989-11-23", "ProQuest:139935071", "0190-8286", "News_Item", 1989, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["Other 72 -- No Title", "WP Company LLC dba The Washington Post", "ProQuest", None, "1989-11-23", "ProQuest:139935071", "0190-8286", "News_Item", 1989, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 3, "2024-11-25"],
+            ["Tom Paxton Washingtons Okie Folky", "WP Company LLC dba The Washington Post", "ProQuest", "RICHARD HARRINGTON Washington Post Staff Writer", "2002-09-06", "ProQuest:2075249937", "0190-8286", "News_Item", 2002, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Tom Paxton Washingtons Okie Folky", "WP Company LLC dba The Washington Post", "ProQuest", "RICHARD HARRINGTON Washington Post Staff Writer", "2002-09-06", "ProQuest:2075249937", "0190-8286", "News_Item", 2002, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Tom Paxton Washingtons Okie Folky", "WP Company LLC dba The Washington Post", "ProQuest", "RICHARD HARRINGTON Washington Post Staff Writer", "2002-09-06", "ProQuest:2075249937", "0190-8286", "News_Item", 2002, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Tom Paxton Washingtons Okie Folky", "WP Company LLC dba The Washington Post", "ProQuest", "RICHARD HARRINGTON Washington Post Staff Writer", "2002-09-06", "ProQuest:2075249937", "0190-8286", "News_Item", 2002, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["WEEK IN REVIEW", "WP Company LLC dba The Washington Post", "ProQuest", None, "2006-04-09", "ProQuest:2690415928", "0190-8286", "News_Item", 2006, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["WEEK IN REVIEW", "WP Company LLC dba The Washington Post", "ProQuest", None, "2006-04-09", "ProQuest:2690415928", "0190-8286", "News_Item", 2006, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Whats Worth A Protest In Pr Georges", "WP Company LLC dba The Washington Post", "ProQuest", "MARC FISHER", "2000-04-06", "ProQuest:1831866402", "0190-8286", "News_Item", 2000, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Whats Worth A Protest In Pr Georges", "WP Company LLC dba The Washington Post", "ProQuest", "MARC FISHER", "2000-04-06", "ProQuest:1831866402", "0190-8286", "News_Item", 2000, "Controlled", "Regular", "The Washington Post  1974", "Newspaper_or_Newsletter", "ProQuest:47130", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Alexandria and Arlington crime report", "WP Company LLC dba The Washington Post", "ProQuest", None, "2013-08-08", "ProQuest:1418777683", "2641-9599", "News_Item", 2013, "Controlled", "Regular", "The Washington Post Online", "Newspaper_or_Newsletter", "ProQuest:2042186", "2641-9599", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Alexandria and Arlington crime report", "WP Company LLC dba The Washington Post", "ProQuest", None, "2013-08-08", "ProQuest:1418777683", "2641-9599", "News_Item", 2013, "Controlled", "Regular", "The Washington Post Online", "Newspaper_or_Newsletter", "ProQuest:2042186", "2641-9599", "Unique_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Book World No Run of DeMille Thriller", "WP Company LLC dba The Washington Post", "ProQuest", "David Morrell", "1994-12-13", "ProQuest:307818243", "0190-8286", "News_Item", 1994, "Controlled", "Regular", "The Washington Post pre1997 Fulltext", "Newspaper_or_Newsletter", "ProQuest:47014", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Book World No Run of DeMille Thriller", "WP Company LLC dba The Washington Post", "ProQuest", "David Morrell", "1994-12-13", "ProQuest:307818243", "0190-8286", "News_Item", 1994, "Controlled", "Regular", "The Washington Post pre1997 Fulltext", "Newspaper_or_Newsletter", "ProQuest:47014", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Gee  Honey - Meat Loaf  Again", "WP Company LLC dba The Washington Post", "ProQuest", "Mike Joyce", "1994-02-18", "ProQuest:307756878", "0190-8286", "News_Item", 1994, "Controlled", "Regular", "The Washington Post pre1997 Fulltext", "Newspaper_or_Newsletter", "ProQuest:47014", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Gee  Honey - Meat Loaf  Again", "WP Company LLC dba The Washington Post", "ProQuest", "Mike Joyce", "1994-02-18", "ProQuest:307756878", "0190-8286", "News_Item", 1994, "Controlled", "Regular", "The Washington Post pre1997 Fulltext", "Newspaper_or_Newsletter", "ProQuest:47014", "0190-8286", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Gee  Honey - Meat Loaf  Again", "WP Company LLC dba The Washington Post", "ProQuest", "Mike Joyce", "1994-02-18", "ProQuest:307756878", "0190-8286", "News_Item", 1994, "Controlled", "Regular", "The Washington Post pre1997 Fulltext", "Newspaper_or_Newsletter", "ProQuest:47014", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Gee  Honey - Meat Loaf  Again", "WP Company LLC dba The Washington Post", "ProQuest", "Mike Joyce", "1994-02-18", "ProQuest:307756878", "0190-8286", "News_Item", 1994, "Controlled", "Regular", "The Washington Post pre1997 Fulltext", "Newspaper_or_Newsletter", "ProQuest:47014", "0190-8286", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["New Orleans Paper Plays Central Role in Contest", "WP Company LLC dba The Washington Post", "ProQuest", "Howard Kurtz", "1991-11-16", "ProQuest:307476748", "0190-8286", "News_Item", 1991, "Controlled", "Regular", "The Washington Post pre1997 Fulltext", "Newspaper_or_Newsletter", "ProQuest:47014", "0190-8286", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["New Orleans Paper Plays Central Role in Contest", "WP Company LLC dba The Washington Post", "ProQuest", "Howard Kurtz", "1991-11-16", "ProQuest:307476748", "0190-8286", "News_Item", 1991, "Controlled", "Regular", "The Washington Post pre1997 Fulltext", "Newspaper_or_Newsletter", "ProQuest:47014", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["Tokyos Disneyland Draw 70 Million Japanese Meet Mickey Mouse", "WP Company LLC dba The Washington Post", "ProQuest", "Margaret Shapiro", "1989-08-23", "ProQuest:307160822", "0190-8286", "News_Item", 1989, "Controlled", "Regular", "The Washington Post pre1997 Fulltext", "Newspaper_or_Newsletter", "ProQuest:47014", "0190-8286", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Tokyos Disneyland Draw 70 Million Japanese Meet Mickey Mouse", "WP Company LLC dba The Washington Post", "ProQuest", "Margaret Shapiro", "1989-08-23", "ProQuest:307160822", "0190-8286", "News_Item", 1989, "Controlled", "Regular", "The Washington Post pre1997 Fulltext", "Newspaper_or_Newsletter", "ProQuest:47014", "0190-8286", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["Tokyos Disneyland Draw 70 Million Japanese Meet Mickey Mouse", "WP Company LLC dba The Washington Post", "ProQuest", "Margaret Shapiro", "1989-08-23", "ProQuest:307160822", "0190-8286", "News_Item", 1989, "Controlled", "Regular", "The Washington Post pre1997 Fulltext", "Newspaper_or_Newsletter", "ProQuest:47014", "0190-8286", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["Tokyos Disneyland Draw 70 Million Japanese Meet Mickey Mouse", "WP Company LLC dba The Washington Post", "ProQuest", "Margaret Shapiro", "1989-08-23", "ProQuest:307160822", "0190-8286", "News_Item", 1989, "Controlled", "Regular", "The Washington Post pre1997 Fulltext", "Newspaper_or_Newsletter", "ProQuest:47014", "0190-8286", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["An Examination of Violence and Gender Role Portrayals in Video Games Implications for Gender", "Organization for the Study of Communication Language and Gender", "ProQuest", "Anonymous", "2000-10-01", "ProQuest:1372329874", "8755-4550", "Article", 2000, "Controlled", "Regular", "Women and Language", "Journal", "ProQuest:31040", "8755-4550", "Total_Item_Investigations", "2024-11-01", 2, "2024-11-25"],
+            ["An Examination of Violence and Gender Role Portrayals in Video Games Implications for Gender", "Organization for the Study of Communication Language and Gender", "ProQuest", "Anonymous", "2000-10-01", "ProQuest:1372329874", "8755-4550", "Article", 2000, "Controlled", "Regular", "Women and Language", "Journal", "ProQuest:31040", "8755-4550", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["An Examination of Violence and Gender Role Portrayals in Video Games Implications for Gender", "Organization for the Study of Communication Language and Gender", "ProQuest", "Anonymous", "2000-10-01", "ProQuest:1372329874", "8755-4550", "Article", 2000, "Controlled", "Regular", "Women and Language", "Journal", "ProQuest:31040", "8755-4550", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["An Examination of Violence and Gender Role Portrayals in Video Games Implications for Gender", "Organization for the Study of Communication Language and Gender", "ProQuest", "Anonymous", "2000-10-01", "ProQuest:1372329874", "8755-4550", "Article", 2000, "Controlled", "Regular", "Women and Language", "Journal", "ProQuest:31040", "8755-4550", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Story of An Hour A Critical Analysis of one Womans Quest to be Free  Body and Soul  Free", "Organization for the Study of Communication Language and Gender", "ProQuest", "Anonymous", "1999-04-01", "ProQuest:1372108612", "8755-4550", "Article", 1999, "Controlled", "Regular", "Women and Language", "Journal", "ProQuest:31040", "8755-4550", "Total_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Story of An Hour A Critical Analysis of one Womans Quest to be Free  Body and Soul  Free", "Organization for the Study of Communication Language and Gender", "ProQuest", "Anonymous", "1999-04-01", "ProQuest:1372108612", "8755-4550", "Article", 1999, "Controlled", "Regular", "Women and Language", "Journal", "ProQuest:31040", "8755-4550", "Total_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+            ["The Story of An Hour A Critical Analysis of one Womans Quest to be Free  Body and Soul  Free", "Organization for the Study of Communication Language and Gender", "ProQuest", "Anonymous", "1999-04-01", "ProQuest:1372108612", "8755-4550", "Article", 1999, "Controlled", "Regular", "Women and Language", "Journal", "ProQuest:31040", "8755-4550", "Unique_Item_Investigations", "2024-11-01", 1, "2024-11-25"],
+            ["The Story of An Hour A Critical Analysis of one Womans Quest to be Free  Body and Soul  Free", "Organization for the Study of Communication Language and Gender", "ProQuest", "Anonymous", "1999-04-01", "ProQuest:1372108612", "8755-4550", "Article", 1999, "Controlled", "Regular", "Women and Language", "Journal", "ProQuest:31040", "8755-4550", "Unique_Item_Requests", "2024-11-01", 1, "2024-11-25"],
+        ],
+        columns=['resource_name', 'publisher', 'platform', 'authors', 'publication_date', 'proprietary_ID', 'print_ISSN', 'data_type', 'YOP', 'access_type', 'access_method', 'parent_title', 'parent_data_type', 'parent_proprietary_ID', 'parent_print_ISSN', 'metric_type', 'usage_date', 'usage_count', 'report_creation_date'],  # Fields where all values are null removed from dataframe
+    )
+    sample_SUSHI_IR_response_R5b1_dataframe = sample_SUSHI_IR_response_R5b1_dataframe.astype({
+        'resource_name': COUNTERData.state_data_types()['resource_name'],
+        'publisher': COUNTERData.state_data_types()['publisher'],
+        'platform': COUNTERData.state_data_types()['platform'],
+        'authors': COUNTERData.state_data_types()['authors'],
+        'proprietary_ID': COUNTERData.state_data_types()['proprietary_ID'],
+        'print_ISSN': COUNTERData.state_data_types()['print_ISSN'],
+        'data_type': COUNTERData.state_data_types()['data_type'],
+        'YOP': COUNTERData.state_data_types()['YOP'],
+        'access_type': COUNTERData.state_data_types()['access_type'],
+        'access_method': COUNTERData.state_data_types()['access_method'],
+        'parent_title': COUNTERData.state_data_types()['parent_title'],
+        'parent_data_type': COUNTERData.state_data_types()['parent_data_type'],
+        'parent_proprietary_ID': COUNTERData.state_data_types()['parent_proprietary_ID'],
+        'parent_print_ISSN': COUNTERData.state_data_types()['parent_print_ISSN'],
+        'metric_type': COUNTERData.state_data_types()['metric_type'],
+        'usage_count': COUNTERData.state_data_types()['usage_count'],
+    })
+    sample_SUSHI_IR_response_R5b1_dataframe['publication_date'] = pd.to_datetime(sample_SUSHI_IR_response_R5b1_dataframe['publication_date'])
+    sample_SUSHI_IR_response_R5b1_dataframe['usage_date'] = pd.to_datetime(sample_SUSHI_IR_response_R5b1_dataframe['usage_date'])
+    sample_SUSHI_IR_response_R5b1_dataframe['report_creation_date'] = pd.to_datetime(sample_SUSHI_IR_response_R5b1_dataframe['report_creation_date'])
+    #TEST: end temp
+    assert_frame_equal(df[sample_SUSHI_IR_response_R5b1_dataframe.columns.tolist()], sample_SUSHI_IR_response_R5b1_dataframe)  #TEST: temp
+    #TEST: `assert_frame_equal(df, sample_SUSHI_IR_response_R5b1_dataframe[df.columns.tolist()])` passes when field are missing from `df` because they're not yet being captured in the class being tested, which isn't the desired behavior

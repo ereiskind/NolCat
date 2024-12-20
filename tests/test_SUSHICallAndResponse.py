@@ -1,5 +1,5 @@
 """Tests the functionality of the `SUSHICallAndResponse` class. Because the class exists solely to encapsulate API call functionality with objects of this class never being instantiated, testing the private methods is better done by sending API calls to vendors representing a variety of edge cases, which are listed on the "Testing" page of the documentation, than by calling each method directly."""
-########## Passing 2024-10-16 ##########
+########## Passing 2024-12-19 ##########
 
 import pytest
 import logging

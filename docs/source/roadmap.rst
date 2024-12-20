@@ -20,9 +20,14 @@ Planned Iterations
 ******************
 * Figure out how to make fuzzy matching work--as of now, test including fuzzy search for "EBSCO" passes but doesn't return "EBSCOhost" as a match
 
+Iteration 0: Prepare for COUNTER R5.1
+=====================================
+* Finish creating the files in "tests/data/R5.1_COUNTER_JSONs_for_tests" (3_PR complete, 0_XR have only one month of data)
 * Develop the procedures for "Create R5.1 SUSHI Response JSON Reports" in the testing documentation
-* Create new test data JSONs (will occur alongside above)
-* Update ``ConvertJSONDictToDataframe`` to handle R5.1 reports
+* Add data to the dataframe fixtures in ``tests.test_ConvertJSONDictToDataframe``
+* Write ``tests.test_ConvertJSONDictToDataframe.test_create_dataframe_from_R5b1_JSON()``
+* DATA TYPE MANDATORY IN CUSTOM REPORTS--its inclusion in 'attributes_to_show' will raise an error
+* Add saving JSON files to `ConvertJSONDictToDataframe.create_dataframe()`
 
 Iteration 2: COUNTER Only Product
 =================================
