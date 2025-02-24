@@ -12,7 +12,7 @@ from nolcat.statements import *
 log = logging.getLogger(__name__)
 
 
-def test_format_list_for_stdout_with_list():
+def test_format_list_for_stdout_with_list(engine):
     """Test pretty printing a list by adding a line break between each item."""
     assert format_list_for_stdout(['a', 'b', 'c']) == "a\nb\nc"
 

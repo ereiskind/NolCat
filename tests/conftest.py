@@ -35,16 +35,38 @@ def engine():
     """Creates a SQLAlchemy engine for testing.
     
     The engine object is the starting point for an SQLAlchemy application. Engines are a crucial intermediary object in how SQLAlchemy connects the user and the database.
+    #TEST: First we will define the database connection responsible for creating the engine and the temporal test database. This fixture relies on creating two different engines because we first need to create an engine that does not point to any specific database. This is what will allow us to create the actual test database for the test suite execution.
 
     Yields:
         sqlalchemy.engine.Engine: a SQLAlchemy engine
     """
-    engine = create_engine(
-        f'mysql://{DATABASE_USERNAME}:{DATABASE_PASSWORD}@{DATABASE_HOST}:{DATABASE_PORT}/{DATABASE_SCHEMA_NAME}',
+    engine1 = create_engine(
+        f'mysql://{DATABASE_USERNAME}:{DATABASE_PASSWORD}@{DATABASE_HOST}:{DATABASE_PORT}/',
         echo=False,  # Logging configuration includes SQLAlchemy engine, so `True` causes repetition
     )
-    log.info(f"`tests.conftest.engine()` yields {engine} (type {type(engine)}).")
-    yield engine
+    log.warning(f"`tests.conftest.engine()` yields {engine1} (type {type(engine1)}).")  #TEST: temp level, should be `info`
+
+    with engine1.connect() as connection:  # Creates a new database in MySQL in the instance
+        log.warning(f"`connection` in with statement yields {connection} (type {type(connection)}).")  #TEST: temp
+        connection.execute(text("CREATE DATABASE test CHARACTER SET = 'utf8';"))
+    engine2 = create_engine(
+        f'mysql://{DATABASE_USERNAME}:{DATABASE_PASSWORD}@{DATABASE_HOST}:{DATABASE_PORT}/test',
+        echo=False,  # Logging configuration includes SQLAlchemy engine, so `True` causes repetition
+    )
+    log.warning(f"`engine2` yields {engine2} (type {type(engine2)}).")  #TEST: temp
+    connection = engine.connect()
+    log.warning(f"`connection` yields {connection} (type {type(connection)}).")  #TEST: temp
+
+    #TEST: temp
+    #def teardown():
+    #    connection.execute(f"DROP DATABASE {TEST_DB_NAME}")
+    #    connection.close()
+
+    #request.addfinalizer(teardown)
+    #return connection
+    #TEST: end temp
+
+    yield engine2
 
 
 @pytest.fixture(scope='session')
