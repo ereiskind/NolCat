@@ -1,22 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List of {{ title }}</title>
-</head>
-<body>
-    <h1>List of {{ title }}</h1>
+{% extends "layout.html" %}
+{% block metadata_title %}List of {{ title }}{% endblock %}
 
+{% block main_content %}
+    <header>
+        <h1>List of {{ title }}</h1>
+    </header>
+
+    <article>
     {% with message = get_flashed_messages() %}
         {% if message %}
             <p>{{ message }}</p>
         {% endif %}
     {% endwith %}
+    </article>
 
-    <!--ToDo: Display dataframe; for each record, have links to pages for viewing details of and editing record-->
+    <article>
+    <table>
+        <tr>
+            {% for field in fields %}
+                <th>{{field}}</th>
+            {% endfor %}
+        </tr>
+
+        {% for record in records %}
+        <tr>
+            {% for field_of_value, value in zip(fields, record) %}
+            <td>
+                {% if field_of_value == "Edit" %}
+                    <a href="{{ url_for('view_lists.edit_list_record', list=value[0], PK=value[1]) }}">Edit</a>
+                {% elif field_of_value == "View Record Details" %}
+                    <a href="{{ url_for('view_lists.view_list_record', list=value[0], PK=value[1]) }}">View Record Details</a>
+                {% else %}
+                    <section>{{ value }}</section>  <!--Tag used primarily for isolating fields during testing-->
+                {% endif %}
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    </article>
 
     <!--ToDo: Create link for adding record-->
-</body>
-</html>
+{% endblock %}

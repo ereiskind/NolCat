@@ -1,0 +1,533 @@
+digraph package_dependencies {
+    graph [rankdir=TB]
+
+    // All Imported Packages
+    /*
+        Bold components are packages installed based on `requirements.txt`
+        Boxes are packages installed as dependencies of other packages
+        Dashed folders are packages installed with Python
+        Dashed components are packages installed based on the Dockerfile
+    */
+
+    aiobotocore [
+        label="\N==2.13.0"
+        shape="box"
+    ]
+    aiohttp [
+        label="\N==3.9.5"
+        shape="box"
+    ]
+    aioitertools [
+        label="\N==0.11.0"
+        shape="box"
+    ]
+    aiosignal [
+        label="\N==1.3.1"
+        shape="box"
+    ]
+    alabaster [
+        label="\N==0.7.16"
+        shape="box"
+    ]
+    anyio [
+        label="\N==4.4.0"
+        shape="box"
+    ]
+    attrs [
+        label="\N==23.2.0"
+        shape="box"
+    ]
+    Babel [
+        label="\N==2.15.0"
+        shape="box"
+    ]
+    beautifulsoup4 [
+        label="\N==4.12.3"
+        shape="component"
+        style="bold"
+    ]
+    blinker [
+        label="\N==1.8.2"
+        shape="box"
+    ]
+    boto3 [
+        label="\N==1.34.69"
+        shape="component"
+        style="bold"
+    ]
+    botocore [
+        label="\N==1.34.106"
+        shape="box"
+    ]
+    Bottleneck [
+        label="\N==1.3.8"
+        shape="box"
+    ]
+    certifi [
+        label="\N==2024.6.2"
+        shape="box"
+    ]
+    "charset-normalizer" [
+        label="\N==3.3.2"
+        shape="box"
+    ]
+    click [
+        label="\N==8.1.7"
+        shape="box"
+    ]
+    colorama [
+        label="\N==0.4.6"
+        shape="box"
+    ]
+    docutils [
+        label="\N==0.21.2"
+        shape="box"
+    ]
+    "et-xmlfile" [
+        label="\N==1.1.0"
+        shape="box"
+    ]
+    Flask [
+        label="\N==3.0.3"
+        shape="component"
+        style="bold"
+    ]
+    "Flask-SQLAlchemy" [
+        label="\N==3.1.1"
+        shape="component"
+        style="bold"
+    ]
+    "Flask-WTF" [
+        label="\N==1.2.1"
+        shape="component"
+        style="bold"
+    ]
+    frozenlist [
+        label="\N==1.4.1"
+        shape="box"
+    ]
+    fsspec [
+        label="\N==2024.5.0"
+        shape="component"
+        style="bold"
+    ]
+    gevent [
+        label="\N==24.2.1"
+        shape="component"
+        style="dashed"
+    ]
+    graphviz [
+        label="\N==0.20.3"
+        shape="component"
+        style="bold"
+    ]
+    greenlet [
+        label="\N==3.0.3"
+        shape="box"
+    ]
+    gunicorn [
+        label="\N==22.0.0"
+        shape="component"
+        style="dashed"
+    ]
+    h11 [
+        label="\N==0.14.0"
+        shape="box"
+    ]
+    idna [
+        label="\N==3.7"
+        shape="box"
+    ]
+    imagesize [
+        label="\N==1.4.1"
+        shape="box"
+    ]
+    iniconfig [
+        label="\N==2.0.0"
+        shape="box"
+    ]
+    itsdangerous [
+        label="\N==2.2.0"
+        shape="box"
+    ]
+    Jinja2 [
+        label="\N==3.1.4"
+        shape="box"
+    ]
+    jmespath [
+        label="\N==1.0.1"
+        shape="box"
+    ]
+    llvmlite [
+        label="\N==0.43.0"
+        shape="box"
+    ]
+    lxml [
+        label="\N==5.2.1"
+        shape="component"
+        style="bold"
+    ]
+    MarkupSafe [
+        label="\N==2.1.5"
+        shape="box"
+    ]
+    multidict [
+        label="\N==6.0.5"
+        shape="box"
+    ]
+    mysql [
+        label="\N==0.0.3"
+        shape="component"
+        style="bold"
+    ]
+    mysqlclient [
+        label="\N==2.2.4"
+        shape="box"
+    ]
+    numba [
+        label="\N==0.60.0"
+        shape="box"
+    ]
+    numexpr [
+        label="\N==2.10.0"
+        shape="box"
+    ]
+    numpy [
+        label="\N==2.0.0"
+        shape="box"
+    ]
+    openpyxl [
+        label="\N==3.1.2"
+        shape="component"
+        style="bold"
+    ]
+    packaging [
+        label="\N==24.1"
+        shape="box"
+    ]
+    pandas [
+        label="\N==2.2.2"
+        shape="component"
+        style="bold"
+    ]
+    pip [
+        label="\N==24.0"
+        shape="folder"
+        style="dashed"
+    ]
+    pluggy [
+        label="\N==1.5.0"
+        shape="box"
+    ]
+    pyarrow [
+        label="\N==16.1.0"
+        shape="box"
+    ]
+    Pygments [
+        label="\N==2.18.0"
+        shape="box"
+    ]
+    PyInputPlus [
+        label="\N==0.2.12"
+        shape="component"
+        style="bold"
+    ]
+    PyMySQL [
+        label="\N==1.1.0"
+        shape="component"
+        style="bold"
+    ]
+    PySimpleValidate [
+        label="\N==0.2.12"
+        shape="box"
+    ]
+    pytest [
+        label="\N==8.2.0"
+        shape="component"
+        style="bold"
+    ]
+    "pytest-dependency" [
+        label="\N==0.6.0"
+        shape="component"
+        style="bold"
+    ]
+    "pytest-session2file" [
+        label="\N==0.1.11"
+        shape="component"
+        style="bold"
+    ]
+    "python-dateutil" [
+        label="\N==2.9.0.post0"
+        shape="box"
+    ]
+    pytz [
+        label="\N==2024.1"
+        shape="box"
+    ]
+    requests [
+        label="\N==2.31.0"
+        shape="component"
+        style="bold"
+    ]
+    "requests-toolbelt" [
+        label="\N==1.0.0"
+        shape="box"
+    ]
+    s3fs [
+        label="\N==2024.5.0"
+        shape="component"
+        style="bold"
+    ]
+    s3transfer [
+        label="\N==0.10.1"
+        shape="box"
+    ]
+    setuptools [
+        label="\N==70.0.0"
+        shape="box"
+    ]
+    six [
+        label="\N==1.16.0"
+        shape="box"
+    ]
+    sniffio [
+        label="\N==1.3.1"
+        shape="box"
+    ]
+    snowballstemmer [
+        label="\N==2.2.0"
+        shape="box"
+    ]
+    soupsieve [
+        label="\N==2.5"
+        shape="box"
+    ]
+    Sphinx [
+        label="\N==7.3.7"
+        shape="component"
+        style="bold"
+    ]
+    "sphinx-autobuild" [
+        label="\N==2024.4.16"
+        shape="component"
+        style="bold"
+    ]
+    "sphinx-autodocgen" [
+        label="\N==1.3"
+        shape="component"
+        style="bold"
+    ]
+    "sphinxcontrib-applehelp" [
+        label="\N==1.0.8"
+        shape="box"
+    ]
+    "sphinxcontrib-devhelp" [
+        label="\N==1.0.6"
+        shape="box"
+    ]
+    "sphinxcontrib-htmlhelp" [
+        label="\N==2.0.5"
+        shape="box"
+    ]
+    "sphinxcontrib-jsmath" [
+        label="\N==1.0.1"
+        shape="box"
+    ]
+    "sphinxcontrib-qthelp" [
+        label="\N==1.0.7"
+        shape="box"
+    ]
+    "sphinxcontrib-serializinghtml" [
+        label="\N==1.1.10"
+        shape="box"
+    ]
+    SQLAlchemy [
+        label="\N==2.0.29"
+        shape="component"
+        style="bold"
+    ]
+    starlette [
+        label="\N==0.37.2"
+        shape="box"
+    ]
+    stdiomask [
+        label="\N==0.0.6"
+        shape="box"
+    ]
+    typing_extensions [
+        label="\N==4.12.2"
+        shape="box"
+    ]
+    tzdata [
+        label="\N==2024.1"
+        shape="box"
+    ]
+    urllib3 [
+        label="\N==2.2.2"
+        shape="box"
+    ]
+    uvicorn [
+        label="\N==0.30.1"
+        shape="box"
+    ]
+    watchfiles [
+        label="\N==0.22.0"
+        shape="box"
+    ]
+    websockets [
+        label="\N==12.0"
+        shape="box"
+    ]
+    Werkzeug [
+        label="\N==3.0.3"
+        shape="box"
+    ]
+    wheel [
+        label="\N==0.43.0"
+        shape="folder"
+        style="dashed"
+    ]
+    wrapt [
+        label="\N==1.16.0"
+        shape="box"
+    ]
+    WTForms [
+        label="\N==3.1.2"
+        shape="component"
+        style="bold"
+    ]
+    yarl [
+        label="\N==1.9.4"
+        shape="box"
+    ]
+    "zope.event" [
+        label="\N==5.0"
+        shape="box"
+    ]
+    "zope.interface" [
+        label="\N==6.4.post2"
+        shape="box"
+    ]
+
+    // Pandas Optional Dependency Markers
+    "pandas[aws]" [
+        shape="box"
+        style="dotted"
+    ]
+    "pandas[performance]" [
+        shape="box"
+        style="dotted"
+    ]
+    "pandas[pyarrow]" [
+        shape="box"
+        style="dotted"
+    ]
+
+    // Package Dependencies
+    aiobotocore -> aiohttp [style="dashed"]
+    aiobotocore -> aioitertools [style="dashed"]
+    aiobotocore -> botocore [style="dashed"]
+    aiobotocore -> wrapt [style="dashed"]
+    aiohttp -> aiosignal [style="dashed"]
+    aiohttp -> attrs [style="dashed"]
+    aiohttp -> frozenlist [style="dashed"]
+    aiohttp -> multidict [style="dashed"]
+    aiohttp -> yarl [style="dashed"]
+    aiosignal -> frozenlist [style="dashed"]
+    anyio -> idna [style="dashed"]
+    anyio -> sniffio [style="dashed"]
+    beautifulsoup4 -> soupsieve
+    boto3 -> botocore
+    boto3 -> jmespath
+    boto3 -> s3transfer
+    botocore -> jmespath [style="dashed"]
+    botocore -> "python-dateutil" [style="dashed"]
+    botocore -> urllib3 [style="dashed"]
+    Bottleneck -> numpy [style="dashed"]
+    Flask -> blinker
+    Flask -> click
+    Flask -> itsdangerous
+    Flask -> Jinja2
+    Flask -> Werkzeug
+    "Flask-SQLAlchemy" -> Flask
+    "Flask-SQLAlchemy" -> SQLAlchemy
+    "Flask-WTF" -> Flask
+    "Flask-WTF" -> itsdangerous
+    "Flask-WTF" -> WTForms
+    gevent -> greenlet [style="dashed"]
+    gevent -> "zope.event" [style="dashed"]
+    gevent -> "zope.interface" [style="dashed"]
+    gunicorn -> packaging [style="dashed"]
+    Jinja2 -> MarkupSafe [style="dashed"]
+    mysql -> mysqlclient
+    numba -> llvmlite [style="dashed"]
+    numba -> numpy [style="dashed"]
+    numexpr -> numpy [style="dashed"]
+    openpyxl -> "et-xmlfile"
+    pandas -> numpy
+    pandas -> "python-dateutil"
+    pandas -> pytz
+    pandas -> tzdata
+    pandas -> "pandas[aws]"
+        "pandas[aws]" -> fsspec
+        "pandas[aws]" -> s3fs
+    pandas -> "pandas[performance]"
+        "pandas[performance]" -> Bottleneck
+        "pandas[performance]" -> numba
+        "pandas[performance]" -> numexpr
+    pandas -> "pandas[pyarrow]"
+        "pandas[pyarrow]" -> pyarrow
+    pyarrow -> numpy [style="dashed"]
+    PyInputPlus -> PySimpleValidate
+    PyInputPlus -> stdiomask
+    pytest -> iniconfig
+    pytest -> packaging
+    pytest -> pluggy
+    "pytest-dependency" -> pytest
+    "pytest-dependency" -> setuptools
+    "pytest-session2file" -> pytest
+    "python-dateutil" -> six [style="dashed"]
+    requests -> certifi
+    requests -> "charset-normalizer"
+    requests -> idna
+    requests -> urllib3
+    "requests-toolbelt" -> requests
+    s3fs -> aiobotocore
+    s3fs -> aiohttp
+    s3fs -> fsspec
+    s3transfer -> botocore [style="dashed"]
+    Sphinx -> alabaster
+    Sphinx -> Babel
+    Sphinx -> docutils
+    Sphinx -> imagesize
+    Sphinx -> Jinja2
+    Sphinx -> packaging
+    Sphinx -> Pygments
+    Sphinx -> requests
+    Sphinx -> snowballstemmer
+    Sphinx -> "sphinxcontrib-applehelp"
+    Sphinx -> "sphinxcontrib-devhelp"
+    Sphinx -> "sphinxcontrib-htmlhelp"
+    Sphinx -> "sphinxcontrib-jsmath"
+    Sphinx -> "sphinxcontrib-qthelp"
+    Sphinx -> "sphinxcontrib-serializinghtml"
+    "sphinx-autobuild" -> colorama
+    "sphinx-autobuild" -> Sphinx
+    "sphinx-autobuild" -> starlette
+    "sphinx-autobuild" -> uvicorn
+    "sphinx-autobuild" -> watchfiles
+    "sphinx-autobuild" -> websockets
+    "sphinx-autodocgen" -> Sphinx
+    SQLAlchemy -> greenlet
+    SQLAlchemy -> typing_extensions
+    starlette -> anyio [style="dashed"]
+    uvicorn -> click [style="dashed"]
+    uvicorn -> h11 [style="dashed"]
+    watchfiles -> anyio [style="dashed"]
+    Werkzeug -> MarkupSafe [style="dashed"]
+    WTForms -> MarkupSafe
+    yarl -> idna [style="dashed"]
+    yarl -> multidict [style="dashed"]
+    "zope.event" -> setuptools [style="dashed"]
+    "zope.interface" -> setuptools [style="dashed"]
+}

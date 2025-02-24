@@ -1,23 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Non-COUNTER Usage</title>
-</head>
-<body>
-    <h1>Download Non-COUNTER Usage Files</h1>
+{% extends "layout.html" %}
+{% block metadata_title %}Download Non-COUNTER Usage{% endblock %}
 
-    <form action="{{ url_for('view_usage.download_non_COUNTER_usage', testing=testing) }}" method="POST">
-        {{ form.csrf_token }}
-        <label>
-            {{ form.AUCT_of_file_download.label}}
-            {{ form.AUCT_of_file_download }}
-        </label>
-        <input type="submit" value="Submit">
-    </form>
+{% block main_content %}
+    <header>
+        <h1>Download Non-COUNTER Usage Files</h1>
+    </header>
 
-    <p><a href="{{ url_for('view_usage.view_usage_homepage') }}">Click here</a> to return to the "Ways to View Usage" page.</p>
-</body>
-</html>
+    <article>
+        <form action="{{ url_for('view_usage.download_non_COUNTER_usage', testing=testing) }}" method="POST">
+            {{ form.csrf_token }}
+            <label>
+                {{ form.AUCT_of_file_download.label}}
+                {{ form.AUCT_of_file_download }}
+            </label>
+            <input type="submit" value="Submit">
+        </form>
+    </article>
+{% endblock %}

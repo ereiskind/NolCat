@@ -1,92 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://raw.githubusercontent.com/necolas/normalize.css/master/normalize.css" rel="stylesheet">
-    <title>Database Initialization Wizard 3</title>
-</head>
-<body>
-    <h1>Database Initialization Wizard: Page 3</h1>
+{% extends "layout.html" %}
+{% block metadata_title %}Database Initialization Wizard 3{% endblock %}
 
+{% block main_content %}
+    <header>
+        <h1>Database Initialization Wizard: Page 3</h1>
+    </header>
+
+    <article>
     {% with message = get_flashed_messages() %}
         {% if message %}
         <p>The data just loaded should be investigated, and probably removed and reloaded, because it raised the error(s)<br>{{ message }}</p>
         {% endif %}
     {% endwith %}
+    </article>
 
-    <h2>6. Create the `annualUsageCollectionTracking` Relation</h2>
-    <ol>
-        <li>Download <a href="{{ url_for('download_file', file_path=AUCT_file_path) }}">"initialize_annualUsageCollectionTracking.csv"</a>.</li>
-        <li>Fill out the CSV from existing documentation:
-            <ul>
-                <li>For statistics source and year combinations which don't exist (meaning either the statistics source didn't exist that year or no resource sources which used that statistics source were provided that year), delete the corresponding row in the CSV.</li>
-                <li>For statistics source and year combinations not requiring usage collection, set `usage_is_being_collected`, `manual_collection_required`, and `is_COUNTER_compliant` to false and choose the `collection_status` reflecting why usage doesn't need to be collected.</li>
-                <li>For statistics source and year combinations which had manually collected non-COUNTER compliant usage (including COUNTER R3 and earlier), set `usage_is_being_collected` and `manual_collection_required` to true, `is_COUNTER_compliant` to false, choose the appropriate `collection_status`, and prepare the usage statistics files:
-                    <ol>
-                        <li>Save the non-COUNTER files, ensuring that they're in one of the following formats:
-                            <dl>
-                                <dt>Tabular data</dt>
-                                    <dd>.xlsx</dd>
-                                    <dd>.csv</dd>
-                                    <dd>.tsv</dd>
-                                <dt>Text</dt>
-                                    <dd>.docx</dd>
-                                    <dd>.txt</dd>
-                                    <dd>.json</dd>
-                                    <dd>.html</dd>
-                                    <dd>.htm</dd>
-                                    <dd>.xml</dd>
-                                <dt>Image</dt>
-                                    <dd>.jpeg</dd>
-                                    <dd>.jpg</dd>
-                                    <dd>.png</dd>
-                                    <dd>.svg</dd>
-                                <dt>Text and images</dt>
-                                    <dd>.pdf</dd>
-                                    <dd>.pptx</dd>
-                                <dt>Compressed file</dt>
-                                    <dd>.zip</dd>
-                            </dl>
-                        </li>
-                        <li>Give the files names with the `statistics_source_ID` of the statistics source from which the usage came and the year for the fiscal year which the usage belongs to (the calendar year in which the fiscal year ends), in that order and separated by an underscore.</li>
-                        <li>For convenient loading later, place all the workbooks in the same folder.</li>
-                    </ol>
-                </li>
-                <li>For statistics source and year combinations with R5 SUSHI, set `usage_is_being_collected` and `is_COUNTER_compliant` to true and `collection_status` to "Collection not started".</li>
-                <li>For statistics source and year combinations with manually collected COUNTER reports, set `usage_is_being_collected`, `manual_collection_required`, and `is_COUNTER_compliant` to true, choose the appropriate `collection_status`, then prepare the COUNTER reports:
-                    <ol>
-                        <li>Save the reports in an Excel workbook where each sheet name is the abbreviation of the name of the report in that sheet.</li>
-                        <li>Give the workbooks names that begin with the `statistics_source_ID` of the statistics source from which the usage came followed by an underscore.</li>
-                        <li>For convenient loading later, place all the workbooks in a folder that contains nothing but these workbooks.</li>
-                    </ol>
-                </li>
-                <li>For statistics source and year combinations not falling into any of the above categories, make selections as appropriate.
+    <article>
+        <section>
+            <h2>6. Create the `annualUsageCollectionTracking` Relation</h2>
+            <ol>
+                <li>Download <a href="{{ url_for('download_file', file_path=AUCT_file_path) }}">"initialize_annualUsageCollectionTracking.csv"</a>.</li>
+                <li>Fill out the CSV from existing documentation:
                     <ul>
-                        <li>If some but not all of a statistics source and year combination's usage is COUNTER complaint, `is_COUNTER_compliant` is true.</li>
-                        <li>If not all of a statistics source and year combination's usage requires being collected manually, `manual_collection_required` is false.</li>
+                        <li>For statistics source and year combinations which don't exist (meaning either the statistics source didn't exist that year or no resource sources which used that statistics source were provided that year), delete the corresponding row in the CSV.</li>
+                        <li>For statistics source and year combinations not requiring usage collection, set `usage_is_being_collected`, `manual_collection_required`, and `is_COUNTER_compliant` to false and choose the `collection_status` reflecting why usage doesn't need to be collected.</li>
+                        <li>For statistics source and year combinations which had manually collected non-COUNTER compliant usage (including COUNTER R3 and earlier), set `usage_is_being_collected` and `manual_collection_required` to true, `is_COUNTER_compliant` to false, choose the appropriate `collection_status`, and prepare the usage statistics files:
+                            <ol>
+                                <li>Save the non-COUNTER files, ensuring that they're in one of the following formats:
+                                    <dl>
+                                        <dt>Tabular data</dt>
+                                            <dd>.xlsx</dd>
+                                            <dd>.csv</dd>
+                                            <dd>.tsv</dd>
+                                        <dt>Text</dt>
+                                            <dd>.docx</dd>
+                                            <dd>.txt</dd>
+                                            <dd>.json</dd>
+                                            <dd>.html</dd>
+                                            <dd>.htm</dd>
+                                            <dd>.xml</dd>
+                                        <dt>Image</dt>
+                                            <dd>.jpeg</dd>
+                                            <dd>.jpg</dd>
+                                            <dd>.png</dd>
+                                            <dd>.svg</dd>
+                                        <dt>Text and images</dt>
+                                            <dd>.pdf</dd>
+                                            <dd>.pptx</dd>
+                                        <dt>Compressed file</dt>
+                                            <dd>.zip</dd>
+                                    </dl>
+                                </li>
+                                <li>Give the files names with the `statistics_source_ID` of the statistics source from which the usage came and the year for the fiscal year which the usage belongs to (the calendar year in which the fiscal year ends), in that order and separated by an underscore.</li>
+                                <li>For convenient loading later, place all the workbooks in the same folder.</li>
+                            </ol>
+                        </li>
+                        <li>For statistics source and year combinations with R5 SUSHI, set `usage_is_being_collected` and `is_COUNTER_compliant` to true and `collection_status` to "Collection not started".</li>
+                        <li>For statistics source and year combinations with manually collected COUNTER reports, set `usage_is_being_collected`, `manual_collection_required`, and `is_COUNTER_compliant` to true, choose the appropriate `collection_status`, then prepare the COUNTER reports:
+                            <ol>
+                                <li>Save the reports in an Excel workbook where each sheet name is the abbreviation of the name of the report in that sheet.</li>
+                                <li>Give the workbooks names that begin with the `statistics_source_ID` of the statistics source from which the usage came followed by an underscore.</li>
+                                <li>For convenient loading later, place all the workbooks in a folder that contains nothing but these workbooks.</li>
+                            </ol>
+                        </li>
+                        <li>For statistics source and year combinations not falling into any of the above categories, make selections as appropriate.
+                            <ul>
+                                <li>If some but not all of a statistics source and year combination's usage is COUNTER complaint, `is_COUNTER_compliant` is true.</li>
+                                <li>If not all of a statistics source and year combination's usage requires being collected manually, `manual_collection_required` is false.</li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
-            </ul>
-        </li>
-        <li>Delete the columns with the `statisticsSources.statistics_source_name` and `fiscalYears.year` fields.</li>
-        <li>Save the CSV, ensuring the encoding is UTF-8 and that any date fields appear as dates.</li>
-    </ol>
+                <li>Delete the columns with the `statisticsSources.statistics_source_name` and `fiscalYears.year` fields.</li>
+                <li>Save the CSV, ensuring the encoding is UTF-8 and that any date fields appear as dates.</li>
+            </ol>
+        </section>
 
-    <h2>7. Submit the `annualUsageCollectionTracking` Relation CSV and COUNTER Workbooks</h2>
-    <ol><form action="{{ url_for('initialization.collect_AUCT_and_historical_COUNTER_data') }}" method="POST" enctype="multipart/form-data">
-        {{ form.csrf_token }}
-        <li><label>
-            {{ form.annualUsageCollectionTracking_CSV.label }}
-            {{ form.annualUsageCollectionTracking_CSV }}
-        </label></li>
-        <br>
-        <li><label>
-            {{ form.COUNTER_reports.label }}
-            {{ form.COUNTER_reports }}
-        </label></li>
-        <input type="submit" value="Submit">
-    </form></ol>
-</body>
-</html>
+        <section>
+            <h2>7. Submit the `annualUsageCollectionTracking` Relation CSV and COUNTER Workbooks</h2>
+            <ol><form action="{{ url_for('initialization.collect_AUCT_and_historical_COUNTER_data') }}" method="POST" enctype="multipart/form-data">
+                {{ form.csrf_token }}
+                <li><label>
+                    {{ form.annualUsageCollectionTracking_CSV.label }}
+                    {{ form.annualUsageCollectionTracking_CSV }}
+                </label></li>
+                <br>
+                <li><label>
+                    {{ form.COUNTER_reports.label }}
+                    {{ form.COUNTER_reports }}
+                </label></li>
+                <input type="submit" value="Submit">
+            </form></ol>
+        </section>
+    </article>
+{% endblock %}

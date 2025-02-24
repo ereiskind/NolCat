@@ -12,24 +12,56 @@ from nolcat.view_lists import *
 log = logging.getLogger(__name__)
 
 
-def test_view_lists_homepage(client):
+@pytest.fixture(scope='module', params=["resources", "statistics", "vendors"])
+def relation_and_record(request, engine):
+    """A parameterized function providing a relation, the readable title for the relation, and a primary key for a record in the relation.
+
+    Args:
+        request (str): the relation whose records are being listed
+        engine (sqlalchemy.engine.Engine): a SQLAlchemy engine
+
+    Yields:
+        tuple: the relation whose records are being listed, the readable title for that relation, and the primary key for a record in that relation
+    """
+    log.debug(f"Listing records in the {request} relation.")
+    if request.param == "resources":
+        query = "SELECT resource_source_ID FROM resourceSources;"
+        readable_title = "Resource Sources"
+    elif request.param == "statistics":
+        query = "SELECT statistics_source_ID FROM statisticsSources;"
+        readable_title = "Statistics Sources"
+    elif request.param == "vendors":
+        query = "SELECT vendor_ID FROM vendors;"
+        readable_title = "Vendors"
+    
+    PKs = query_database(
+        query=query,
+        engine=engine,
+    )
+    if isinstance(PKs, str):
+        pytest.skip(database_function_skip_statements(PKs))
+    PK = extract_value_from_single_value_df(PKs.sample())
+    log.debug(f"Viewing and editing record {PK}.")
+    yield(request.param, readable_title, PK)
+
+
+def test_view_lists_homepage(client, relation_and_record):
     """Tests that the homepage can be successfully GET requested and that the response matches the file being used."""
-    #ToDo: Either randomly choose from or iterate through the route options = ["resources", "statistics", "vendors"]
+    relation, readable_title, record_PK = relation_and_record
+    page = client.get(f'/view_lists/{relation}')
+    GET_soup = BeautifulSoup(page.data, 'lxml')
+    GET_response_title = GET_soup.head.title
+    GET_response_page_title = GET_soup.body.h1
+    log.warning(f"`GET_response_page_title` (type {type(GET_response_page_title)}):\n{GET_response_page_title}")  #TEST: temp
 
-    #page = client.get('/view_lists/')  #ToDo: Add variable route element
-    #GET_soup = BeautifulSoup(page.data, 'lxml')
-    #GET_response_title = GET_soup.head.title
-    #GET_response_page_title = GET_soup.body.h1
+    with open(TOP_NOLCAT_DIRECTORY / 'nolcat' / 'view_lists' / 'templates' / 'view_lists' / 'index.html', 'br') as HTML_file:
+        file_soup = BeautifulSoup(HTML_file, 'lxml')
+        HTML_file_title = file_soup.head.title.replace("{{ title }}", readable_title)
+        HTML_file_page_title = file_soup.body.h1.replace("{{ title }}", readable_title)
 
-    #with open(TOP_NOLCAT_DIRECTORY / 'nolcat' / 'view_lists' / 'templates' / 'view_lists' / 'index.html', 'br') as HTML_file:
-    #    file_soup = BeautifulSoup(HTML_file, 'lxml')
-    #    HTML_file_title = file_soup.head.title  #ToDo: Replace `{{ title }}` with value from route function corresponding to the string in the homepage route
-    #    HTML_file_page_title = file_soup.body.h1  #ToDo: Replace `{{ title }}` with value from route function corresponding to the string in the homepage route
-
-    #assert page.status == "200 OK"
-    #assertHTML_file_title == GET_response_title
-    #assertHTML_file_page_title == GET_response_page_title
-    pass
+    assert page.status == "200 OK"
+    assert HTML_file_title == GET_response_title
+    assert HTML_file_page_title == GET_response_page_title
 
 
 def test_GET_request_for_view_list_record():

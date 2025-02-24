@@ -1,31 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Homepage</title>
-</head>
-<body>
-    <h1>Admin Homepage</h1>
+{% extends "layout.html" %}
+{% block metadata_title %}Admin Homepage{% endblock %}
 
+{% block main_content %}
+    <header>
+        <h1>Admin Homepage</h1>
+    </header>
+
+    <article>
     {% with message = get_flashed_messages() %}
         {% if message %}
             <p>{{ message }}</p>
         {% endif %}
     {% endwith %}
+    </article>
 
-    <p><a href="{{ url_for('view_lists.view_lists_homepage', list='vendors') }}">Click here</a> to view the list of vendors</p>
-    <p><a href="{{ url_for('view_lists.view_lists_homepage', list='statistics') }}">Click here</a> to view the list of statistics sources</p>
-    <p><a href="{{ url_for('view_lists.view_lists_homepage', list='resources') }}">Click here</a> to view the list of resource sources</p>
+    <article>
+        <ul>
+            <li><a href="{{ url_for('view_lists.view_lists_homepage', list='vendors') }}">Click here</a> to view the list of vendors.</li>
+            <li><a href="{{ url_for('view_lists.view_lists_homepage', list='statistics') }}">Click here</a> to view the list of statistics sources.</li>
+            <li><a href="{{ url_for('view_lists.view_lists_homepage', list='resources') }}">Click here</a> to view the list of resource sources.</li>
+        </ul>
+    </article>
 
-    <form action="{{  url_for('annual_stats.annual_stats_homepage') }}" method="POST">
-        {{ form.csrf_token }}
-        <label>
-            {{ form.fiscal_year.label }}
-            {{ form.fiscal_year }}
-        </label>
-        <input type="submit" value="Submit">
-    </form>
-</body>
-</html>
+    <article>
+        <form action="{{  url_for('annual_stats.annual_stats_homepage') }}" method="POST">
+            {{ form.csrf_token }}
+            <label>
+                {{ form.fiscal_year.label }}
+                {{ form.fiscal_year }}
+            </label>
+            <input type="submit" value="Submit">
+        </form>
+    </article>
+{% endblock %}

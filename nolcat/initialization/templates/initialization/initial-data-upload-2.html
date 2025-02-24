@@ -1,80 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://raw.githubusercontent.com/necolas/normalize.css/master/normalize.css" rel="stylesheet">
-    <title>Database Initialization Wizard 2</title>
-</head>
-<body>
-    <h1>Database Initialization Wizard: Page 2</h1>
+{% extends "layout.html" %}
+{% block metadata_title %}Database Initialization Wizard 2{% endblock %}
 
+{% block main_content %}
+    <header>
+        <h1>Database Initialization Wizard: Page 2</h1>
+    </header>
+
+    <article>
     {% with message = get_flashed_messages() %}
         {% if message %}
         <p>The data just loaded should be investigated, and probably removed and reloaded, because it raised the error(s)<br>{{ message }}</p>
         {% endif %}
     {% endwith %}
+    </article>
 
-    <h2>4. Create the `statisticsSources`, `statisticsSourceNotes`, `resourceSources`, `resourceSourceNotes`, and `statisticsResourceSources` Relations</h2>
-    <p>In handling usage statistics for electronic resources, there are two information sources to consider--the resource source, also called the platform and often equivalent to a HTTP domain, which is the source of the e-resource content, and the statistics source, where the usage statistics come from. There's a complex, many-to-many relationship between these two sources with situations/use cases that include
-        <ul>
-            <li>a single statistics source providing usage for multiple resource sources from a single vendor (e.g. pre-migration Oxford),</li>
-            <li>a single statistics source providing usage for multiple resource sources from different vendors (e.g. HighWire),</li>
-            <li>multiple resource sources being moved to a single statistics source (e.g. Peterson's Prep),</li>
-            <li>resource sources that shared a statistics source being split apart on the backend (e.g. UN/OECD iLibrary),</li>
-            <li>a new publisher leaving a resource source as is but moving the usage to the publisher's existing statistics source (e.g. Nature), and</li>
-            <li>a hosting service change that doesn't include any changes to the resource source UI (e.g. Company of Biologists).</li>
-        </ul>
-    To handle this complexity, three relations in a junction table-like relationship are employed: the `resourceSources` relation contains records for sources of e-resource content, including if that content is still available to patrons; the `statisticsSources` relation contains records for all the different usage statistics sources and a field for linking to externally stored SUSHI R5 credentials; and the `statisticsResourceSources` relation is a junction table for the other two relations with an additional field to indicate if the given statistics source currently provides usage for the given resource source. This model can integrate with other e-resource management tools through the `resourceSources` relation and track changes to system backends that don't cause frontend changes.</p>
-    <ol>
-        <li>Download <a href="{{ url_for('download_file', file_path=CWD+'/relation_initialization_templates/initialize_resourceSources.csv') }}">"initialize_resourceSources.csv"</a>, <a href="{{ url_for('download_file', file_path=CWD+'/relation_initialization_templates/initialize_statisticsSources.csv') }}">"initialize_statisticsSources.csv"</a>, <a href="{{ url_for('download_file', file_path=CWD+'/relation_initialization_templates/initialize_resourceSourceNotes.csv') }}">"initialize_resourceSourceNotes.csv"</a>, and <a href="{{ url_for('download_file', file_path=CWD+'/relation_initialization_templates/initialize_statisticsSourceNotes.csv') }}">"initialize_statisticsSourceNotes.csv"</a>.</li>
-        <li>Open a spreadsheet program and create a spreadsheet named "temp" with all the field names from "initialize_resourceSources.csv" and "initialize_statisticsSources.csv", then adding the field name `current_statistics_source`.</li>
-        <li>In the "temp" spreadsheet, replace the two `vendor_ID` fields with `Resource Vendor` and `Stats Vendor`.</li>
-        <li>In the "temp" spreadsheet, create the list of statistics sources and resource sources pairings, adding to the notes CSVs whenever appropriate. This is a comprehensive listing, so the best methods to use will depend on how much data is already gathered and what form it is in. Below are some ideas that form a potential procedure.
-            <ul>
-                <li>For all securely stored R5 SUSHI credentials, give the credentials a name in the `statistics_source_name` field and put either the Alma interface name or the secure JSON file ID for the credentials in the `statistics_source_retrieval_code` field, then fill in the `Resource Vendor` field, the fields for the resource source, and the `current_statistics_source` field; repeat for each resource source the SUSHI credentials serve, using the same `statistics_source_ID` for all the records.</li>
-                <li>For all the administrator portals not providing SUSHI, give the credentials a name in the `statistics_source_name` field, then fill in the `Stats Vendor` field, the fields for the resource source, and the `current_statistics_source` field; repeat for each resource source which has its usage provided by the given administrator portal, using the same `Statistics_Source_ID` for all the records.</li>
-                <li>For resource sources that have changed statistics sources at any point since the beginning of the desired collection period, fill out all the resource source fields identically in as many records as there are statistics sources, then fill each record's  `statistics_source_name` and `Stats Vendor` field for the different statistics sources, putting `True` in `current_statistics_source` for the current statistics source for the given resource source and filling that field in with `False` for all other records.</li>
-                <li>For all vendors in the list of vendors not connected to a statistics source or resource source, determine what statistics source(s) and/or resource source(s) come from the vendor and add the relevant record(s).</li>
-            </ul>
-        </li>
-        <li>If numbers weren't added to `statistics_source_ID` and `resource_source_ID` in all records as the "temp" spreadsheet was being filled in, finish adding sequential numbering to those fields (any records that have duplicates or a note should already have an ID number). Remember that the numbering should start at `0`.</li>
-        <li>Copy values from the fields in the "temp" spreadsheet columns into the columns with the same field labels in "initialize_resourceSources.csv" and "initialize_statisticsSources.csv", including copying the `Resource Vendor` and `Stats Vendor` columns into the `vendor_ID` fields in the appropriate CSV.</li>
-        <li>Remove duplicate records (meaning all values in the record match) from "initialize_resourceSources.csv" and "initialize_statisticsSources.csv", then double check that there are no duplicated values in `resource_source_ID` or `statistics_source_ID`; if there are duplicates, return to the "temp" spreadsheet, find and fix the error, and start again at the previous step.</li>
-        <li>Save all four CSVs, ensuring the encodings are UTF-8 and that any date fields appear as dates.</li>
-        <li>Delete all fields but `resource_source_ID`, `statistics_source_ID`, and `current_statistics_source` from the "temp" spreadsheet, then save it as a CSV with UTF-8 encoding and and with date fields appearing as dates named "initialize_statisticsResourceSources.csv".</li>
-        <li>In "initialize_statisticsResourceSources.csv", change `statistics_source_ID` to `SRS_statistics_source` and `resource_source_ID` to `SRS_resource_source`, then save the CSV again.</li>
-    </ol>
+    <article>
+        <section>
+            <h2>4. Create the `statisticsSources`, `statisticsSourceNotes`, `resourceSources`, `resourceSourceNotes`, and `statisticsResourceSources` Relations</h2>
+            <p>In handling usage statistics for electronic resources, there are two information sources to consider--the resource source, also called the platform and often equivalent to a HTTP domain, which is the source of the e-resource content, and the statistics source, where the usage statistics come from. There's a complex, many-to-many relationship between these two sources with situations/use cases that include
+                <ul>
+                    <li>a single statistics source providing usage for multiple resource sources from a single vendor (e.g. pre-migration Oxford),</li>
+                    <li>a single statistics source providing usage for multiple resource sources from different vendors (e.g. HighWire),</li>
+                    <li>multiple resource sources being moved to a single statistics source (e.g. Peterson's Prep),</li>
+                    <li>resource sources that shared a statistics source being split apart on the backend (e.g. UN/OECD iLibrary),</li>
+                    <li>a new publisher leaving a resource source as is but moving the usage to the publisher's existing statistics source (e.g. Nature), and</li>
+                    <li>a hosting service change that doesn't include any changes to the resource source UI (e.g. Company of Biologists).</li>
+                </ul>
+            To handle this complexity, three relations in a junction table-like relationship are employed: the `resourceSources` relation contains records for sources of e-resource content, including if that content is still available to patrons; the `statisticsSources` relation contains records for all the different usage statistics sources and a field for linking to externally stored SUSHI R5 credentials; and the `statisticsResourceSources` relation is a junction table for the other two relations with an additional field to indicate if the given statistics source currently provides usage for the given resource source. This model can integrate with other e-resource management tools through the `resourceSources` relation and track changes to system backends that don't cause frontend changes.</p>
+            <ol>
+                <li>Download <a href="{{ url_for('download_file', file_path=CWD+'/relation_initialization_templates/initialize_resourceSources.csv') }}">"initialize_resourceSources.csv"</a>, <a href="{{ url_for('download_file', file_path=CWD+'/relation_initialization_templates/initialize_statisticsSources.csv') }}">"initialize_statisticsSources.csv"</a>, <a href="{{ url_for('download_file', file_path=CWD+'/relation_initialization_templates/initialize_resourceSourceNotes.csv') }}">"initialize_resourceSourceNotes.csv"</a>, and <a href="{{ url_for('download_file', file_path=CWD+'/relation_initialization_templates/initialize_statisticsSourceNotes.csv') }}">"initialize_statisticsSourceNotes.csv"</a>.</li>
+                <li>Open a spreadsheet program and create a spreadsheet named "temp" with all the field names from "initialize_resourceSources.csv" and "initialize_statisticsSources.csv", then adding the field name `current_statistics_source`.</li>
+                <li>In the "temp" spreadsheet, replace the two `vendor_ID` fields with `Resource Vendor` and `Stats Vendor`.</li>
+                <li>In the "temp" spreadsheet, create the list of statistics sources and resource sources pairings, adding to the notes CSVs whenever appropriate. This is a comprehensive listing, so the best methods to use will depend on how much data is already gathered and what form it is in. Below are some ideas that form a potential procedure.
+                    <ul>
+                        <li>For all securely stored R5 SUSHI credentials, give the credentials a name in the `statistics_source_name` field and put either the Alma interface name or the secure JSON file ID for the credentials in the `statistics_source_retrieval_code` field, then fill in the `Resource Vendor` field, the fields for the resource source, and the `current_statistics_source` field; repeat for each resource source the SUSHI credentials serve, using the same `statistics_source_ID` for all the records.</li>
+                        <li>For all the administrator portals not providing SUSHI, give the credentials a name in the `statistics_source_name` field, then fill in the `Stats Vendor` field, the fields for the resource source, and the `current_statistics_source` field; repeat for each resource source which has its usage provided by the given administrator portal, using the same `Statistics_Source_ID` for all the records.</li>
+                        <li>For resource sources that have changed statistics sources at any point since the beginning of the desired collection period, fill out all the resource source fields identically in as many records as there are statistics sources, then fill each record's  `statistics_source_name` and `Stats Vendor` field for the different statistics sources, putting `True` in `current_statistics_source` for the current statistics source for the given resource source and filling that field in with `False` for all other records.</li>
+                        <li>For all vendors in the list of vendors not connected to a statistics source or resource source, determine what statistics source(s) and/or resource source(s) come from the vendor and add the relevant record(s).</li>
+                    </ul>
+                </li>
+                <li>If numbers weren't added to `statistics_source_ID` and `resource_source_ID` in all records as the "temp" spreadsheet was being filled in, finish adding sequential numbering to those fields (any records that have duplicates or a note should already have an ID number). Remember that the numbering should start at `0`.</li>
+                <li>Copy values from the fields in the "temp" spreadsheet columns into the columns with the same field labels in "initialize_resourceSources.csv" and "initialize_statisticsSources.csv", including copying the `Resource Vendor` and `Stats Vendor` columns into the `vendor_ID` fields in the appropriate CSV.</li>
+                <li>Remove duplicate records (meaning all values in the record match) from "initialize_resourceSources.csv" and "initialize_statisticsSources.csv", then double check that there are no duplicated values in `resource_source_ID` or `statistics_source_ID`; if there are duplicates, return to the "temp" spreadsheet, find and fix the error, and start again at the previous step.</li>
+                <li>Save all four CSVs, ensuring the encodings are UTF-8 and that any date fields appear as dates.</li>
+                <li>Delete all fields but `resource_source_ID`, `statistics_source_ID`, and `current_statistics_source` from the "temp" spreadsheet, then save it as a CSV with UTF-8 encoding and and with date fields appearing as dates named "initialize_statisticsResourceSources.csv".</li>
+                <li>In "initialize_statisticsResourceSources.csv", change `statistics_source_ID` to `SRS_statistics_source` and `resource_source_ID` to `SRS_resource_source`, then save the CSV again.</li>
+            </ol>
+        </section>
 
-    <h2>5. Upload the `statisticsSources`, `statisticsSourceNotes`, `resourceSources`, `resourceSourceNotes`, and `statisticsResourceSources` Relation CSVs</h2>
-    <ol><form method="POST" action="{{ url_for('initialization.collect_sources_data') }}" enctype="multipart/form-data">
-        {{ form.csrf_token }}
-        <li><label>
-            {{ form.statisticsSources_CSV.label }}
-            {{ form.statisticsSources_CSV }}
-        </label></li>
-        <br>
-        <li><label>
-            {{ form.statisticsSourceNotes_CSV.label }}
-            {{ form.statisticsSourceNotes_CSV }}
-        </label></li>
-        <br>
-        <li><label>
-            {{ form.resourceSources_CSV.label }}
-            {{ form.resourceSources_CSV }}
-        </label></li>
-        <br>
-        <li><label>
-            {{ form.resourceSourceNotes_CSV.label }}
-            {{ form.resourceSourceNotes_CSV }}
-        </label></li>
-        <br>
-        <li><label>
-            {{ form.statisticsResourceSources_CSV.label }}
-            {{ form.statisticsResourceSources_CSV }}
-        </label></li>
-        <input type="submit" value="Submit">
-    </form></ol>
-</body>
-</html>
+        <section>
+            <h2>5. Upload the `statisticsSources`, `statisticsSourceNotes`, `resourceSources`, `resourceSourceNotes`, and `statisticsResourceSources` Relation CSVs</h2>
+            <ol><form method="POST" action="{{ url_for('initialization.collect_sources_data') }}" enctype="multipart/form-data">
+                {{ form.csrf_token }}
+                <li><label>
+                    {{ form.statisticsSources_CSV.label }}
+                    {{ form.statisticsSources_CSV }}
+                </label></li>
+                <br>
+                <li><label>
+                    {{ form.statisticsSourceNotes_CSV.label }}
+                    {{ form.statisticsSourceNotes_CSV }}
+                </label></li>
+                <br>
+                <li><label>
+                    {{ form.resourceSources_CSV.label }}
+                    {{ form.resourceSources_CSV }}
+                </label></li>
+                <br>
+                <li><label>
+                    {{ form.resourceSourceNotes_CSV.label }}
+                    {{ form.resourceSourceNotes_CSV }}
+                </label></li>
+                <br>
+                <li><label>
+                    {{ form.statisticsResourceSources_CSV.label }}
+                    {{ form.statisticsResourceSources_CSV }}
+                </label></li>
+                <input type="submit" value="Submit">
+            </form></ol>
+        </section>
+    </article>
+{% endblock %}

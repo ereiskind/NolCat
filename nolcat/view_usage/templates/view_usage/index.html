@@ -1,25 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Usage Homepage</title>
-</head>
-<body>
-    <h1>Ways to View Usage</h1>
+{% extends "layout.html" %}
+{% block metadata_title %}View Usage Homepage{% endblock %}
 
+{% block main_content %}
+    <header>
+        <h1>Ways to View Usage</h1>
+        <p>All usage is returned as a CSV download.</p>
+    </header>
+
+    <article>
     {% with message = get_flashed_messages() %}
         {% if message %}
             <p>{{ message }}</p>
         {% endif %}
     {% endwith %}
+    </article>
 
-    <p><a href="{{ url_for('view_usage.run_custom_SQL_query') }}">Click here</a> to write a custom SQL query.</p>
-    <p><a href="{{ url_for('view_usage.use_predefined_SQL_query') }}">Click here</a> to use a predefined query.</p>
-    <p><a href="{{ url_for('view_usage.start_query_wizard') }}">Click here</a> to use the query wizard.</p>
-    <p><a href="{{ url_for('view_usage.download_non_COUNTER_usage') }}">Click here</a> for a non-COUNTER usage file.</p>
-
-    <p>All usage is returned as a CSV download.</p>
-</body>
-</html>
+    <article>
+        <ul>
+            <li><a href="{{ url_for('view_usage.run_custom_SQL_query') }}">Click here</a> to write a custom SQL query.</li>
+            <li><a href="{{ url_for('view_usage.use_predefined_SQL_query') }}">Click here</a> to use a predefined query.</li>
+            <li><a href="{{ url_for('view_usage.start_query_wizard') }}">Click here</a> to use the query wizard.</li>
+            <li><a href="{{ url_for('view_usage.download_non_COUNTER_usage') }}">Click here</a> for a non-COUNTER usage file.</li>
+        </ul>
+    </article>
+{% endblock %}

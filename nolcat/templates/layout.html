@@ -9,18 +9,24 @@
     <title>{% block metadata_title %}{% endblock %}</title>
 </head>
 <body>
-    <header>
-        NoLCAT: Noles Library Collection Assessment Tool
-        <nav>
-            <!--ToDo: Create nav menu when pages for purposes other than database setup have been created-->
-        </nav>
-        <!--ToDo: When authentication is set up, add login/logout function-->
-        <!--ToDo: Does anything else need to go in the header?-->
-    </header>
-
     <main>
         {% block main_content %}{% endblock %}
     </main>
+
+    <header>
+        NoLCAT: Noles Library Collection Assessment Tool
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('homepage') }}">Homepage</a></li>
+                <li><a href="{{ url_for('ingest_usage.ingest_usage_homepage') }}">Ingest Usage</a></li>
+                <li><a href="{{ url_for('view_usage.view_usage_homepage') }}">View Usage</a></li>
+                <li><a href="{{ url_for('annual_stats.annual_stats_homepage') }}">Administration</a></li>
+                <!--ToDo: Link to main Sphinx page with link text `Documentation` -->
+            </ul>
+        </nav>
+        <!--ToDo: When authentication is set up, make below show user if logged in and link to log in if not -->
+        <a href="{{ url_for('login.login_homepage') }}">Login Page</a>
+    </header>
 
     <footer>
         NoLCAT, created by FSU Libraries

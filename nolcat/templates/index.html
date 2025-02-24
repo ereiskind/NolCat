@@ -1,24 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://raw.githubusercontent.com/necolas/normalize.css/master/normalize.css" rel="stylesheet">
-    <title>NoLCAT</title>
-</head>
-<body>
-    <h1>NoLCAT Homepage</h1>
-    <p>This is the NoLCAT homepage.</p>
-    <p>For the purpose of providing a direct link, <a href="{{ url_for('initialization.collect_FY_and_vendor_data') }}">access the initialization wizard here</a>.</p>
+{% extends "layout.html" %}
+{% block metadata_title %}NoLCAT{% endblock %}
 
-    <h2>Links</h2>
-    <ul>
-        <li><a href="{{ url_for('login.login_homepage') }}">Click here</a> to log in</li>
-        <li><a href="{{ url_for('ingest_usage.ingest_usage_homepage') }}">Click here</a> for usage ingest options</li>
-        <li><a href="{{ url_for('view_usage.view_usage_homepage') }}">Click here</a> for usage view options</li>
-        <li><a href="{{ url_for('annual_stats.annual_stats_homepage') }}">click here</a> for admin features homepage</li>
-        <li><a href="{{ url_for('view_lists.view_lists_homepage', list='vendors') }}">click here</a> to view the list of vendors</li>
-    </ul>
-</body>
-</html>
+{% block main_content %}
+    <header>
+        <h1>NoLCAT Homepage</h1>
+        <p>This is the NoLCAT homepage.</p>
+        <p>For the purpose of providing a direct link, <a href="{{ url_for('initialization.collect_FY_and_vendor_data') }}">access the initialization wizard here</a>.</p>
+    </header>
+
+    <article>
+        <h2>Links</h2>
+        <ul>
+            <li><a href="{{ url_for('login.login_homepage') }}">Click here</a> to log in.</li>
+            <li><a href="{{ url_for('ingest_usage.ingest_usage_homepage') }}">Click here</a> for usage ingest options.</li>
+            <li><a href="{{ url_for('view_usage.view_usage_homepage') }}">Click here</a> for usage view options.</li>
+            <li><a href="{{ url_for('annual_stats.annual_stats_homepage') }}">Click here</a> for admin features homepage.</li>
+        </ul>
+    </article>
+{% endblock %}

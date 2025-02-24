@@ -1,26 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ingest Usage</title>
-</head>
-<body>
-    <h1>Ingest Usage Homepage</h1>
+{% extends "layout.html" %}
+{% block metadata_title %}Ingest Usage{% endblock %}
 
+{% block main_content %}
+    <header>
+        <h1>Ingest Usage Homepage</h1>
+    </header>
+
+    <article>
     {% with message = get_flashed_messages() %}
         {% if message %}
             <p>{{ message }}</p>
         {% endif %}
     {% endwith %}
+    </article>
 
-    <ul>
-        <li>To upload COUNTER data, <a href="{{ url_for('ingest_usage.upload_COUNTER_data') }}">click here</a>.</li>
-        <li>To make a SUSHI call, <a href="{{ url_for('ingest_usage.harvest_SUSHI_statistics') }}">click here</a>.</li>
-        <li>To save a non-COUNTER usage file, <a href="{{ url_for('ingest_usage.upload_non_COUNTER_reports') }}">click here</a>.</li>
-    </ul>
-
-    <p>To return to the homepage, <a href="{{ url_for('homepage') }}">click here</a>.</p>
-</body>
-</html>
+    <article>
+        <ul>
+            <li><a href="{{ url_for('ingest_usage.upload_COUNTER_data') }}">Click here</a> to upload COUNTER data.</li>
+            <li><a href="{{ url_for('ingest_usage.harvest_SUSHI_statistics') }}">Click here</a> to make a SUSHI call.</li>
+            <li><a href="{{ url_for('ingest_usage.upload_non_COUNTER_reports') }}">Click here</a> to save a non-COUNTER usage file.</li>
+        </ul>
+    </article>
+{% endblock %}

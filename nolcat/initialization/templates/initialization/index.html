@@ -1,72 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://raw.githubusercontent.com/necolas/normalize.css/master/normalize.css" rel="stylesheet">
-    <title>Database Initialization Wizard 1</title>
-</head>
-<body>
-    <h1>Database Initialization Wizard: Page 1</h1>
-    <p>These pages will walk you through the process of initializing the database with your historical usage statistics and other data required for the relational structure of the underlying database.</p>
+{% extends "layout.html" %}
+{% block metadata_title %}Database Initialization Wizard 1{% endblock %}
 
+{% block main_content %}
+    <header>
+        <h1>Database Initialization Wizard: Page 1</h1>
+        <p>These pages will walk you through the process of initializing the database with your historical usage statistics and other data required for the relational structure of the underlying database.</p>
+    </header>
+
+    <article>
     {% with message = get_flashed_messages() %}
         {% if message %}
             <p>The data just loaded should be investigated, and probably removed and reloaded, because it raised the error(s)<br>{{ message }}</p>
         {% endif %}
     {% endwith %}
+    </article>
 
-    <h2>1. Create the `fiscalYears` Relation with Historical Years</h2>  <!--Ordered list not used because numbering continues across multiple pages-->
-    <ol>
-        <li>Download <a href="{{ url_for('download_file', file_path=CWD+'/relation_initialization_templates/initialize_fiscalYears.csv') }}">"initialize_fiscalYears.csv"</a>.</li>
-        <li>For all previous fiscal years for which there is usage data, fill out a row in the CSV with the appropriate data (only the `year`, `start_date`, and `end_date` fields are required).</li>
-        <li>Add sequential integer numbering starting at `0` and incrementing by one to all records in the `fiscal_year_ID` field.</li>
-        <li>Save the CSV, ensuring the encoding is UTF-8 and that any date fields appear as dates.</li>
-    </ol>
+    <article>
+        <section>
+            <h2>1. Create the `fiscalYears` Relation with Historical Years</h2>  <!--Ordered list not used because numbering continues across multiple pages-->
+            <ol>
+                <li>Download <a href="{{ url_for('download_file', file_path=CWD+'/relation_initialization_templates/initialize_fiscalYears.csv') }}">"initialize_fiscalYears.csv"</a>.</li>
+                <li>For all previous fiscal years for which there is usage data, fill out a row in the CSV with the appropriate data (only the `year`, `start_date`, and `end_date` fields are required).</li>
+                <li>Add sequential integer numbering starting at `0` and incrementing by one to all records in the `fiscal_year_ID` field.</li>
+                <li>Save the CSV, ensuring the encoding is UTF-8 and that any date fields appear as dates.</li>
+            </ol>
+        </section>
 
-    <h2>2. Create the `annualStatistics` Relation</h2>
-    <ol>
-        <li>Download <a href="{{ url_for('download_file', file_path=CWD+'/relation_initialization_templates/initialize_annualStatistics.csv') }}">"initialize_annualStatistics.csv"</a>.</li>
-        <li>For all recorded annual usage statistics values, fill out a row in the CSV with the `fiscal_year_ID` assigned to the year in the `fiscalYears` relation in the `fiscal_year_ID` field, the survey abbreviation and question number in the `question` field, and the answer value in the `count` field.</li>
-        fill in using ID numbers established above
-        <li>Save the CSVs, ensuring the encodings are UTF-8 and that any date fields appear as dates.</li>
-    </ol>
+        <section>
+            <h2>2. Create the `annualStatistics` Relation</h2>
+            <ol>
+                <li>Download <a href="{{ url_for('download_file', file_path=CWD+'/relation_initialization_templates/initialize_annualStatistics.csv') }}">"initialize_annualStatistics.csv"</a>.</li>
+                <li>For all recorded annual usage statistics values, fill out a row in the CSV with the `fiscal_year_ID` assigned to the year in the `fiscalYears` relation in the `fiscal_year_ID` field, the survey abbreviation and question number in the `question` field, and the answer value in the `count` field.</li>
+                fill in using ID numbers established above
+                <li>Save the CSVs, ensuring the encodings are UTF-8 and that any date fields appear as dates.</li>
+            </ol>
+        </section>
 
-    <h2>3. Create the `vendors` and `vendorNotes` Relations</h2>
-    <ol>
-        <li>Download <a href="{{ url_for('download_file', file_path=CWD+'/relation_initialization_templates/initialize_vendors.csv') }}">"initialize_vendors.csv"</a>.</li>
-        <li>In the `vendor_name` field, list all the organizations which provide or have provided resources--publishers, aggregators, free sources, ect.</li>
-        <li>For all of the above values that have vendor codes in Alma, add those codes to the `alma_vendor_code` field.</li>
-        <li>Add sequential integer numbering starting at `0` and incrementing by one to all records in the `vendor_ID` field.</li>
-        <li>Download <a href="{{ url_for('download_file', file_path=CWD+'/relation_initialization_templates/initialize_vendorNotes.csv') }}">"initialize_vendorNotes.csv"</a>.</li>
-        <li>For every note on a vendor that needs to be added, in the `vendor_ID` field, put the `vendor_ID` value for the vendor from the "initialize_vendors.csv" file, then fill out the `note`, `written_by`, and `date_written` fields.</li>
-        <li>Save the CSVs, ensuring the encodings are UTF-8 and that any date fields appear as dates.</li>
-    </ol>
+        <section>
+            <h2>3. Create the `vendors` and `vendorNotes` Relations</h2>
+            <ol>
+                <li>Download <a href="{{ url_for('download_file', file_path=CWD+'/relation_initialization_templates/initialize_vendors.csv') }}">"initialize_vendors.csv"</a>.</li>
+                <li>In the `vendor_name` field, list all the organizations which provide or have provided resources--publishers, aggregators, free sources, ect.</li>
+                <li>For all of the above values that have vendor codes in Alma, add those codes to the `alma_vendor_code` field.</li>
+                <li>Add sequential integer numbering starting at `0` and incrementing by one to all records in the `vendor_ID` field.</li>
+                <li>Download <a href="{{ url_for('download_file', file_path=CWD+'/relation_initialization_templates/initialize_vendorNotes.csv') }}">"initialize_vendorNotes.csv"</a>.</li>
+                <li>For every note on a vendor that needs to be added, in the `vendor_ID` field, put the `vendor_ID` value for the vendor from the "initialize_vendors.csv" file, then fill out the `note`, `written_by`, and `date_written` fields.</li>
+                <li>Save the CSVs, ensuring the encodings are UTF-8 and that any date fields appear as dates.</li>
+            </ol>
+        </section>
 
-    <h2>4. Upload the `fiscalYears`, `vendors`, and `vendorNotes` Relation CSVs</h2>
-    <ol><form method="POST" action="{{ url_for('initialization.collect_FY_and_vendor_data') }}" enctype="multipart/form-data">
-        {{ form.csrf_token }}
-        <li><label>
-            {{ form.fiscalYears_CSV.label }}
-            {{ form.fiscalYears_CSV }}
-        </label></li>
-        <br>
-        <li><label>
-            {{ form.annualStatistics_CSV.label }}
-            {{ form.annualStatistics_CSV }}
-        </label></li>
-        <br>
-        <li><label>
-            {{ form.vendors_CSV.label }}
-            {{ form.vendors_CSV }}
-        </label></li>
-        <br>
-        <li><label>
-            {{ form.vendorNotes_CSV.label }}
-            {{ form.vendorNotes_CSV }}
-        </label></li>
-        <input type="submit" value="Submit">
-    </form></ol>
-</body>
-</html>
+        <section>
+            <h2>4. Upload the `fiscalYears`, `vendors`, and `vendorNotes` Relation CSVs</h2>
+            <ol><form method="POST" action="{{ url_for('initialization.collect_FY_and_vendor_data') }}" enctype="multipart/form-data">
+                {{ form.csrf_token }}
+                <li><label>
+                    {{ form.fiscalYears_CSV.label }}
+                    {{ form.fiscalYears_CSV }}
+                </label></li>
+                <br>
+                <li><label>
+                    {{ form.annualStatistics_CSV.label }}
+                    {{ form.annualStatistics_CSV }}
+                </label></li>
+                <br>
+                <li><label>
+                    {{ form.vendors_CSV.label }}
+                    {{ form.vendors_CSV }}
+                </label></li>
+                <br>
+                <li><label>
+                    {{ form.vendorNotes_CSV.label }}
+                    {{ form.vendorNotes_CSV }}
+                </label></li>
+                <input type="submit" value="Submit">
+            </form></ol>
+        </section>
+    </article>
+{% endblock %}

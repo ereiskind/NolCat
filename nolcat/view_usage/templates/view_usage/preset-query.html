@@ -1,39 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preset Queries</title>
-</head>
-<body>
-    <h1>Preset Queries</h1>
+{% extends "layout.html" %}
+{% block metadata_title %}Preset Queries{% endblock %}
 
-    <form action="{{ url_for('view_usage.use_predefined_SQL_query') }}" method="POST">
-        {{ form.csrf_token }}
-        <h2>Select Date Range</h2>
-        <label>
-            {{ form.begin_date.label}}
-            {{ form.begin_date }}
-        </label>
-        <label>
-            {{ form.end_date.label}}
-            {{ form.end_date }}
-        </label>
+{% block main_content %}
+    <header>
+        <h1>Preset Queries</h1>
+    </header>
 
-        <h2>Select Type of Query</h2>
-        <label>
-            {{ form.query_options.label}}
-            {{ form.query_options }}
-        </label>
-        <br><br>
-        <label>
-            {{ form.open_in_Excel.label}}
-            {{ form.open_in_Excel }}
-        </label>
-        <input type="submit" value="Submit">
-    </form>
-
-    <p><a href="{{ url_for('view_usage.view_usage_homepage') }}">Click here</a> to return to the "Ways to View Usage" page.</p>
-</body>
-</html>
+    <article>
+        <form action="{{ url_for('view_usage.use_predefined_SQL_query') }}" method="POST">
+            {{ form.csrf_token }}
+            <h2>Select Date Range</h2>
+            <label>
+                {{ form.begin_date.label}}
+                {{ form.begin_date }}
+            </label>
+            <label>
+                {{ form.end_date.label}}
+                {{ form.end_date }}
+            </label>
+    
+            <h2>Select Type of Query</h2>
+            <label>
+                {{ form.query_options.label}}
+                {{ form.query_options }}
+            </label>
+            <br><br>
+            <label>
+                {{ form.open_in_Excel.label}}
+                {{ form.open_in_Excel }}
+            </label>
+            <input type="submit" value="Submit">
+        </form>
+    </article>
+{% endblock %}

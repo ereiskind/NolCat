@@ -1,129 +1,130 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IR Query Wizard</title>
-</head>
-<body>
-    <h1>IR Query Wizard <small>(continued)</small></h1>
+{% extends "layout.html" %}
+{% block metadata_title %}IR Query Wizard{% endblock %}
 
-    <p>Fill out the form below; only the date fields, which are already filled in, are required. For the boxes listing options to select:
-        <ol>
-            <li>None of the boxes are required, and not selecting any options is the same as selecting all of the options. It is highly recommended that some filters be applied, however, so a manageable number of records are returned.</li>
-            <li>To select multiple options, hold down the `ctrl` key while clicking the options.</li>
-        </ol>
-    </p>
+{% block main_content %}
+    <header>
+        <h1>IR Query Wizard <small>(continued)</small></h1>
+    </header>
 
+    <article>
     {% with message = get_flashed_messages() %}
         {% if message %}
             <p>{{ message }}</p>
         {% endif %}
     {% endwith %}
+    </article>
 
-    <form action="{{ url_for('view_usage.construct_IR_query_with_wizard') }}" method="POST">
-        {{ form.csrf_token }}
-        <label>
-            {{ form.begin_date.label }}
-            {{ form.begin_date }}
-        </label>
-        <br><br>
-        <label>
-            {{ form.end_date.label }}
-            {{ form.end_date }}
-        </label>
-        <br><br>
-        <label>
-            {{ form.display_fields.label }} <br>
-            {{ form.display_fields }}
-        </label>
-        <br><br>
-        <label>
-            {{ form.resource_name_filter.label }}
-            {{ form.resource_name_filter }}
-        </label>
-        <br><br>
-        <label>
-            {{ form.publisher_filter.label }}
-            {{ form.publisher_filter }}
-        </label>
-        <br><br>
-        <label>
-            {{ form.platform_filter.label }}
-            {{ form.platform_filter }}
-        </label>
-        <br><br>
-        <label>
-            {{ form.publication_date_start_filter.label }}
-            {{ form.publication_date_start_filter }}
-        </label>
-        <br><br>
-        <label>
-            {{ form.publication_date_end_filter.label }}
-            {{ form.publication_date_end_filter }}
-        </label>
-        <br><br>
-        <label>
-            {{ form.ISBN_filter.label }}
-            {{ form.ISBN_filter }}
-        </label>
-        <br><br>
-        <label>
-            {{ form.ISSN_filter.label }}
-            {{ form.ISSN_filter }}
-        </label>
-        <br><br>
-        <label>
-            {{ form.parent_title_filter.label }}
-            {{ form.parent_title_filter }}
-        </label>
-        <br><br>
-        <label>
-            {{ form.parent_ISBN_filter.label }}
-            {{ form.parent_ISBN_filter }}
-        </label>
-        <br><br>
-        <label>
-            {{ form.parent_ISSN_filter.label }}
-            {{ form.parent_ISSN_filter }}
-        </label>
-        <br><br>
-        <label>
-            {{ form.data_type_filter.label }} <br>
-            {{ form.data_type_filter }}
-        </label>
-        <br><br>
-        <label>
-            {{ form.YOP_start_filter.label }}
-            {{ form.YOP_start_filter }}
-        </label>
-        <br><br>
-        <label>
-            {{ form.YOP_end_filter.label }}
-            {{ form.YOP_end_filter }}
-        </label>
-        <br><br>
-        <label>
-            {{ form.access_type_filter.label }} <br>
-            {{ form.access_type_filter }}
-        </label>
-        <br><br>
-        <label>
-            {{ form.access_method_filter.label }} <br>
-            {{ form.access_method_filter }}
-        </label>
-        <br><br>
-        <label>
-            {{ form.metric_type_filter.label }} <br>
-            {{ form.metric_type_filter }}
-        </label>
-        <br><br>
-        <br><br>
-        <label>
-            {{ form.open_in_Excel.label}}
-            {{ form.open_in_Excel }}
-        </label>
-        <input type="submit" value="Submit">
-    </form>
-</body>
-</html>
+    <article>
+        <p>Fill out the form below; only the date fields, which are already filled in, are required. For the boxes listing options to select:
+            <ol>
+                <li>None of the boxes are required, and not selecting any options is the same as selecting all of the options. It is highly recommended that some filters be applied, however, so a manageable number of records are returned.</li>
+                <li>To select multiple options, hold down the `ctrl` key while clicking the options.</li>
+            </ol>
+        </p>
+
+        <form action="{{ url_for('view_usage.construct_IR_query_with_wizard') }}" method="POST">
+            {{ form.csrf_token }}
+            <label>
+                {{ form.begin_date.label }}
+                {{ form.begin_date }}
+            </label>
+            <br><br>
+            <label>
+                {{ form.end_date.label }}
+                {{ form.end_date }}
+            </label>
+            <br><br>
+            <label>
+                {{ form.display_fields.label }} <br>
+                {{ form.display_fields }}
+            </label>
+            <br><br>
+            <label>
+                {{ form.resource_name_filter.label }}
+                {{ form.resource_name_filter }}
+            </label>
+            <br><br>
+            <label>
+                {{ form.publisher_filter.label }}
+                {{ form.publisher_filter }}
+            </label>
+            <br><br>
+            <label>
+                {{ form.platform_filter.label }}
+                {{ form.platform_filter }}
+            </label>
+            <br><br>
+            <label>
+                {{ form.publication_date_start_filter.label }}
+                {{ form.publication_date_start_filter }}
+            </label>
+            <br><br>
+            <label>
+                {{ form.publication_date_end_filter.label }}
+                {{ form.publication_date_end_filter }}
+            </label>
+            <br><br>
+            <label>
+                {{ form.ISBN_filter.label }}
+                {{ form.ISBN_filter }}
+            </label>
+            <br><br>
+            <label>
+                {{ form.ISSN_filter.label }}
+                {{ form.ISSN_filter }}
+            </label>
+            <br><br>
+            <label>
+                {{ form.parent_title_filter.label }}
+                {{ form.parent_title_filter }}
+            </label>
+            <br><br>
+            <label>
+                {{ form.parent_ISBN_filter.label }}
+                {{ form.parent_ISBN_filter }}
+            </label>
+            <br><br>
+            <label>
+                {{ form.parent_ISSN_filter.label }}
+                {{ form.parent_ISSN_filter }}
+            </label>
+            <br><br>
+            <label>
+                {{ form.data_type_filter.label }} <br>
+                {{ form.data_type_filter }}
+            </label>
+            <br><br>
+            <label>
+                {{ form.YOP_start_filter.label }}
+                {{ form.YOP_start_filter }}
+            </label>
+            <br><br>
+            <label>
+                {{ form.YOP_end_filter.label }}
+                {{ form.YOP_end_filter }}
+            </label>
+            <br><br>
+            <label>
+                {{ form.access_type_filter.label }} <br>
+                {{ form.access_type_filter }}
+            </label>
+            <br><br>
+            <label>
+                {{ form.access_method_filter.label }} <br>
+                {{ form.access_method_filter }}
+            </label>
+            <br><br>
+            <label>
+                {{ form.metric_type_filter.label }} <br>
+                {{ form.metric_type_filter }}
+            </label>
+            <br><br>
+            <br><br>
+            <label>
+                {{ form.open_in_Excel.label}}
+                {{ form.open_in_Excel }}
+            </label>
+            <input type="submit" value="Submit">
+        </form>
+    </article>
+{% endblock %}

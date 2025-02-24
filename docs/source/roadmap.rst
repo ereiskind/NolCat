@@ -72,9 +72,6 @@ These iterations make NoLCAT more robust and easier to use through relatively sm
 
 Iteration 1: View Lists
 =======================
-* Confirm variable routes in "annual_stats/index.html" work
-* Finish ``nolcat.view_lists.views.view_lists_homepage()``
-* Write "view_lists/index.html" page
 * Finish ``tests.test_bp_view_list.test_view_lists_homepage()``
 * Write ``tests.test_bp_view_list.test_GET_request_for_view_list_record()``
 * Finish ``nolcat.view_lists.views.view_list_record()``
@@ -84,6 +81,7 @@ Iteration 1: View Lists
 Iteration 2: Edit Lists
 =======================
 * Create form classes needed for editing
+* Add link for creating new record to "view_lists/index.html" page
 * Finish ``nolcat.view_lists.views.edit_list_record()``
 * Create "view_lists/edit-record.html" page
 * Write ``tests.test_bp_view_list.test_GET_request_for_edit_list_record_for_new_record()``

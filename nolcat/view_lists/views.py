@@ -20,36 +20,113 @@ log = logging.getLogger(__name__)
 def view_lists_homepage(list):
     """Returns the homepage for the `view_lists` blueprint, which shows the list of resource sources, statistics sources, or vendors depending on the variable route value.
 
-        Args:
-            list (str): the relation whose records are being listed
+    Args:
+        list (str): the relation whose records are being listed
     """
     log.info(f"Starting `view_lists_homepage()` for {list}.")
+    #TEST: temp
+    try:
+        log.warning(f"`list.__dict__`:\n{list.__dict__}")
+    except:
+        pass
+    try:
+        log.warning(f"`list.dir()`:\n{list.dir()}")
+    except:
+        pass
+    try:
+        log.warning(f"`list.var()`:\n{list.var()}")
+    except:
+        pass
+    #TEST: end temp
     if list == "resources":
         title = "Resource Sources"
-        #ToDo: SQL_query = Write query that provides all fields in human-understandable data
+        SQL_query = f"""
+            SELECT
+                resourceSources.resource_source_ID AS ID,
+                resourceSources.resource_source_name,
+                resourceSources.source_in_use,
+                resourceSources.access_stop_date,
+                vendors.vendor_name
+            FROM resourceSources
+                JOIN vendors ON resourceSources.vendor_ID=vendors.vendor_ID
+            ORDER BY resourceSources.resource_source_name;
+        """
+        df = query_database(
+            query=SQL_query,
+            engine=db.engine,
+        )
+        if isinstance(df, str):
+            message = database_query_fail_statement(df)
+            log.error(message)
+            flash(message)
+            return redirect(url_for('view_lists.view_lists_homepage'))
+        df = df.astype({
+            **{k: v for (k, v) in COUNTERData.state_data_types().items() if k in df.columns.tolist()},
+            "ID": 'int',
+        })
+        df['source_in_use'] = restore_boolean_values_to_boolean_field(df['source_in_use'])
     elif list == "statistics":
         title = "Statistics Sources"
-        #ToDo: SQL_query = Write query that provides all fields in human-understandable data
+        SQL_query = f"""
+            SELECT
+                statisticsSources.statistics_source_ID AS ID,
+                statisticsSources.statistics_source_name,
+                vendors.vendor_name
+            FROM statisticsSources
+                JOIN vendors ON statisticsSources.vendor_ID=vendors.vendor_ID
+            ORDER BY statisticsSources.statistics_source_name;
+        """
+        df = query_database(
+            query=SQL_query,
+            engine=db.engine,
+        )
+        if isinstance(df, str):
+            message = database_query_fail_statement(df)
+            log.error(message)
+            flash(message)
+            return redirect(url_for('view_lists.view_lists_homepage'))
+        df = df.astype({
+            **{k: v for (k, v) in COUNTERData.state_data_types().items() if k in df.columns.tolist()},
+            "ID": 'int',
+        })
     elif list == "vendors":
         title = "Vendors"
-        #ToDo: SQL_query = Write query that provides all fields in human-understandable data
+        SQL_query = f"""
+            SELECT
+                vendor_ID AS ID,
+                vendor_name
+            FROM vendors
+            ORDER BY vendor_name;
+        """
+        df = query_database(
+            query=SQL_query,
+            engine=db.engine,
+        )
+        if isinstance(df, str):
+            message = database_query_fail_statement(df)
+            log.error(message)
+            flash(message)
+            return redirect(url_for('view_lists.view_lists_homepage'))
+        df = df.astype({
+            **{k: v for (k, v) in COUNTERData.state_data_types().items() if k in df.columns.tolist()},
+            "ID": 'int',
+        })
     else:
-        log.error(f"The route function didn't understand the argument `{list}`.")  ##Flask_error_statement()
+        message = f"`{list}` is not a valid list option."
+        log.error(message)
+        flash(message)
         return abort(404)
     
-    # df = query_database(
-    #     query=SQL_query,
-    #     engine=db.engine,
-    # )
-    # if isinstance(df, str):
-    #     flash(database_query_fail_statement(df))
-    #     return abort(404)
-    # df = df.astype({dict setting correct dtypes})
-    # Add field with links to see details for each record
-    # Display the returned dataframe
-        # https://stackoverflow.com/q/52644035
-        # https://stackoverflow.com/q/22180993
-    return render_template('view_lists/index.html', title=title)
+    df['View Record Details'] = df['ID'].apply(lambda cell_value: (list, cell_value))
+    df['Edit'] = df['ID'].apply(lambda cell_value: (list, cell_value))
+    log.info(f"List of {list} as dataframe:\n{df}")
+    return render_template(
+        'view_lists/index.html',
+        title=title,
+        fields=[field_name.replace("_", " ").title() for field_name in df.columns.values.tolist() if field_name != "ID"],
+        records=[field_values[1:] for field_values in df.values.tolist()],
+        zip=zip,
+    )
 
 
 @bp.route('/<string:list>/<int:PK>')
@@ -92,8 +169,8 @@ def edit_list_record(list, PK):
     Adding a record is done by creating a `PK` value that matches what's next in the auto-generated count list, adding new values to all the fields available for edit, which are then committed to the relation as a new record. Editing the `resourceSources` relation is also the method for updating the `statisticsResourceSources` junction table, which is never directly visible or directly accessed.
 
     Args:
-        list (_type_): _description_
-        PK (_type_): _description_
+        list (str): the relation the record comes from
+        PK (int): the primary key of the record being edited
     """
     log.info(f"Starting `edit_list_record()` for {list}.")
     #ToDo: Write form for adding/editing record and for adding or editing notes
@@ -107,7 +184,9 @@ def edit_list_record(list, PK):
             #     engine=db.engine,
             # )
             # if isinstance(df, str):
-            #     flash(database_query_fail_statement(df))
+            #     message = database_query_fail_statement(df)
+            #     log.error(message)
+            #     flash(message)
             #     return redirect(url_for(view_lists.view_lists_homepage))
             # df = df.astype({dict setting correct dtypes})
             #ToDo: Prepopulate the fields

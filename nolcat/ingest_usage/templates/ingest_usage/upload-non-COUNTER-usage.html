@@ -1,53 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://raw.githubusercontent.com/necolas/normalize.css/master/normalize.css" rel="stylesheet">
-    <title>Upload Historical Non-COUNTER Data</title>
-</head>
-<body>
-    <h1>Upload Historical Non-COUNTER Data</h1>
+{% extends "layout.html" %}
+{% block metadata_title %}Upload Historical Non-COUNTER Data{% endblock %}
 
-    <p>The file name will be changed by the program to match the needed convention, but the file must be one of the following:
-        <dl>
-            <dt>Tabular data</dt>
-                <dd>.xlsx</dd>
-                <dd>.csv</dd>
-                <dd>.tsv</dd>
-            <dt>Text</dt>
-                <dd>.docx</dd>
-                <dd>.txt</dd>
-                <dd>.json</dd>
-                <dd>.html</dd>
-                <dd>.htm</dd>
-                <dd>.xml</dd>
-            <dt>Image</dt>
-                <dd>.jpeg</dd>
-                <dd>jpg</dd>
-                <dd>.png</dd>
-                <dd>.svg</dd>
-            <dt>Text and images</dt>
-                <dd>.pdf</dd>
-                <dd>.pptx</dd>
-            <dt>Compressed file</dt>
-                <dd>.zip</dd>
-        </dl>
-    </p>
+{% block main_content %}
+    <header>
+        <h1>Upload Historical Non-COUNTER Data</h1>
 
-    <form action="{{ url_for('ingest_usage.upload_non_COUNTER_reports', testing=testing) }}" method="POST" enctype="multipart/form-data">
-        {{ form.csrf_token }}
-        <label>
-            {{ form.AUCT_option.label }}
-            {{ form.AUCT_option }}
-        </label>
-        <br>
-        <label>
-            {{ form.usage_file.label }}
-            {{ form.usage_file }}
-        </label>
-        <input type="submit" value="Submit">
-    </form>
-</body>
-</html>
+        <p>The file name will be changed by the program to match the needed convention, but the file must be one of the following:
+            <dl>
+                <dt>Tabular data</dt>
+                    <dd>.xlsx</dd>
+                    <dd>.csv</dd>
+                    <dd>.tsv</dd>
+                <dt>Text</dt>
+                    <dd>.docx</dd>
+                    <dd>.txt</dd>
+                    <dd>.json</dd>
+                    <dd>.html</dd>
+                    <dd>.htm</dd>
+                    <dd>.xml</dd>
+                <dt>Image</dt>
+                    <dd>.jpeg</dd>
+                    <dd>jpg</dd>
+                    <dd>.png</dd>
+                    <dd>.svg</dd>
+                <dt>Text and images</dt>
+                    <dd>.pdf</dd>
+                    <dd>.pptx</dd>
+                <dt>Compressed file</dt>
+                    <dd>.zip</dd>
+            </dl>
+        </p>
+    </header>
+
+    <article>
+        <form action="{{ url_for('ingest_usage.upload_non_COUNTER_reports', testing=testing) }}" method="POST" enctype="multipart/form-data">
+            {{ form.csrf_token }}
+            <label>
+                {{ form.AUCT_option.label }}
+                {{ form.AUCT_option }}
+            </label>
+            <br>
+            <label>
+                {{ form.usage_file.label }}
+                {{ form.usage_file }}
+            </label>
+            <input type="submit" value="Submit">
+        </form>
+    </article>
+{% endblock %}

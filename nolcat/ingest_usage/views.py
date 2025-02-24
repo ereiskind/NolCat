@@ -160,7 +160,9 @@ def harvest_SUSHI_statistics(testing):
             engine=db.engine,
         )
         if isinstance(df, str):
-            flash(database_query_fail_statement(df))
+            message = database_query_fail_statement(df)
+            log.error(message)
+            flash(message)
             return redirect(url_for('ingest_usage.ingest_usage_homepage'))
         
         statistics_source = StatisticsSources(  # Even with one value, the field of a single-record dataframe is still considered a series, making type juggling necessary
@@ -278,7 +280,9 @@ def upload_non_COUNTER_reports(testing):
             engine=db.engine,
         )
         if isinstance(df, str):
-            flash(database_query_fail_statement(df))
+            message = database_query_fail_statement(df)
+            log.error(message)
+            flash(message)
             return redirect(url_for('ingest_usage.ingest_usage_homepage'))
         AUCT_object = AnnualUsageCollectionTracking(
             AUCT_statistics_source=df.at[0,'AUCT_statistics_source'],

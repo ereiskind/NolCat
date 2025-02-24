@@ -95,7 +95,9 @@ def run_custom_SQL_query():
             engine=db.engine,
         )
         if isinstance(df, str):
-            flash(database_query_fail_statement(df))
+            message = database_query_fail_statement(df)
+            log.error(message)
+            flash(message)
             return redirect(url_for('view_usage.view_usage_homepage'))
         
         file_path = create_downloads_folder() / 'NoLCAT_download.csv'
@@ -237,7 +239,9 @@ def use_predefined_SQL_query():
             engine=db.engine,
         )
         if isinstance(df, str):
-            flash(database_query_fail_statement(df))
+            message = database_query_fail_statement(df)
+            log.error(message)
+            flash(message)
             return redirect(url_for('view_usage.view_usage_homepage'))
         log.debug(f"The result of the query:\n{df}")
 
@@ -283,7 +287,7 @@ def start_query_wizard():
         return render_template('view_usage/query-wizard-start.html', form=form)
     elif form.validate_on_submit():
         if form.begin_date.data and form.end_date.data:
-            logging.debug("Using custom date range.")
+            log.debug("Using custom date range.")
             end_date = last_day_of_month(form.end_date.data).isoformat()
             begin_date = form.begin_date.data.isoformat()
         elif not form.begin_date.data and not form.end_date.data:

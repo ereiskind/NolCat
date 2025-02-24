@@ -1,50 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Query Wizard</title>
-</head>
-<body>
-    <h1>Query Wizard</h1>
+{% extends "layout.html" %}
+{% block metadata_title %}Query Wizard{% endblock %}
 
+{% block main_content %}
+    <header>
+        <h1>Query Wizard</h1>
+        <p>This query wizard helps construct a query for returning COUNTER data. Select the date range and report type here; on the next page, select the fields to display and the filters. For the date range, either enter dates for a custom date range or select a fiscal year to use that time span as the date range; if custom dates are entered, the fiscal year selection will be ignored.</p>
+    </header>
+
+    <article>
     {% with message = get_flashed_messages() %}
         {% if message %}
             <p>{{ message }}</p>
         {% endif %}
     {% endwith %}
+    </article>
 
-    <p>This query wizard helps construct a query for returning COUNTER data. Select the date range and report type here; on the next page, select the fields to display and the filters. For the date range, either enter dates for a custom date range or select a fiscal year to use that time span as the date range; if custom dates are entered, the fiscal year selection will be ignored.</p>
 
-    <form action="{{ url_for('view_usage.start_query_wizard') }}" method="POST">
-        {{ form.csrf_token }}
-        <h2>Select a Date Range: Custom or Fiscal Year</h2>
-        <h3>Use a Custom Date Range</h3>
-        <label>
-            {{ form.begin_date.label }}
-            {{ form.begin_date }}
-        </label>
-        <br>
-        <label>
-            {{ form.end_date.label }}
-            {{ form.end_date }}
-        </label>
-        <br>
-        <h3>Use a Fiscal Year as the Date Range</h3>
-        <label>
-            {{ form.fiscal_year.label }}
-            {{ form.fiscal_year }}
-        </label>
-        <br>
-        <h2>Select a Report Type</h2>
-        <label>
-            {{ form.report_type.label }}
-            {{ form.report_type }}
-        </label>
-        <br>
-        <input type="submit" value="Submit">
-    </form>
-    
-    <p><a href="{{ url_for('view_usage.view_usage_homepage') }}">Click here</a> to return to the "Ways to View Usage" page.</p>
-</body>
-</html>
+    <article>
+        <form action="{{ url_for('view_usage.start_query_wizard') }}" method="POST">
+            {{ form.csrf_token }}
+            <h2>Select a Date Range: Custom or Fiscal Year</h2>
+            <h3>Use a Custom Date Range</h3>
+            <label>
+                {{ form.begin_date.label }}
+                {{ form.begin_date }}
+            </label>
+            <br>
+            <label>
+                {{ form.end_date.label }}
+                {{ form.end_date }}
+            </label>
+            <br>
+            <h3>Use a Fiscal Year as the Date Range</h3>
+            <label>
+                {{ form.fiscal_year.label }}
+                {{ form.fiscal_year }}
+            </label>
+            <br>
+            <h2>Select a Report Type</h2>
+            <label>
+                {{ form.report_type.label }}
+                {{ form.report_type }}
+            </label>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+    </article>
+{% endblock %}

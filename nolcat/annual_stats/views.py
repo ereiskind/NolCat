@@ -28,8 +28,10 @@ def annual_stats_homepage():
             engine=db.engine,
         )
         if isinstance(fiscal_year_options, str):
-            flash(database_query_fail_statement(fiscal_year_options))
-            return abort(404)
+            message = database_query_fail_statement(fiscal_year_options)
+            log.error(message)
+            flash(message)
+            return redirect(url_for('annual_stats.annual_stats_homepage'))
         form.fiscal_year.choices = list(fiscal_year_options.itertuples(index=False, name=None))
         return render_template('annual_stats/index.html', form=form)
     elif form.validate_on_submit():

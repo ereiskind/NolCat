@@ -1,30 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Write SQL Queries</title>
-</head>
-<body>
-    <h1>Write a Custom SQL Query</h1>
 
-    <p>A custom SQL query to be run against the database can be entered below. Please note that knowledge of the NoLCAT database structure, COUNTER and its fixed vocabulary terms, and the names used for resources in COUNTER reports are necessary to construct a successful query. If there is any doubt about the ability to construct a successful query, use <a href="{{ url_for('view_usage.use_predefined_SQL_query') }}">a predefined query</a> or <a href="{{ url_for('view_usage.start_query_wizard') }}">the query wizard</a> instead.</p>
-    
-    <form action="{{ url_for('view_usage.run_custom_SQL_query') }}" method="POST">
-        {{ form.csrf_token }}
-        <label>
-            {{ form.SQL_query.label }}
-            {{ form.SQL_query }}
-        </label>
-        <br><br>
-        <label>
-            {{ form.open_in_Excel.label}}
-            {{ form.open_in_Excel }}
-        </label>
-        <input type="submit" value="Submit">
-    </form>
+{% extends "layout.html" %}
+{% block metadata_title %}Write SQL Queries{% endblock %}
 
-    <p><a href="{{ url_for('view_usage.view_usage_homepage') }}">Click here</a> to return to the "Ways to View Usage" page.</p>
-</body>
-</html>
+{% block main_content %}
+    <header>
+        <h1>Write a Custom SQL Query</h1>
+    </header>
+
+    <article>
+        <p>A custom SQL query to be run against the database can be entered below. Please note that knowledge of the NoLCAT database structure, COUNTER and its fixed vocabulary terms, and the names used for resources in COUNTER reports are necessary to construct a successful query. If there is any doubt about the ability to construct a successful query, use <a href="{{ url_for('view_usage.use_predefined_SQL_query') }}">a predefined query</a> or <a href="{{ url_for('view_usage.start_query_wizard') }}">the query wizard</a> instead.</p>
+
+        <form action="{{ url_for('view_usage.run_custom_SQL_query') }}" method="POST">
+            {{ form.csrf_token }}
+            <label>
+                {{ form.SQL_query.label }}
+                {{ form.SQL_query }}
+            </label>
+            <br><br>
+            <label>
+                {{ form.open_in_Excel.label}}
+                {{ form.open_in_Excel }}
+            </label>
+            <input type="submit" value="Submit">
+        </form>
+    </article>
+{% endblock %}

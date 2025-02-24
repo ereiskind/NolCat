@@ -1,37 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload COUNTER Data</title>
-</head>
-<body>
-    <h1>Upload COUNTER Data</h1>
+{% extends "layout.html" %}
+{% block metadata_title %}Upload COUNTER Data{% endblock %}
 
-    <p>COUNTER data can be uploaded in two ways on this page:</p>
-    <ul>
-        <li>SQL file(s), from which the insert statements for the `COUNTERData` relation are taken and loaded into the database.
-            <p>These files should only be dump files from the NoLCAT database to ensure clean and secure data loads; note that all data except for the insert statements for the `COUNTERData` relation, including data definition language and insert statements for other relations, will be ignored.</p>
-        </li>
-        <li>Excel workbook(s) containing tabular COUNTER reports.
-            <p>For COUNTER workbooks, formats following the COUNTER specification for tabular reports for Code of Practice 4 (R4) or Code of Practice 5 (R5) are accepted. To ensure the file is processed properly,
+{% block main_content %}
+    <header>
+        <h1>Upload COUNTER Data</h1>
+    </header>
+
+    <article>
+        <p>COUNTER data can be uploaded in two ways on this page:</p>
+        <ul>
+            <li>SQL file(s), from which the insert statements for the `COUNTERData` relation are taken and loaded into the database.
                 <ul>
-                    <li>give the file name that begins with the statistics source ID followed by an underscore and ends with the Excel file extension,</li>
-                    <li>label each tab with the shortened name of the type of report it contains (BR1, TR, ect.),</li>
-                    <li>and format all data so it displays as it should appear in the database (dates data types must be in date format, long numbers must be fully displayed instead of in scientific notation, ect.).</li>
+                    <li>These files should only be dump files from the NoLCAT database to ensure clean and secure data loads; note that all data except for the insert statements for the `COUNTERData` relation, including data definition language and insert statements for other relations, will be ignored.</li>
                 </ul>
-            </p>
-        </li>
-    </ul> 
-    
-    <form method="POST" action="{{ url_for('ingest_usage.upload_COUNTER_data') }}"  enctype="multipart/form-data">
-        {{ form.csrf_token }}
-        <label>
-            {{ form.COUNTER_data.label }}
-            {{ form.COUNTER_data }}
-        </label>
-        <input type="submit" value="Submit">
-    </form>
-</body>
-</html>
+            </li>
+            <li>Excel workbook(s) containing tabular COUNTER reports.
+                <ul>
+                    <li>For COUNTER workbooks, formats following the COUNTER specification for tabular reports for Code of Practice 4 (R4) or Code of Practice 5 (R5) are accepted. To ensure the file is processed properly,</li>
+                    <ul>
+                        <li>give the file name that begins with the statistics source ID followed by an underscore and ends with the Excel file extension,</li>
+                        <li>label each tab with the shortened name of the type of report it contains (BR1, TR, ect.),</li>
+                        <li>and format all data so it displays as it should appear in the database (dates data types must be in date format, long numbers must be fully displayed instead of in scientific notation, ect.).</li>
+                    </ul>
+                </ul>
+            </li>
+        </ul> 
+        
+        <form method="POST" action="{{ url_for('ingest_usage.upload_COUNTER_data') }}"  enctype="multipart/form-data">
+            {{ form.csrf_token }}
+            <label>
+                {{ form.COUNTER_data.label }}
+                {{ form.COUNTER_data }}
+            </label>
+            <input type="submit" value="Submit">
+        </form>
+    </article>
+{% endblock %}

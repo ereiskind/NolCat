@@ -1,37 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://raw.githubusercontent.com/necolas/normalize.css/master/normalize.css" rel="stylesheet">
-    <title>Database Initialization Wizard 4</title>
-</head>
-<body>
-    <h1>Database Initialization Wizard: Page 4</h1>
+{% extends "layout.html" %}
+{% block metadata_title %}Database Initialization Wizard 4{% endblock %}
 
+{% block main_content %}
+    <header>
+        <h1>Database Initialization Wizard: Page 4</h1>
+    </header>
+
+    <article>
     {% with message = get_flashed_messages() %}
         {% if message %}
         <p>The data just loaded should be investigated, and probably removed and reloaded, because it raised the error(s)<br>{{ message }}</p>
         {% endif %}
     {% endwith %}
+    </article>
 
-    <h2>8. Upload the Non-COUNTER Files</h2>
-    <ol>
-        <li>Locate the folder from step 6.2 where all of the non-COUNTER files with the appropriate naming convention were saved.</li>
-        <li>For each of the file selection fields below, select the non-COUNTER file corresponding to the given statistics source and fiscal year.
-            <form action="{{ url_for('initialization.upload_historical_non_COUNTER_usage', testing=testing) }}" method="POST" enctype="multipart/form-data">
-                {{ form.csrf_token }}
-                {% for file in form.usage_files %}
-                    <label>
-                        {{ file.usage_file.label }}<br>
-                        {{ file.usage_file.data }}&nbsp;{{ file.usage_file }}
-                    </label>
-                    <br><br>
-                {% endfor %}
-                <input type="submit" value="Submit">
-            </form>
-        </li>
-    </ol>
-</body>
-</html>
+    <article>
+        <section>
+            <h2>8. Upload the Non-COUNTER Files</h2>
+            <ol>
+                <li>Locate the folder from step 6.2 where all of the non-COUNTER files with the appropriate naming convention were saved.</li>
+                <li>For each of the file selection fields below, select the non-COUNTER file corresponding to the given statistics source and fiscal year.
+                    <form action="{{ url_for('initialization.upload_historical_non_COUNTER_usage', testing=testing) }}" method="POST" enctype="multipart/form-data">
+                        {{ form.csrf_token }}
+                        {% for file in form.usage_files %}
+                            <label>
+                                {{ file.usage_file.label }}<br>
+                                {{ file.usage_file.data }}&nbsp;{{ file.usage_file }}
+                            </label>
+                            <br><br>
+                        {% endfor %}
+                        <input type="submit" value="Submit">
+                    </form>
+                </li>
+            </ol>
+        </section>
+    </article>
+{% endblock %}

@@ -1,42 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Make SUSHI Call</title>
-</head>
-<body>
-    <h1>Make SUSHI Call</h1>
+{% extends "layout.html" %}
+{% block metadata_title %}Make SUSHI Call{% endblock %}
 
+{% block main_content %}
+    <header>
+        <h1>Make SUSHI Call</h1>
+    </header>
+
+    <article>
     {% with message = get_flashed_messages() %}
         {% if message %}
             <p>{{ message }}</p>
         {% endif %}
     {% endwith %}
+    </article>
 
-    <form action="{{ url_for('ingest_usage.harvest_SUSHI_statistics', testing=testing) }}" method="POST">
-        {{ form.csrf_token }}
-        <label>
-            {{ form.statistics_source.label }}
-            {{ form.statistics_source }}
-        </label>
-        <br>
-        <label>
-            {{ form.begin_date.label }}
-            {{ form.begin_date }}
-        </label>
-        <br>
-        <label>
-            {{ form.end_date.label }}
-            {{ form.end_date }}
-        </label>
-        <br>
-        <label>
-            {{ form.report_to_harvest.label }}
-            {{ form.report_to_harvest }}
-        </label>
-        <input type="submit" value="Submit">
-    </form>
-</body>
-</html>
+    <article>
+        <form action="{{ url_for('ingest_usage.harvest_SUSHI_statistics', testing=testing) }}" method="POST">
+            {{ form.csrf_token }}
+            <label>
+                {{ form.statistics_source.label }}
+                {{ form.statistics_source }}
+            </label>
+            <br>
+            <label>
+                {{ form.begin_date.label }}
+                {{ form.begin_date }}
+            </label>
+            <br>
+            <label>
+                {{ form.end_date.label }}
+                {{ form.end_date }}
+            </label>
+            <br>
+            <label>
+                {{ form.report_to_harvest.label }}
+                {{ form.report_to_harvest }}
+            </label>
+            <input type="submit" value="Submit">
+        </form>
+    </article>
+{% endblock %}

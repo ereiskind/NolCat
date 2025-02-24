@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Empty Dataframes Warning</title>
-</head>
-<body>
-    <h1>Empty Dataframes Warning</h1>
+{% extends "layout.html" %}
+{% block metadata_title %}Empty Dataframes Warning{% endblock %}
+
+{% block main_content %}
+    <header>
+        <h1>Empty Dataframes Warning</h1>
+    </header>
 
     <p>The {{ relation }} relation dataframe contained no data when it was loaded in to the web app. At best, this will result in missing data in the database; the more likely outcome is that large amounts of the data will fail to load and the program will crash with an HTTP 500 error because empty dataframes can't meet primary and foreign key constraints. Make sure the CSV uses UTF-8 encoding; the easiest way to check a CSV's encoding is to open the file in a text editor. After checking over the file and making any necessary adjustments, <a href="{{ url_for('initialization.collect_FY_and_vendor_data') }}">restart the initialization wizard</a>.</p>
-</body>
-</html>
+{% endblock %}

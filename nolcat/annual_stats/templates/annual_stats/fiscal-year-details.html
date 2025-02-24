@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fiscal Year Details</title>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block metadata_title %}Fiscal Year Details{% endblock %}
 
+{% block main_content %}
     <!--ToDo: Create title including Jinja variable for fiscal year-->
 
     <!--ToDo: Create HTML form for the `RunAnnualStatsMethodsForm` form class-->
@@ -24,5 +18,4 @@
     <!--ToDo: Create HTML form for the `edit_annualStatistics_form` form class-->
 
     <!--ToDo: Display dataframe  with data from the `fiscal_year_reporting` variable in the route function, accompanying each record with the HTML form for the `EditAUCTForm` form class-->
-</body>
-</html>
+{% endblock %}

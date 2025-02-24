@@ -1,28 +1,29 @@
 digraph nolcat_sitemap {
     /* *** NoLCAT SITEMAP *** */
     rankdir=LR
+    /*
+        Dotted = page not yet created
+        House = blueprint homepage
+    */
 
 
     /* *** Main NoLCAT Folder *** */
-    homepage [shape="box"]
+    homepage [shape="box" style="bold"]
+        homepage -> initialization_wizard
         homepage -> login_page
         homepage -> ingest_usage_homepage
-        homepage -> manage_usage_collection_homepage
         homepage -> view_usage_homepage
+        homepage -> annual_stats_homepage
         homepage -> Sphinx_homepage
 
 
-    /* *** `login` Blueprint *** */
-    login_page
-        login_page -> create_account
-    // Account creation may not be needed--a single set of credentials for each user type may be created instead
-    create_account
-        create_account -> initialization_wizard // Page in `ingest` section; linkage because program will request data for database initialization upon creation of first account
-    // And any other pages needed for authentication
-
-
-    /* *** `initialization` Blueprint *** */
-    initialization_wizard
+    /* *** `annual_stats` Blueprint *** */
+    annual_stats_homepage [shape="house"]
+        annual_stats_homepage -> view_lists
+        annual_stats_homepage -> view_FY_details // The FY for which the details will be shown is selected before going to the page
+    view_FY_details [style="dotted"]
+        view_FY_details -> all_AUCT_records_for_chosen_FY
+    all_AUCT_records_for_chosen_FY [style="dotted"]
 
 
     /* *** `ingest_usage` Blueprint *** */
@@ -35,25 +36,29 @@ digraph nolcat_sitemap {
     upload_non_COUNTER_reports
 
 
-    /* *** `annual_stats` Blueprint *** */
-    manage_usage_collection_homepage [shape="house"]
-        manage_usage_collection_homepage -> view_lists
-        manage_usage_collection_homepage -> view_FY_details // The FY for which the details will be shown is selected before going to the page
-    view_FY_details
-        view_FY_details -> all_AUCT_records_for_chosen_FY
-    all_AUCT_records_for_chosen_FY
+    /* *** `initialization` Blueprint *** */
+    initialization_wizard
+
+
+    /* *** `login` Blueprint *** */
+    login_page
+        login_page -> create_account
+    // Account creation may not be needed--a single set of credentials for each user type may be created instead
+    create_account [style="dotted"]
+        create_account -> initialization_wizard // Page in `ingest` section; linkage because program will request data for database initialization upon creation of first account
+    // And any other pages needed for authentication
 
 
     /* *** `view_lists` Blueprint *** */
     // StatisticsSources, ResourceSources, and Vendors are similar enough in structure and purpose that the same Flask logic and Jinja templates can be used
-    view_lists
+    view_lists [shape="house"]
         view_lists -> add_new_record
         view_lists -> view_record_details
-    add_new_record
+    add_new_record [style="dotted"]
         add_new_record -> edit_record_details // To provide info for the new source
-    view_record_details
+    view_record_details [style="dotted"]
         view_record_details -> edit_record_details
-    edit_record_details // Includes adding or editing notes
+    edit_record_details [style="dotted"] // Includes adding or editing notes
 
 
     /* *** `view_usage` Blueprint *** */
@@ -61,17 +66,18 @@ digraph nolcat_sitemap {
         view_usage_homepage -> create_report_from_SQL
         view_usage_homepage -> create_report_from_wizard
         view_usage_homepage -> create_report_from_saved_queries
-    create_report_from_SQL // Runs a custom SQL statement against the database
+        view_usage_homepage -> download_non_COUNTER_report
+    create_report_from_SQL
         create_report_from_SQL -> view_report
-    create_report_from_wizard // GUI options are used to write SQL behind the scenes
+    create_report_from_wizard
         create_report_from_wizard -> view_report
-    create_report_from_saved_queries // SQL statements that are either complete or only ask for one input for commonly asked questions
+    create_report_from_saved_queries
         create_report_from_saved_queries -> view_report
-    view_report
+    view_report [style="dotted"]
 
 
     /* *** Sphinx *** */
-    Sphinx_homepage [shape="house"]
+    Sphinx_homepage [shape="house" style="dotted"]
         Sphinx_homepage -> Sphinx_other_pages
-    Sphinx_other_pages // Use Sphinx itself for site organization
+    Sphinx_other_pages [style="dotted"] // Use Sphinx itself for site organization
 }
